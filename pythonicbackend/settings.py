@@ -25,7 +25,9 @@ SECRET_KEY = 'p^y@nikb%mhq(sam7sfdg&&37rtu%kgel%4x9x5ehhvp)u29vx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'pythonicbackend.herokuapp.com'
+]
 
 
 # Application definition
