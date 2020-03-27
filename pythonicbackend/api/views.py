@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
+from .models import Employee
 from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, EmployeeSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -14,3 +15,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
+
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows employees to be viewed or edited
+    """
+    queryset = Employee.objects.all().order_by('-date__joined')
+    serializer_class = EmployeeSerializer
