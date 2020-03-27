@@ -67,10 +67,8 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'backendpythonic',
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
