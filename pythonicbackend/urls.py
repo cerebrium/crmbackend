@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 from pythonicbackend.api import views
-from pythonicbackend.api.views import login
+# from pythonicbackend.api.views import login
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
