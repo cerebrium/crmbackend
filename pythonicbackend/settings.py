@@ -11,10 +11,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    'pythonicbackend.herokuapp.com'
+    'pythonicbackend.herokuapp.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 
@@ -77,11 +79,6 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated', )
 }
 
 # Password validation
