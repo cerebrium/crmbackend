@@ -30,5 +30,6 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'email',
             'location',
+            'inOff',
             'milesDriven'
         ]
