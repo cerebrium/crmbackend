@@ -35,7 +35,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'route',
             'logIn',
             'logOut',
-            'milage',
+            'mileage',
             'parcel',
             'LWP',
             'LVP',
