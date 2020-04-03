@@ -14,7 +14,7 @@ class Employee(models.Model):
     route = models.CharField(max_length = 10)
     logIn = models.DateTimeField(null=True, blank=True)
     logOut = models.DateTimeField(null=True, blank=True)
-    milage = models.IntegerField(default=0)
+    mileage = models.IntegerField(default=0)
     parcel = models.IntegerField(default=0)
     LWP = models.IntegerField(default=0)
     LVP = models.IntegerField(default=0)
