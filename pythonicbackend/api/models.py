@@ -24,6 +24,7 @@ class Employee(models.Model):
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
+    
     #deductions
     # TORH = models.DateTimeField()
 
