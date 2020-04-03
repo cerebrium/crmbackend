@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('LVP', models.IntegerField(default=0)),
                 ('CRT', models.IntegerField(default=0)),
                 ('RL', models.IntegerField(default=0)),
-                ('SUP', MoneyField(max_digits=14, decimal_places = 2, default_currency='GBP'))
+                ('SUP', MoneyField(default=0, max_digits=14, decimal_places = 2, default_currency='GBP'))
             ],
         ),
     ]

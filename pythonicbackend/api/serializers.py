@@ -35,12 +35,16 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'route',
             'logIn',
             'logOut',
-            'TORH',
             'milage',
             'parcel',
             'LWP',
             'LVP',
             'CRT',
             'RL',
-            'SUP'
+            'SUP',
+            'fuel',
+            'vans',
+            'supportDeductions'
         ]
+
+            # 'TORH',
