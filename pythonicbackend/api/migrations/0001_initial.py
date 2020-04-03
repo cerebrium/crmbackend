@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100,verbose_name='DA Name')),
                 ('email', models.CharField(max_length=100, verbose_name='Email')),
-                ('inOff', models.BooleanField(default=False)),
+                ('inOff', models.IntegerField(default=0)),
                 ('location', models.CharField(max_length=50, verbose_name = 'Station')), #DBS2, DSN1, DEX2
                 ('route', models.CharField(max_length = 10)),
                 ('logIn', models.DateTimeField(null=True, blank=True)),
