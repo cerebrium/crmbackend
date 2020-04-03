@@ -12,8 +12,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production! ok!
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pythonicbackend.api',
     'rest_framework',
+    'djmoney',
     'rest_auth',
     'rest_framework.authtoken'
 ]
