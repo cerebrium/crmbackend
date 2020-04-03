@@ -22,7 +22,7 @@ class Employee(models.Model):
     LVP = models.IntegerField(default=0)
     CRT = models.IntegerField(default=0)
     RL = models.IntegerField(default=0)
-    SUP = models.DecimalField(max_digits=8, decimal_places=2)
+    SUP = MoneyField(max_digits=19, decimal_places=4, default_currency='GBP')
     #deductions
     fuel = MoneyField(max_digits=19, decimal_places=4, default_currency='GBP')
     support_deducitons = MoneyField(max_digits=19, decimal_places=4, default_currency='GBP')
