@@ -35,8 +35,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'djmoney',
     'rest_auth',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django.contrib.postgres.fields'
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
