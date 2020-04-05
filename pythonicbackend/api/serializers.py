@@ -2,9 +2,6 @@ from django.contrib.auth.models import User, Group
 from .models import Employee
 from rest_framework import serializers
 
-
-
-
 # a comment
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -30,7 +27,6 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Employee
         fields =[
-            'name',
             'inOff', 
             'location',
             'route',
@@ -46,6 +42,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'fuel',
             'vans',
             'supportDeductions',
-            #'TORH',
             'datesList'
         ]
+
+            # 'TORH',

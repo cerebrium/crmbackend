@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.postgres.fields'
 ]
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,8 +75,12 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'testerarray',
+        'USER': 'postgres',
+        'PASSWORD': 'Ginishka04121995',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
