@@ -30,9 +30,9 @@ class Employee(models.Model):
 
     
     # @property
-    # def TORH(self):
-    #     self.TORH = self.logOut - self.logIn
-    #     return self.TORH
+    def TORH(myVar, yourVar):
+        return myVar, yourVar
+
 
 
     # @property
