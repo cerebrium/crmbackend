@@ -91,7 +91,11 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+<<<<<<< HEAD
         'NAME': 'allowmigrations',
+=======
+        'NAME': 'arrayfield',
+>>>>>>> d632c2ae9bc514318d3138028244d7255dca1039
         'USER': 'postgres',
         'PASSWORD': 'Ginishka04121995',
         'HOST': 'localhost',
