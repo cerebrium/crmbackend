@@ -114,6 +114,8 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #     }
 # }
 
+#comment for deploy
+
 # Deployment Database Configuration
 DATABASES = {
     'default': {
