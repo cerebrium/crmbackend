@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 
-
+# Ginishka local database Configuration
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -87,19 +87,23 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #     }
 # }
 
-# Nikitch Local Database
+# Nikitch Local Database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'allowmigrations',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+# Deployment Database Configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-<<<<<<< HEAD
-        'NAME': 'allowmigrations',
-=======
-        'NAME': 'arrayfield',
->>>>>>> d632c2ae9bc514318d3138028244d7255dca1039
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
