@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -79,7 +79,11 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'superme'
+        'NAME': 'ginovevailieva',
+        'USER': 'ginovevailieva',
+        'PASSWORD': 'Ginishka95',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 # DATABASES = {
