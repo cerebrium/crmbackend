@@ -27,6 +27,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Employee
         fields =[
+            'name',
             'inOff', 
             'location',
             'route',
