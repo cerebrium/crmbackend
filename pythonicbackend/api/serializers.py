@@ -29,7 +29,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
         fields =[
             'name',
             'inOff', 
-            'location',
+            'station',
             'route',
             'logIn',
             'logOut',
