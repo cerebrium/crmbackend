@@ -10,12 +10,12 @@ from datetime import datetime
 # Create your models here.
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
-    name = models.CharField(default='employee', max_length = 30)
+    name = models.CharField(max_length = 30)
     inOff = models.IntegerField(default=0,editable=True)
     location = models.CharField(max_length = 10,editable=True)
     route = models.CharField(max_length = 10,editable=True)
-    logIn = models.DateTimeField(null=True, blank=True,editable=True)
-    logOut = models.DateTimeField(null=True, blank=True,editable=True)
+    logIn = models.DateTimeField(null=True, blank=True, editable=True)
+    logOut = models.DateTimeField(null=True, blank=True, editable=True)
     mileage = models.IntegerField(default=0,editable=True)
     parcel = models.IntegerField(default=0,editable=True)
 

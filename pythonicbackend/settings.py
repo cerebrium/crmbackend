@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'djmoney',
     'rest_auth',
     'rest_framework.authtoken',
-    'django.contrib.postgres.fields'
+    'django.contrib.postgres.fields',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "https://crmfrontend.netlify.com"
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'POST',
+    'PUT',
 ]
 
 ROOT_URLCONF = 'pythonicbackend.urls'
