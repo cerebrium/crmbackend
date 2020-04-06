@@ -10,6 +10,7 @@ from datetime import datetime
 # Create your models here.
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
+    name = models.CharField(max_length = 30)
     inOff = models.IntegerField(default=0)
     location = models.CharField(max_length = 10)
     route = models.CharField(max_length = 10)
