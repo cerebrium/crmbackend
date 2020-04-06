@@ -11,21 +11,27 @@ from datetime import datetime
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
     name = models.CharField(max_length = 30)
-    inOff = models.IntegerField(default=0)
-    location = models.CharField(max_length = 10)
-    route = models.CharField(max_length = 10)
-    logIn = models.DateTimeField(null=True, blank=True)
-    logOut = models.DateTimeField(null=True, blank=True)
-    mileage = models.IntegerField(default=0)
-    parcel = models.IntegerField(default=0)
+    inOff = models.IntegerField(default=0,editable=True)
+    location = models.CharField(max_length = 10,editable=True)
+    route = models.CharField(max_length = 10,editable=True)
+    logIn = models.DateTimeField(null=True, blank=True,editable=True)
+    logOut = models.DateTimeField(null=True, blank=True,editable=True)
+    mileage = models.IntegerField(default=0,editable=True)
+    parcel = models.IntegerField(default=0,editable=True)
+
+    
     LWP = models.IntegerField(default=0)
     LVP = models.IntegerField(default=0)
     CRT = models.IntegerField(default=0)
     RL = models.IntegerField(default=0)
     SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
+
+    #the following fields are money deducion fields
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
+
+    #arrayList for storing the the driver has been on the road ()
     datesList =  ArrayField(models.CharField(max_length=10), default=list)
 
     def __str__(self):
