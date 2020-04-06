@@ -76,26 +76,29 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ginovevailieva',
-        'USER': 'ginovevailieva',
-        'PASSWORD': 'Ginishka95',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'dayone',
+#         'NAME': 'ginovevailieva',
 #         'USER': 'ginovevailieva',
 #         'PASSWORD': 'Ginishka95',
 #         'HOST': 'localhost',
 #         'PORT': '5432'
 #     }
 # }
+
+# Nikitch Local Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'arrayfield',
+        'USER': 'postgres',
+        'PASSWORD': 'Ginishka04121995',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
