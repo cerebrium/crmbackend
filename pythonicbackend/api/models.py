@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
+from django import forms
+
 #import pytz
 #from django.utils.timesince import timesince
 
@@ -14,20 +16,21 @@ from datetime import datetime
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
     name = models.CharField(max_length = 30)
-
     #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
     # that person with default = 1, will work and have data for that day
     inOff = models.IntegerField(default=1, editable=True)
-    station = models.CharField(max_length = 30)
-    route = models.CharField(max_length = 10)
-
+    location = models.CharField(max_length = 10,default='DBS2')
+    route = models.CharField(max_length = 10, null = True)
+    logIn = models.DateField()
+    logOut = models.TimeField()
+    
     #dateTime 
     #dt_now = datetime.now()
-    logIn = models.TimeField(default = None)
-
-    #logIn2 = datetime.strptime(logIn,'%H:%M')
-    logOut = models.TimeField(default = None)
-
+    #dt_0 = timedelta.fields.TimedeltaField()
+    #logIn = forms.DateField(widget=forms.DateInput(attrs={'class':'timepicker'}))
+    #logOut = forms.DateField(widget=forms.DateInput(attrs={'class':'timepicker'}))
+    #logOut = models.DateTimeField()
+    
     # TORH = (logOut - logIn)
     mileage = models.IntegerField(default=0, editable=True)
     parcel = models.IntegerField(default=0,editable=True)
@@ -36,7 +39,6 @@ class Employee(models.Model):
     CRT = models.IntegerField(default=0)
     RL = models.IntegerField(default=0)
     SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
-
     #the following fields are money deducion fields
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')

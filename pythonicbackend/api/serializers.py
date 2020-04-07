@@ -29,7 +29,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
         fields =[
             'name',
             'inOff', 
-            'station',
+            'location',
             'route',
             'logIn',
             'logOut',
@@ -47,3 +47,6 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
             # 'TORH',
+
+    logIn=serializers.DateField(format="%H:%M",input_formats=['%H:%M'])
+    logOut=serializers.DateField(format="%H:%M",input_formats=['%H:%M'])
