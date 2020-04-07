@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -92,28 +92,28 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 # Ginishka local database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'ginovevailieva',
-#         'USER': 'ginovevailieva',
-#         'PASSWORD': 'Ginishka95',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
-# Nikitch Local Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'allowmigrations',
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995',
+        'NAME': 'ginovevailieva',
+        'USER': 'ginovevailieva',
+        'PASSWORD': 'Ginishka95',
         'HOST': 'localhost',
         'PORT': '5432'
     }
 }
+
+# Nikitch Local Database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'allowmigrations',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
 #comment for deploy
 
@@ -162,6 +162,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_INPUT_FORMATS = ('%I:%M %p',)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
