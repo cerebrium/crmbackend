@@ -13,8 +13,9 @@ import pytz
 #import pytz
 #from django.utils.timesince import timesince
 # Create your models here.
-class Employee(models.Model):
+class Employee(models.Model):  
     # all fields needed for the daily feeling sheet report 
+    employee_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
     inOff = models.IntegerField(default=1, editable=True, null = True)
     location = models.CharField(max_length = 10, default='DBS2', null = True)

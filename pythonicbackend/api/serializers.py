@@ -24,13 +24,13 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
              'age'
         ]       
   
-class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
-    
+class EmployeeSerializer(serializers.HyperlinkedModelSerializer): 
     logIn_time = serializers.TimeField(input_formats= ['%I:%M %p'])
     logOut_time = serializers.TimeField(input_formats= ['%I:%M %p'])
     class Meta:
         model = Employee
         fields =[
+            'employee_id',
             'name',
             'inOff', 
             'location',
