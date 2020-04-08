@@ -8,10 +8,6 @@ from django import forms
 
 #import pytz
 #from django.utils.timesince import timesince
-
-
-
-
 # Create your models here.
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
@@ -49,16 +45,6 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
-
-
-
 
 
 #-%%% ------------------

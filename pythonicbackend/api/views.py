@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from .models import Employee
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer, EmployeeSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -24,9 +24,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
-class EmployeeView(mixins.Create):    
-    """
-    API endpoint that allows employees to be edited
-    """
-    serializer_class = EmployeeSerializer
-    queryset = Employee.objects.all()
+# class EmployeeView(mixins.Create):    
+#     """
+#     API endpoint that allows employees to be edited
+#     """
+#     serializer_class = EmployeeSerializer
+#     queryset = Employee.objects.all()
