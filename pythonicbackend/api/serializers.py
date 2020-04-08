@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from .models import Employee
 from rest_framework import serializers
 
+
 # a comment
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,6 +25,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         ]       
   
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
+    
+    logIn_time = serializers.TimeField(input_formats= ['%I:%M %p'])
+    #logOut_time = serializers.DateTimeField(input_formats="%H:%M")
     class Meta:
         model = Employee
         fields =[
@@ -31,8 +35,8 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'inOff', 
             'location',
             'route',
-            'logIn',
-            'logOut',
+            'logIn_time',
+            #'logOut_time',
             'mileage',
             'parcel',
             'LWP',
@@ -46,7 +50,15 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'datesList'
         ]
 
-            # 'TORH',
+        
 
-    logIn=serializers.DateField(format="%H:%M",input_formats=['%H:%M'])
-    logOut=serializers.DateField(format="%H:%M",input_formats=['%H:%M'])
+
+    # logIn=serializers.DateField(format='%H:%M',input_formats='%H:%M')
+    # logOut=serializers.DateField(format='%H:%M',input_formats='%H:%M')
+
+#        logIn=serializers.DateField(format = "%H:%M")
+ #       logOut=serializers.DateField(format = "%H:%M")
+
+
+    #logIn=serializers.TimeField(read_only=True, format="%H:%M", input_formats=['%H:%M'])
+    #logOut=serializers.TimeField(read_only=True, format="%H:%M", input_formats=['%H:%M'])

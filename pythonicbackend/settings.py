@@ -1,4 +1,5 @@
 import os
+import pytz
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 
 
@@ -152,17 +153,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-gb'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/London'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
-TIME_INPUT_FORMATS = ('%I:%M %p',)
+TIME_INPUT_FORMATS = '%I:%M %p'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
