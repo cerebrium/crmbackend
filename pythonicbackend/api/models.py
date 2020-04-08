@@ -5,6 +5,10 @@ from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
 from django import forms
+from django.utils import timezone
+import pytz
+
+
 
 #import pytz
 #from django.utils.timesince import timesince
@@ -16,10 +20,12 @@ class Employee(models.Model):
     # that person with default = 1, will work and have data for that day
     inOff = models.IntegerField(default=1, editable=True)
     location = models.CharField(max_length = 10,default='DBS2')
-    route = models.CharField(max_length = 10, null = True)
-    logIn = models.DateField()
-    logOut = models.TimeField()
+    route = models.CharField(max_length = 10, default = "0")
+    logIn_time = models.TimeField(null = True)
+    #logOut_time = models.CharField(widget = forms.TimeField())
+   # models.DateTimeField()
     
+
     #dateTime 
     #dt_now = datetime.now()
     #dt_0 = timedelta.fields.TimedeltaField()
