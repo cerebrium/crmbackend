@@ -15,13 +15,33 @@ import pytz
 # Create your models here.
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
-    name = models.CharField(max_length = 30)
+    name = models.CharField(max_length = 30, null = True)
+    inOff = models.IntegerField(default=1, editable=True, null = True)
+    location = models.CharField(max_length = 10, default='DBS2', null = True)
+    route = models.CharField(max_length = 10, default = "0", null = True)
+    logIn_time = models.TimeField(null = True)
+    mileage = models.IntegerField(default=0, editable=True, null = True)
+    parcel = models.IntegerField(default=0, editable=True, null = True)
+    LWP = models.IntegerField(default=0, null = True)
+    LVP = models.IntegerField(default=0, null = True)
+    CRT = models.IntegerField(default=0, null = True)
+    RL = models.IntegerField(default=0, null = True)
+    SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    #the following fields are money deducion fields
+    fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    #arrayList for storing the the driver has been on the road ()
+    datesList =  ArrayField(models.CharField(max_length=10), default=list, null = True)
+
+    def __str__(self):
+        return self.name
+
+
+
     #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
     # that person with default = 1, will work and have data for that day
-    inOff = models.IntegerField(default=1, editable=True)
-    location = models.CharField(max_length = 10,default='DBS2')
-    route = models.CharField(max_length = 10, default = "0")
-    logIn_time = models.TimeField(null = True)
+
     #logOut_time = models.CharField(widget = forms.TimeField())
    # models.DateTimeField()
     
@@ -34,24 +54,6 @@ class Employee(models.Model):
     #logOut = models.DateTimeField()
     
     # TORH = (logOut - logIn)
-    mileage = models.IntegerField(default=0, editable=True)
-    parcel = models.IntegerField(default=0,editable=True)
-    LWP = models.IntegerField(default=0)
-    LVP = models.IntegerField(default=0)
-    CRT = models.IntegerField(default=0)
-    RL = models.IntegerField(default=0)
-    SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
-    #the following fields are money deducion fields
-    fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
-    vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
-    supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP')
-
-    #arrayList for storing the the driver has been on the road ()
-    datesList =  ArrayField(models.CharField(max_length=10), default=list)
-
-    def __str__(self):
-        return self.name
-
 
 #-%%% ------------------
     #  def hours(self):

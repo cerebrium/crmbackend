@@ -36,7 +36,6 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'location',
             'route',
             'logIn_time',
-            #'logOut_time',
             'mileage',
             'parcel',
             'LWP',

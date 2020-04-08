@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'allowmigrations',
+        'NAME': 'newtable',
         'USER': 'postgres',
         'PASSWORD': 'Ginishka04121995',
         'HOST': 'localhost',
