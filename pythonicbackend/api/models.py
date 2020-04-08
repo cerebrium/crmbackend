@@ -20,6 +20,7 @@ class Employee(models.Model):
     location = models.CharField(max_length = 10, default='DBS2', null = True)
     route = models.CharField(max_length = 10, default = "0", null = True)
     logIn_time = models.TimeField(null = True)
+    logOut_time = models.TimeField(null = True)
     mileage = models.IntegerField(default=0, editable=True, null = True)
     parcel = models.IntegerField(default=0, editable=True, null = True)
     LWP = models.IntegerField(default=0, null = True)
@@ -42,7 +43,6 @@ class Employee(models.Model):
     #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
     # that person with default = 1, will work and have data for that day
 
-    #logOut_time = models.CharField(widget = forms.TimeField())
    # models.DateTimeField()
     
 

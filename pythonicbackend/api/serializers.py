@@ -27,7 +27,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
     
     logIn_time = serializers.TimeField(input_formats= ['%I:%M %p'])
-    #logOut_time = serializers.DateTimeField(input_formats="%H:%M")
+    logOut_time = serializers.TimeField(input_formats= ['%I:%M %p'])
     class Meta:
         model = Employee
         fields =[
@@ -36,6 +36,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'location',
             'route',
             'logIn_time',
+            'logOut_time',
             'mileage',
             'parcel',
             'LWP',
