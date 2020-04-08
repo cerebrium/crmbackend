@@ -15,6 +15,7 @@ import pytz
 # Create your models here.
 class Employee(models.Model):
     # all fields needed for the daily feeling sheet report 
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
     inOff = models.IntegerField(default=1, editable=True, null = True)
     location = models.CharField(max_length = 10, default='DBS2', null = True)
@@ -33,7 +34,7 @@ class Employee(models.Model):
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     #arrayList for storing the the driver has been on the road ()
-    datesList =  ArrayField(models.CharField(max_length=10), default=list, null = True)
+    datesList =  ArrayField(models.CharField(max_length=20), default=list, null = True)
 
     def __str__(self):
         return self.name
