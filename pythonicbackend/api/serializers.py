@@ -42,7 +42,8 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'SUP',
             'fuel',
             'vans',
-            'supportDeductions'
+            'supportDeductions',
+            'datesList'
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  

@@ -30,6 +30,7 @@ class Employee(models.Model):
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
     def __str__(self):
         return self.name
