@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Employee
+from .models import Employee, ScheduledDate
 from rest_framework import serializers
 
 
@@ -25,8 +25,6 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         ]       
   
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer): 
-    logIn_time = serializers.TimeField(input_formats= ['%I:%M %p'])
-    logOut_time = serializers.TimeField(input_formats= ['%I:%M %p'])
     class Meta:
         model = Employee
         fields =[
@@ -35,8 +33,6 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'inOff', 
             'location',
             'route',
-            'logIn_time',
-            'logOut_time',
             'mileage',
             'parcel',
             'LWP',
@@ -46,8 +42,20 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'SUP',
             'fuel',
             'vans',
-            'supportDeductions',
-            'datesList'
+            'supportDeductions'
+        ]
+
+class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
+    logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
+    logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
+    class Meta:
+        model = ScheduledDate
+        fields = [
+            'date_id',
+            'logIn_time',
+            'logOut_time',   
+            'date',
+            'employee_id'
         ]
 
 

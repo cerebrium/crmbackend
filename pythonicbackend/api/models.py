@@ -8,10 +8,9 @@ from django import forms
 from django.utils import timezone
 import pytz
 
-
-
 #import pytz
-#from django.utils.timesince import timesince
+
+
 # Create your models here.
 class Employee(models.Model):  
     # all fields needed for the daily feeling sheet report 
@@ -20,8 +19,6 @@ class Employee(models.Model):
     inOff = models.IntegerField(default=1, editable=True, null = True)
     location = models.CharField(max_length = 10, default='DBS2', null = True)
     route = models.CharField(max_length = 10, default = "0", null = True)
-    logIn_time = models.TimeField(null = True)
-    logOut_time = models.TimeField(null = True)
     mileage = models.IntegerField(default=0, editable=True, null = True)
     parcel = models.IntegerField(default=0, editable=True, null = True)
     LWP = models.IntegerField(default=0, null = True)
@@ -33,8 +30,18 @@ class Employee(models.Model):
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
-    #arrayList for storing the the driver has been on the road ()
-    datesList =  ArrayField(models.CharField(max_length=20), default=list, null = True)
+
+    def __str__(self):
+        return self.name
+
+
+class ScheduledDate(models.Model):
+    date_id = models.AutoField(primary_key=True)
+    logIn_time = models.TimeField(null = True)
+    logOut_time = models.TimeField(null = True)
+    date = models.CharField(max_length = 20, null = True)
+    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
