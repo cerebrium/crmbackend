@@ -1,4 +1,5 @@
 import os
+import pytz
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 
 
@@ -13,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -36,8 +37,10 @@ INSTALLED_APPS = [
     'djmoney',
     'rest_auth',
     'rest_framework.authtoken',
-    'django.contrib.postgres.fields'
+    'django.contrib.postgres.fields',
+    'corsheaders',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +50,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "https://crmfrontend.netlify.com"
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'POST',
+    'PUT',
 ]
 
 ROOT_URLCONF = 'pythonicbackend.urls'
@@ -73,15 +90,39 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
+
+# Ginishka local database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'ginovevailieva',
+#         'USER': 'ginovevailieva',
+#         'PASSWORD': 'Ginishka95',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+# Nikitch Local Database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'crmbackend',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+#comment for deploy
+
+# Deployment Database Configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testerarray',
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995',
-        'HOST': 'localhost',
-        'PORT': '5432'
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -118,10 +159,11 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
+TIME_INPUT_FORMATS = '%I:%M %p'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
