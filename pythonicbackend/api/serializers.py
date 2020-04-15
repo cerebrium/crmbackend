@@ -43,6 +43,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'fuel',
             'vans',
             'supportDeductions',
+            'documents',
             'datesList'
         ]
 
@@ -55,6 +56,7 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'date_id',
             'logIn_time',
             'logOut_time',   
+            'location',
             'date',
             'employee_id'
         ]
