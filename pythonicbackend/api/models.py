@@ -30,6 +30,7 @@ class Employee(models.Model):
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
     def __str__(self):
@@ -40,6 +41,7 @@ class ScheduledDate(models.Model):
     date_id = models.AutoField(primary_key=True)
     logIn_time = models.TimeField(null = True)
     logOut_time = models.TimeField(null = True)
+    location = models.CharField(max_length = 100, null=True)
     date = models.CharField(max_length = 20, null = True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
