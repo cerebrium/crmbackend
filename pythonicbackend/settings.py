@@ -18,6 +18,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
+    'crmfrontend.netlify.app',
     'localhost',
     '127.0.0.1'
 ]
