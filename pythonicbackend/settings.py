@@ -18,7 +18,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
-    'crmfrontend.netlify.app',
     'localhost',
     '127.0.0.1'
 ]
@@ -58,6 +57,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://crmfrontend.netlify.com"
+    "https://crmfrontend.netlify.app"
 ]
 
 CORS_ALLOW_METHODS = [
