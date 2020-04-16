@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from .models import Employee, ScheduledDate
 from rest_framework import serializers
 
@@ -12,17 +12,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'url', 
             'username', 
             'email', 
-            'groups'
+            'groups',
+            'auth_level'
         ]
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = [
-            'url',
-             'name',
-             'age'
-        ]       
   
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer): 
     class Meta:
@@ -44,7 +36,7 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
             'vans',
             'supportDeductions',
             'documents',
-            'datesList'
+            'datesList',
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
@@ -62,15 +54,3 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-        
-
-
-    # logIn=serializers.DateField(format='%H:%M',input_formats='%H:%M')
-    # logOut=serializers.DateField(format='%H:%M',input_formats='%H:%M')
-
-#        logIn=serializers.DateField(format = "%H:%M")
- #       logOut=serializers.DateField(format = "%H:%M")
-
-
-    #logIn=serializers.TimeField(read_only=True, format="%H:%M", input_formats=['%H:%M'])
-    #logOut=serializers.TimeField(read_only=True, format="%H:%M", input_formats=['%H:%M'])

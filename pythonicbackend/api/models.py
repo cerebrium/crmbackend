@@ -8,11 +8,10 @@ from django import forms
 from django.utils import timezone
 import pytz
 
-#import pytz
-
 
 # Create your models here.
 class Employee(models.Model):  
+
     # all fields needed for the daily feeling sheet report 
     employee_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
@@ -22,8 +21,8 @@ class Employee(models.Model):
     mileage = models.IntegerField(default=0, editable=True, null = True)
     parcel = models.IntegerField(default=0, editable=True, null = True)
     LWP = models.IntegerField(default=0, null = True)
-    LVP = models.IntegerField(default=0, null = True)
-    CRT = models.IntegerField(default=0, null = True)
+    LVP = models.DecimalField(default=4, decimal_places=10, max_digits=15,  null = True)
+    CRT = models.DecimalField(default=3, decimal_places=10, max_digits=15, null = True)
     RL = models.IntegerField(default=0, null = True)
     SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     #the following fields are money deducion fields
