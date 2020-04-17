@@ -13,7 +13,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'username', 
             'email', 
             'groups',
-            'auth_level'
+            'is_superuser'
         ]
   
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer): 
