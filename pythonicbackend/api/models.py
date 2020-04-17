@@ -8,11 +8,10 @@ from django import forms
 from django.utils import timezone
 import pytz
 
-#import pytz
-
 
 # Create your models here.
 class Employee(models.Model):  
+
     # all fields needed for the daily feeling sheet report 
     employee_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
@@ -22,14 +21,15 @@ class Employee(models.Model):
     mileage = models.IntegerField(default=0, editable=True, null = True)
     parcel = models.IntegerField(default=0, editable=True, null = True)
     LWP = models.IntegerField(default=0, null = True)
-    LVP = models.IntegerField(default=0, null = True)
-    CRT = models.IntegerField(default=0, null = True)
+    LVP = models.DecimalField(default=4, decimal_places=10, max_digits=15,  null = True)
+    CRT = models.DecimalField(default=3, decimal_places=10, max_digits=15, null = True)
     RL = models.IntegerField(default=0, null = True)
     SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     #the following fields are money deducion fields
     fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
+    documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
     def __str__(self):
@@ -40,6 +40,7 @@ class ScheduledDate(models.Model):
     date_id = models.AutoField(primary_key=True)
     logIn_time = models.TimeField(null = True)
     logOut_time = models.TimeField(null = True)
+    location = models.CharField(max_length = 100, null=True)
     date = models.CharField(max_length = 20, null = True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
