@@ -21,8 +21,8 @@ class Employee(models.Model):
     mileage = models.IntegerField(default=0, editable=True, null = True)
     parcel = models.IntegerField(default=0, editable=True, null = True)
     LWP = models.IntegerField(default=0, null = True)
-    LVP = models.DecimalField(default=4, decimal_places=10, max_digits=15,  null = True)
-    CRT = models.DecimalField(default=3, decimal_places=10, max_digits=15, null = True)
+    LVP = models.DecimalField(default=0, decimal_places=10, max_digits=15,  null = True)
+    CRT = models.DecimalField(default=0, decimal_places=10, max_digits=15, null = True)
     RL = models.IntegerField(default=0, null = True)
     SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
     #the following fields are money deducion fields
