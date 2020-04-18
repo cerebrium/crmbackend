@@ -21,7 +21,9 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         model = Driver
         fields =[
             'driver_id',
-            'name'
+            'name',
+            'documents',
+            'datesList'
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
@@ -47,10 +49,8 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'RL',
             'SUP',
             'fuel',
-            'vans',
             'supportDeductions',
-            'documents',
-            'datesList',
+            'vans'
         ]
 
 
