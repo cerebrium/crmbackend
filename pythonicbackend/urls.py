@@ -5,7 +5,7 @@ from pythonicbackend.api import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'employees', views.EmployeeViewSet)
+router.register(r'drivers', views.DriverViewSet)
 router.register(r'schedule', views.ScheduleViewSet)
 
 # Setup automatic URL routing
