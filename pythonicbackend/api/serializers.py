@@ -38,7 +38,7 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'logOut_time',   
             'location',
             'date',
-            #'driver_id',
+            'driver_id',
             'mileage',
             'parcel',
             'LWP',
