@@ -13,33 +13,13 @@ import pytz
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-    name = models.CharField(max_length = 30, null = True)
     driver_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 30, null = True)
     documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
     def __str__(self):
         return self.name
-
-    
-
-#------- The following fields are moved in the ScheduleDate class
-
-    # route = models.CharField(max_length = 10, default = "0", null = True)
-    # mileage = models.IntegerField(default=0, editable=True, null = True)
-    # parcel = models.IntegerField(default=0, editable=True, null = True)
-    # LWP = models.IntegerField(default=0, null = True)
-    # LVP = models.DecimalField(default=0, decimal_places=10, max_digits=15,  null = True)
-    # CRT = models.DecimalField(default=0, decimal_places=10, max_digits=15, null = True)
-    # RL = models.IntegerField(default=0, null = True)
-    # SUP = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
-    # #the following fields are money deducion fields
-    # fuel = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
-    # vans = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
-    # supportDeductions = MoneyField(default=0, max_digits=19, decimal_places=4, default_currency='GBP', null = True)
-    # documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
-    # datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
-
 
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
@@ -49,12 +29,11 @@ class ScheduledDate(models.Model):
     route = models.CharField("Route", max_length = 10, default = "0", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
-    #location = models.CharField(max_length = 10, default='DBS2', null = True)
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 100, null=True)
-    date = models.CharField(max_length = 20, null = True, default= datetime.now())
+    date = models.CharField(max_length = 50, null = True, default= datetime.now())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     
