@@ -21,10 +21,24 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         model = Driver
         fields =[
             'driver_id',
+            'name'
+        ]
+
+class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
+    logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
+    logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
+    class Meta:
+        model = ScheduledDate
+        fields = [
+            'date_id',
             'name',
-            'inOff', 
-            'location',
+            'inOff',
             'route',
+            'logIn_time',
+            'logOut_time',   
+            'location',
+            'date',
+            #'driver_id',
             'mileage',
             'parcel',
             'LWP',
@@ -37,20 +51,6 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'supportDeductions',
             'documents',
             'datesList',
-        ]
-
-class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
-    logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
-    logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
-    class Meta:
-        model = ScheduledDate
-        fields = [
-            'date_id',
-            'logIn_time',
-            'logOut_time',   
-            'location',
-            'date',
-            'driver_id'
         ]
 
 

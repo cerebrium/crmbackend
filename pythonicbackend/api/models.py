@@ -13,8 +13,9 @@ import pytz
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-    driver_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
+    driver_id = models.AutoField(primary_key=True)
+
     
 
 #------- The following fields are moved in the ScheduleDate class
@@ -40,7 +41,6 @@ class Driver(models.Model):
 
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
-
     date_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
