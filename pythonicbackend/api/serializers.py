@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Employee, ScheduledDate
+from .models import Driver, ScheduledDate
 from rest_framework import serializers
 
 
@@ -16,11 +16,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'is_superuser'
         ]
   
-class EmployeeSerializer(serializers.HyperlinkedModelSerializer): 
+class DriverSerializer(serializers.HyperlinkedModelSerializer): 
     class Meta:
-        model = Employee
+        model = Driver
         fields =[
-            'employee_id',
+            'driver_id',
             'name',
             'inOff', 
             'location',
@@ -50,7 +50,7 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'logOut_time',   
             'location',
             'date',
-            'employee_id'
+            'driver_id'
         ]
 
 
