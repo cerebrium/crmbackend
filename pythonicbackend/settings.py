@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'ginovevailieva',
+#         'NAME': 'test2',
 #         'USER': 'ginovevailieva',
 #         'PASSWORD': 'Ginishka95',
 #         'HOST': 'localhost',
@@ -116,8 +116,6 @@ DATABASES = {
         'PORT': '5432'
     }
 }
-
-#comment for deploy
 
 # Deployment Database Configuration
 # DATABASES = {
