@@ -19,6 +19,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         fields =[
             'driver_id',
             'name',
+            'location',
             'documents',
             'datesList'
         ]
