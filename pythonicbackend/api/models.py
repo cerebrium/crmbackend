@@ -15,7 +15,7 @@ import pytz
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
-    location = models.CharField(max_length = 15, default = 'DBS2', null = True)
+    station = models.CharField(max_length = 15, default = 'DBS2', null = True)
     documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
@@ -33,7 +33,7 @@ class ScheduledDate(models.Model):
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
-    location = models.CharField(max_length = 100, null=True)
+    location = models.CharField(max_length = 15, null=True)
     date = models.CharField(max_length = 50, null = True, default= datetime.now())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
