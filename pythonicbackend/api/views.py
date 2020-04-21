@@ -74,6 +74,8 @@ class DataViewSet(APIView):
             'LWP_and_LVP': myScheduleArray,
             ### so this is all we need to actually do to call the function here and store it.... much cleaner!
             'dates_differences_list': timeDifference(schedule),
+
+            ### so this is the final object and function in the functions file... this is where its at! :D
             'data': returnOrderdData(drivers, schedule)
         }
         return Response(content)

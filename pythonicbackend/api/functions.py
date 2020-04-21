@@ -40,9 +40,34 @@ def timeDifference(scheduledDates):
 
 
 def returnOrderdData(driversList, datesList):
+    ############## this function just copies everything and puts it into one array that can be returned...  ###########
     myDriverArray = []
     myDatesArray = []
     
+    for ele in datesList:
+        myTransientObjectDates = {}
+        myTransientObjectDates['date_id'] = ele.date_id
+        myTransientObjectDates['name'] = ele.name
+        myTransientObjectDates['inOff'] = ele.inOff
+        myTransientObjectDates['route'] = ele.route
+        myTransientObjectDates['logIn_time'] = ele.logIn_time
+        myTransientObjectDates['logOut_time'] = ele.logOut_time
+        myTransientObjectDates['timeDifference'] = ele.timeDifference
+        myTransientObjectDates['location'] = ele.location
+        myTransientObjectDates['date'] = ele.date
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
+        myTransientObjectDates['parcel'] = ele.parcel
+        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['LVP'] = ele.LVP
+        myTransientObjectDates['CRT'] = ele.CRT
+        myTransientObjectDates['RL'] = ele.RL
+        myTransientObjectDates['SUP'] = str(ele.SUP)
+        myTransientObjectDates['fuel'] = str(ele.fuel)
+        myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
+        myTransientObjectDates['vans'] = str(ele.vans)
+    
+        myDatesArray.append(myTransientObjectDates)
+
     ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
@@ -68,33 +93,36 @@ def returnOrderdData(driversList, datesList):
         else:
             myTransientObjectDriver['datesList'] = [] 
 
+        ################################## important part to look at ..... here i am going to add a 'field' that is not being saved, but will be returned to the front end... very 
+        #### useful because this is going to put all the matching appointments into an array attached to the driver object they belong to ... something ive been doing on the front end
+
+        ### step one .... I have mapped all the date data into an array now... which I will be formatting from now on, dont want to touch the actual data class
+        # # if it can be avoided.
+        datesObjectArray = []
+        for dateObject in myDatesArray:
+            ## see, now we can actually access everything as objects not stupid psql untouchable data fields
+            ## i . e if this was:
+            # for dateObject in datesList:
+            #   print(dateObject)  --> this would throw an error ...
+            
+            print(dateObject['driver_id']) 
+
+            ## so what I want is that if the scheduled dates objects foreign key matches the driver... i want to add it into an array I am going to 
+            # create on teh drivers object:
+            if dateObject['driver_id'] == ele.name:
+                datesObjectArray.append(dateObject)
+
+
+            ## all the data is in the array now ... cool ... now lets add the array to the object visible on the front end    
+
+        ## im making up the name dates array, it is not a field on the driver class.... but the object returned here it will look like it is with all the scheduled dates added in! :D
+        myTransientObjectDriver['datesArray'] = datesObjectArray    
+
+
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
 
-    for ele in datesList:
-        myTransientObjectDates = {}
-        print(ele.driver_id)
-        myTransientObjectDates['date_id'] = ele.date_id
-        myTransientObjectDates['name'] = ele.name
-        myTransientObjectDates['inOff'] = ele.inOff
-        myTransientObjectDates['route'] = ele.route
-        myTransientObjectDates['logIn_time'] = ele.logIn_time
-        myTransientObjectDates['logOut_time'] = ele.logOut_time
-        myTransientObjectDates['timeDifference'] = ele.timeDifference
-        myTransientObjectDates['location'] = ele.location
-        myTransientObjectDates['date'] = ele.date
-        myTransientObjectDates['driver_id'] = str(ele.driver_id)
-        myTransientObjectDates['parcel'] = ele.parcel
-        myTransientObjectDates['LWP'] = ele.LWP
-        myTransientObjectDates['LVP'] = ele.LVP
-        myTransientObjectDates['CRT'] = ele.CRT
-        myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['SUP'] = str(ele.SUP)
-        myTransientObjectDates['fuel'] = str(ele.fuel)
-        myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
-        myTransientObjectDates['vans'] = str(ele.vans)
-        
-        myDatesArray.append(myTransientObjectDates)
+
 
     myFinalObject = {
         'drivers': myDriverArray,
