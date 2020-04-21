@@ -3,7 +3,7 @@ import locale
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
-from datetime import datetime
+import datetime
 from django import forms
 from django.utils import timezone
 import pytz
@@ -13,7 +13,7 @@ import pytz
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-    name = models.CharField(max_length = 30, null = True)
+    name = models.CharField(max_length = 50, null = True)
     driver_id = models.AutoField(primary_key=True)
     documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
@@ -46,6 +46,8 @@ class ScheduledDate(models.Model):
     date_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
+
+    # ---????? ----route type should be a drop down menu? 
     route = models.CharField("Route", max_length = 10, default = "0", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
@@ -54,7 +56,7 @@ class ScheduledDate(models.Model):
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 100, null=True)
-    date = models.CharField(max_length = 20, null = True, default= datetime.now())
+    date = models.DateField(max_length = 50, null = True, default = datetime.date.today)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     

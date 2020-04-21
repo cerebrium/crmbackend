@@ -36,4 +36,3 @@ class CoolViewSet(APIView):
             'message': 'hello there'
         }
         return Response(content)
-
