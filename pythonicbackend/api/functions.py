@@ -28,7 +28,7 @@ def timeDifference(scheduledDates):
         print(differenceValue)
         ### so I looked at the output and it was 28800..... wtf is that.... welll, the difference value here is 8, and 8 times 3600 is 28800 . awesome, thanks python. so we have to convert this 
         ## number into something not silly
-        differenceValue = differenceValue/3600
+        differenceValue = differenceValue/3600   # if you look at the console it says 8:00:00.... which is fine, but comment this out then look what postman gives you
 
         ## now the result is in hours.. with decimal places for minutes... <3
 
