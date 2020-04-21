@@ -54,7 +54,6 @@ class DataViewSet(APIView):
 
         # grab all of the objects stored in the schedule class
         schedule = ScheduledDate.objects.all().order_by('driver_id')
-        ScheduledDate.timeDifference = timeDifference(schedule)
         
         # make another array to store the dates data i want
         myScheduleArray = []
