@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer
+#### import the function from the fil here... can add a comma then the next function if you want
+from .functions import timeDifference
+
 
 class UserViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
@@ -32,6 +35,7 @@ class DataViewSet(APIView):
     # permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
+        ############# examples of writing functions here #############
         # First returned array
         # grab all of the objects stored in the drivers class
         drivers = Driver.objects.all().order_by('name')
@@ -57,9 +61,16 @@ class DataViewSet(APIView):
             myScheduleArray.append(dateObject.LWP + dateObject.LVP)
 
 
+        ############### example of importing functions from functions file .... much cleaner and the 'proper' way to do this ....
+        # step 1: at the top import the name of the function from the file where the function lives
+        ## call the function... but dont forget to pass into the function whatever data you want it to act on
+        ## store the contents of the function in the object below
+        
         content = {
             'drivers_names': myDriverArray,
-            'LWP_and_LVP': myScheduleArray
+            'LWP_and_LVP': myScheduleArray,
+            ### so this is all we need to actually do to call the function here and store it.... much cleaner!
+            'dates_differences_list': timeDifference(schedule)
         }
         return Response(content)
 
