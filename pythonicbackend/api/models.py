@@ -31,6 +31,9 @@ class ScheduledDate(models.Model):
     logIn_time = models.TimeField("LOG IN", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
 
+    ## tryign to set values with function
+    timeDifference = models.IntegerField("difference", null = True)
+
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 15, null=True)
@@ -46,9 +49,9 @@ class ScheduledDate(models.Model):
     LVP = models.IntegerField("LVP", default=0,  null = True)
     CRT = models.IntegerField("CRT", default=0, null = True)
     RL = models.IntegerField("RL", default=0, null = True)
-    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
     
     #the following fields are money DEDUCTION fields 
+    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)

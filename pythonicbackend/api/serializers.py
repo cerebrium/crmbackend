@@ -36,6 +36,7 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'route',
             'logIn_time',
             'logOut_time',   
+            'timeDifference',
             'location',
             'date',
             'driver_id',

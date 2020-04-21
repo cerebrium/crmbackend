@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer
 #### import the function from the fil here... can add a comma then the next function if you want
-from .functions import timeDifference
+from .functions import timeDifference, returnOrderdData
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -28,7 +28,9 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows drivers to be viewed or edited
     """
+
     queryset = ScheduledDate.objects.all().order_by('driver_id')
+
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
@@ -52,6 +54,7 @@ class DataViewSet(APIView):
 
         # grab all of the objects stored in the schedule class
         schedule = ScheduledDate.objects.all().order_by('driver_id')
+        ScheduledDate.timeDifference = timeDifference(schedule)
         
         # make another array to store the dates data i want
         myScheduleArray = []
@@ -65,12 +68,13 @@ class DataViewSet(APIView):
         # step 1: at the top import the name of the function from the file where the function lives
         ## call the function... but dont forget to pass into the function whatever data you want it to act on
         ## store the contents of the function in the object below
-        
+
         content = {
             'drivers_names': myDriverArray,
             'LWP_and_LVP': myScheduleArray,
             ### so this is all we need to actually do to call the function here and store it.... much cleaner!
-            'dates_differences_list': timeDifference(schedule)
+            'dates_differences_list': timeDifference(schedule),
+            'data': returnOrderdData(drivers, schedule)
         }
         return Response(content)
 
