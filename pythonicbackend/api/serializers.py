@@ -2,9 +2,6 @@ from django.contrib.auth.models import User
 from .models import Driver, ScheduledDate
 from rest_framework import serializers
 
-
-# a comment
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -22,6 +19,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         fields =[
             'driver_id',
             'name',
+            'location',
             'documents',
             'datesList'
         ]

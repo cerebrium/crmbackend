@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -15,13 +15,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):
-    #permission_classes = (IsAuthenticated,) 
+    permission_classes = (IsAuthenticated,) 
 
     queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     """
     API endpoint that allows drivers to be viewed or edited
     """
@@ -29,7 +29,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     serializer_class = ScheduledDatesSerializer
 
 class CoolViewSet(APIView):
-    #permission_classes = (IsAuthenticated,)    
+    permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
         content = {
