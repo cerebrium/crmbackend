@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer
 #### import the function from the fil here... can add a comma then the next function if you want
-from .functions import timeDifference, returnOrderdData
+from .functions import timeDifference, returnOrderdData, trainings, deductionReport
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -62,6 +62,15 @@ class DataViewSet(APIView):
         for dateObject in schedule:
             myScheduleArray.append(dateObject.LWP + dateObject.LVP)
 
+# Ginishka ----
+            # so cool!! LVP and LWP are different thought, we won't add them
+            #LWP means late wave payment and if there is "1" that menas we pay the driver 10 extra pounds
+
+            # LVP means large van payment  "1" that means we pay the driver i think 16 extra pounds
+            #for the invoice we will need to sum all the extra reposrt stuff and substract deductions, we have
+            #time for that though :*
+
+# --- end
 
         ############### example of importing functions from functions file .... much cleaner and the 'proper' way to do this ....
         # step 1: at the top import the name of the function from the file where the function lives
@@ -73,9 +82,12 @@ class DataViewSet(APIView):
             'LWP_and_LVP': myScheduleArray,
             ### so this is all we need to actually do to call the function here and store it.... much cleaner!
             'dates_differences_list': timeDifference(schedule),
+            'training': trainings(ScheduledDate),
+            'deduction_report': deductionReport(ScheduledDate),
 
             ### so this is the final object and function in the functions file... this is where its at! :D
             'data': returnOrderdData(drivers, schedule)
+
         }
         return Response(content)
 
