@@ -13,5 +13,5 @@ router.register(r'schedule', views.ScheduleViewSet)
 urlpatterns = [
     path('', include(router.urls), name='rest routes'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('hello/', views.CoolViewSet.as_view(), name='hello')
+    path('data/', views.DataViewSet.as_view(), name='data')
 ]
