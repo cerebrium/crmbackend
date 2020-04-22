@@ -28,12 +28,12 @@ def timeDifference(scheduledDates):
         # print(differenceValue)
         ### so I looked at the output and it was 28800..... wtf is that.... welll, the difference value here is 8, and 8 times 3600 is 28800 . awesome, thanks python. so we have to convert this 
         ## number into something not silly
-        differenceValue = differenceValue/3600   # if you look at the console it says 8:00:00.... which is fine, but comment this out then look what postman gives you
+        differenceValue = differenceValue/60   # if you look at the console it says 8:00:00.... which is fine, but comment this out then look what postman gives you
 
         ## now the result is in hours.. with decimal places for minutes... <3
 
         ## now that we have the value we want to return, let push each value into the array we will return to be put into the object for the front end
-        myReturnArray.append(differenceValue)
+        myReturnArray.append(abs(differenceValue))
 
     ## make sure to return a value so that when the function is called the array is the actual value that is given back
     return myReturnArray    
