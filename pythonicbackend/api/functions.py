@@ -41,19 +41,36 @@ def timeDifference(scheduledDates):
 
 def returnOrderdData(driversList, datesList):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
+
+    # Ginishka ----
+    # so cool!! LVP and LWP are different thought, we won't add them
+    #LWP means late wave payment and if there is "1" that menas we pay the driver 10 extra pounds
+
+    # LVP means large van payment  "1" that means we pay the driver i think 16 extra pounds
+    #for the invoice we will need to sum all the extra reposrt stuff and substract deductions, we have
+    #time for that though :*
+
+    # --- end
+
+    # here we want to return the sum of the dedcution fields in shceduleDates
+    #     #  that sum will be deducted from the driver payment
+
+    #  Here we want to check the number of day a driver has been on training
+        #  CRT and RL needs to be 4 for every driver
+        # Every driver needs to comlete the trainings before starting to work
+        # CRT (classroom) and RL (on the road) training needs to be 4  (2 of each)
+        # if the driver has been on RL the managers rights '1' that means he has completed one ride along training for the day
+        # same for CRT
+        # maybe we can usethis someweher else later, to keep track of the drivers info
     myDriverArray = []
     myDatesArray = []
-    
+
     for ele in datesList:
         myTransientObjectDates = {}
-
         myTransientObjectDates['driver_id'] = ele.driver_id
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ', myTransientObjectDates['driver_id'])
         myObj = myTransientObjectDates['driver_id']
         myNewObj = str(myObj)
         myTransientObjectDates['driver_id'] = myNewObj
-        print(myNewObj)
-        
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
@@ -72,6 +89,9 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
         myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['dates_differences_list'] = timeDifference(datesList)
+        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.supportDeductions + ele.vans) # here
+        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
         myDatesArray.append(myTransientObjectDates)
 
