@@ -8,15 +8,14 @@ from django import forms
 from django.utils import timezone
 import pytz
 
+from .myfuns import work_days
+
 
 # Create your models here.
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-<<<<<<< HEAD
     name = models.CharField(max_length = 50, null = True)
-=======
->>>>>>> c314db91e50b00031ba3dc9ea4367aaa7e9bd637
     driver_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
@@ -29,6 +28,9 @@ class Driver(models.Model):
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
     date_id = models.AutoField(primary_key=True)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    date = models.DateField(max_length = 50, null = True, default = datetime.date.today)
+    
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
 
@@ -39,30 +41,21 @@ class ScheduledDate(models.Model):
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
-<<<<<<< HEAD
     location = models.CharField(max_length = 100, null=True)
-    date = models.DateField(max_length = 50, null = True, default = datetime.date.today)
-=======
-    location = models.CharField(max_length = 15, null=True)
-    date = models.CharField(max_length = 50, null = True, default= datetime.now())
->>>>>>> c314db91e50b00031ba3dc9ea4367aaa7e9bd637
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
-    
     mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     parcel = models.IntegerField("PARCEL", default=0, editable=True, null = True)
 
     #the following fields are Extra's report fields 
-    LWP = models.IntegerField("LWP", default=0, null = True)
-    LVP = models.IntegerField("LVP", default=0,  null = True)
-    CRT = models.IntegerField("CRT", default=0, null = True)
-    RL = models.IntegerField("RL", default=0, null = True)
-    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
+    LWP = models.IntegerField("LWP", default=0, editable=True, null = True)
+    LVP = models.IntegerField("LVP", default=0, editable=True,  null = True)
+    CRT = models.IntegerField("CRT", default=0, editable=True, null = True)
+    RL = models.IntegerField("RL", default=0,editable=True, null = True)
+    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True,editable=True)
     
     #the following fields are money DEDUCTION fields 
-    fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True,editable=True)
+    supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP',editable=True, null = True)
+    vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP',editable=True, null = True)
     
 
 

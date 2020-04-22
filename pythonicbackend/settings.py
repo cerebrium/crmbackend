@@ -94,29 +94,16 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 # Ginishka local database Configuration
-<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test5',
+        'NAME': 'test15',
         'USER': 'ginovevailieva',
         'PASSWORD': 'Ginishka95',
         'HOST': 'localhost',
         'PORT': '5432'
     }
 }
-=======
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'test2',
-#         'USER': 'ginovevailieva',
-#         'PASSWORD': 'Ginishka95',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
->>>>>>> c314db91e50b00031ba3dc9ea4367aaa7e9bd637
 
 # Nikitch Local Database Configuration
 # DATABASES = {
@@ -131,12 +118,12 @@ DATABASES = {
 # }
 
 # Deployment Database Configuration
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
