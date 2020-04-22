@@ -46,6 +46,14 @@ def returnOrderdData(driversList, datesList):
     
     for ele in datesList:
         myTransientObjectDates = {}
+
+        myTransientObjectDates['driver_id'] = ele.driver_id
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ', myTransientObjectDates['driver_id'])
+        myObj = myTransientObjectDates['driver_id']
+        myNewObj = str(myObj)
+        myTransientObjectDates['driver_id'] = myNewObj
+        print(myNewObj)
+        
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
@@ -55,7 +63,6 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['timeDifference'] = ele.timeDifference
         myTransientObjectDates['location'] = ele.location
         myTransientObjectDates['date'] = ele.date
-        myTransientObjectDates['driver_id'] = str(ele.driver_id)
         myTransientObjectDates['parcel'] = ele.parcel
         myTransientObjectDates['LWP'] = ele.LWP
         myTransientObjectDates['LVP'] = ele.LVP
