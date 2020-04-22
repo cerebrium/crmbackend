@@ -3,7 +3,7 @@ import locale
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
-from datetime import datetime
+import datetime
 from django import forms
 from django.utils import timezone
 import pytz
@@ -37,7 +37,7 @@ class ScheduledDate(models.Model):
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 15, null=True)
-    date = models.CharField(max_length = 50, null = True, default= datetime.now())
+    date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     

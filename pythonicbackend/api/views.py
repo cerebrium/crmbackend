@@ -71,6 +71,7 @@ class DataViewSet(APIView):
         content = {
             'drivers_names': myDriverArray,
             'LWP_and_LVP': myScheduleArray,
+            
             ### so this is all we need to actually do to call the function here and store it.... much cleaner!
             'dates_differences_list': timeDifference(schedule),
 
