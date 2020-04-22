@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer
 #### import the function from the fil here... can add a comma then the next function if you want
-from .functions import timeDifference, returnOrderdData, trainings, deductionReport
+from .functions import timeDifference, returnOrderdData
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,6 +40,7 @@ class DataViewSet(APIView):
         ############# examples of writing functions here #############
         # First returned array
         # grab all of the objects stored in the drivers class
+
         drivers = Driver.objects.all().order_by('name')
 
         # make data type to store stuff in -- array in this case
@@ -62,7 +63,7 @@ class DataViewSet(APIView):
         for dateObject in schedule:
             myScheduleArray.append(dateObject.LWP + dateObject.LVP)
 
-# Ginishka ----
+            # Ginishka ----
             # so cool!! LVP and LWP are different thought, we won't add them
             #LWP means late wave payment and if there is "1" that menas we pay the driver 10 extra pounds
 
@@ -71,6 +72,31 @@ class DataViewSet(APIView):
             #time for that though :*
 
 # --- end
+
+# here we want to return the sum of the dedcution fields in shceduleDates
+#     #  that sum will be deducted from the driver payment
+
+        deductionArray = []
+        for ele in schedule:
+            deductionArray.append(str(ele.SUP) + str(ele.fuel) +
+                              str(ele.supportDeductions) + str(ele.vans))
+
+        
+
+#  Here we want to check the number of day a driver has been on training
+    #  CRT and RL needs to be 4 for every driver
+    # Every driver needs to comlete the trainings before starting to work
+    # CRT (classroom) and RL (on the road) training needs to be 4  (2 of each)
+    # if the driver has been on RL the managers rights '1' that means he has completed one ride along training for the day
+    # same for CRT
+    # maybe we can usethis someweher else later, to keep track of the drivers info
+        trainingArray = []
+        
+        for element2 in schedule:
+            trainingArray.append(element2.CRT + element2.RL)
+    
+
+
 
         ############### example of importing functions from functions file .... much cleaner and the 'proper' way to do this ....
         # step 1: at the top import the name of the function from the file where the function lives
@@ -82,8 +108,8 @@ class DataViewSet(APIView):
             'LWP_and_LVP': myScheduleArray,
             ### so this is all we need to actually do to call the function here and store it.... much cleaner!
             'dates_differences_list': timeDifference(schedule),
-            'training': trainings(ScheduledDate),
-            'deduction_report': deductionReport(ScheduledDate),
+            'training': trainingArray,
+            'deduction_report': deductionArray,
 
             ### so this is the final object and function in the functions file... this is where its at! :D
             'data': returnOrderdData(drivers, schedule)
