@@ -18,13 +18,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):
-    # permission_classes = (IsAuthenticated,) 
+    permission_classes = (IsAuthenticated,) 
 
     queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     """
     API endpoint that allows drivers to be viewed or edited
     """
@@ -34,7 +34,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
-    # permission_classes = (IsAuthenticated,)    
+    permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
         ## defining overall data objects
