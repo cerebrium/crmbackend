@@ -20,8 +20,8 @@ class Driver(models.Model):
     vehicleDocuments = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name
 
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
@@ -31,9 +31,6 @@ class ScheduledDate(models.Model):
     route = models.CharField("Route", max_length = 10, default = "0", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
-
-    ## tryign to set values with function
-    timeDifference = models.IntegerField("difference", null = True)
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
@@ -55,10 +52,8 @@ class ScheduledDate(models.Model):
     supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     
-    # def __str__(self):
-    #     return self.name
-
-
+    def __str__(self):
+        return self.name
 
     #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
     # that person with default = 1, will work and have data for that day

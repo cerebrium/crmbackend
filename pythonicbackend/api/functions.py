@@ -47,17 +47,14 @@ def returnOrderdData(driversList, datesList):
     for ele in datesList:
         myTransientObjectDates = {}
 
-        def __str__(self):
-            return self.name
-
-        myTransientObjectDates['driver_id'] = __str__(ele.driver_id)
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
         myTransientObjectDates['route'] = ele.route
         myTransientObjectDates['logIn_time'] = ele.logIn_time
         myTransientObjectDates['logOut_time'] = ele.logOut_time
-        myTransientObjectDates['timeDifference'] = ele.timeDifference
+        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
         myTransientObjectDates['location'] = ele.location
         myTransientObjectDates['date'] = ele.date
         myTransientObjectDates['parcel'] = ele.parcel
@@ -69,7 +66,6 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['dates_differences_list'] = timeDifference(ele.logIn_time, ele.logOut_time)
         myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.supportDeductions + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
@@ -91,6 +87,14 @@ def returnOrderdData(driversList, datesList):
             myTransientObjectDriver['documents'] = documentArray
         else:
             myTransientObjectDriver['documents'] = [] 
+
+        ## iterate through each document in vehicle documents
+        if len(ele.vehicleDocuments) > 0:
+            for item in ele.vehicleDocuments:
+                documentArray.append(item)
+            myTransientObjectDriver['vehicleDocuments'] = documentArray
+        else:
+            myTransientObjectDriver['vehicleDocuments'] = [] 
 
         ## iterate through each date in datesList
         if len(ele.datesList) > 0:

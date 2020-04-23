@@ -21,6 +21,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'location',
             'documents',
+            'vehicleDocuments',
             'datesList'
         ]
 
@@ -36,7 +37,6 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'route',
             'logIn_time',
             'logOut_time',   
-            'timeDifference',
             'location',
             'date',
             'driver_id',

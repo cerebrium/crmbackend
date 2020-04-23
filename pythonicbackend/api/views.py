@@ -10,39 +10,38 @@ from .functions import timeDifference, returnOrderdData
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    # Authentication
     permission_classes = (IsAuthenticated,)
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+
+    # Users
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):
+    # Authentication
     permission_classes = (IsAuthenticated,) 
 
+    # drivers
     queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
+    # Authentication
     permission_classes = (IsAuthenticated,)
-    """
-    API endpoint that allows drivers to be viewed or edited
-    """
 
+    # schedule
     queryset = ScheduledDate.objects.all().order_by('driver_id')
-
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
-    # permission_classes = (IsAuthenticated,)    
+    # Authentication
+    permission_classes = (IsAuthenticated,)    
 
+    # function for all data
     def get(self, request):
         ## defining overall data objects
         drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all()
-
-        #####################################################
-        # to Ginishke: check line 71 and 72 of the functions file --> I added your stuff to the overall object so I can just hit one route and get everything
 
         content = {
             'data': returnOrderdData(drivers, schedule)
