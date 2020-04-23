@@ -7,8 +7,8 @@ import math
 def timeDifference(logIn, logOut):
     date = datetime.date(1, 1, 1)  # null time value to compare our log in and log out times to
 
-    dateTimeLogIn = datetime.datetime.strptime(logIn, '%H:%M:%S') # lots here... but combining null time and our elements log in time
-    dateTimeLogOut = datetime.datetime.strptime(logOut, '%H:%M:%S')  # same but log out, and now we can actually subrat them
+    dateTimeLogIn = datetime.datetime.strptime(str(logIn), '%H:%M:%S') # lots here... but combining null time and our elements log in time
+    dateTimeLogOut = datetime.datetime.strptime(str(logOut), '%H:%M:%S')  # same but log out, and now we can actually subrat them
 
     differenceValue = dateTimeLogIn - dateTimeLogOut
 
@@ -69,7 +69,7 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['dates_differences_list'] = timeDifference("08:15:00", "18:26:00")
+        myTransientObjectDates['dates_differences_list'] = timeDifference(ele.logIn_time, ele.logOut_time)
         myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.supportDeductions + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
@@ -119,17 +119,13 @@ def returnOrderdData(driversList, datesList):
             if dateObject['driver_id'] == ele.name:
                 datesObjectArray.append(dateObject)
 
-
             ## all the data is in the array now ... cool ... now lets add the array to the object visible on the front end    
 
         ## im making up the name dates array, it is not a field on the driver class.... but the object returned here it will look like it is with all the scheduled dates added in! :D
         myTransientObjectDriver['datesArray'] = datesObjectArray    
 
-
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
-
-
 
     myFinalObject = {
         'drivers': myDriverArray,

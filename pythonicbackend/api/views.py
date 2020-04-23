@@ -34,7 +34,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
-    permission_classes = (IsAuthenticated,)    
+    # permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
         ## defining overall data objects
