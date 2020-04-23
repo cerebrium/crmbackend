@@ -17,10 +17,11 @@ class Driver(models.Model):
     name = models.CharField(max_length = 30, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
+    vehicleDocuments = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
@@ -39,8 +40,6 @@ class ScheduledDate(models.Model):
     location = models.CharField(max_length = 15, null=True)
     date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
-    
     mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     parcel = models.IntegerField("PARCEL", default=0, editable=True, null = True)
 
@@ -56,10 +55,8 @@ class ScheduledDate(models.Model):
     supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     
-
-
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 

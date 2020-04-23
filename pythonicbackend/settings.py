@@ -6,10 +6,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
@@ -106,28 +102,28 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # }
 
 # Nikitch Local Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'crmbackend',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ginishka04121995',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
-# Deployment Database Configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crmbackend',
+        'USER': 'postgres',
+        'PASSWORD': 'Ginishka04121995',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
+# Deployment Database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # <-- Authentication added as mandatory :) :*:*:*
+        'rest_framework.authentication.TokenAuthentication',  
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10000,

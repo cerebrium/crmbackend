@@ -1,42 +1,21 @@
 ##### functions file #####
 ## make sure to import anything you plan to use
 import datetime
+import math
 
 ## declare a function - this one is going to return an array containing the difference between log in and log out times
-def timeDifference(scheduledDates):
-    # takes one argument which is going to be the entirety of the class containing the scheduled work dates... which has access to all fields on each item
+def timeDifference(logIn, logOut):
+    date = datetime.date(1, 1, 1)  # null time value to compare our log in and log out times to
 
-    ## here i am declaring an empty array, I amgoing to do my computation in a loop and push each final number into this array to be returned later
-    myReturnArray = []
+    dateTimeLogIn = datetime.datetime.strptime(logIn, '%H:%M:%S') # lots here... but combining null time and our elements log in time
+    dateTimeLogOut = datetime.datetime.strptime(logOut, '%H:%M:%S')  # same but log out, and now we can actually subrat them
 
-    ## since the 'scheduledDates' passed in is all of the dates.... i can loop through them and call each field i want to use
-    for element in scheduledDates:
-        ## now element is an object ... or an instance... of the scheduled dates class that is accesibel to call fields on
-        # print('log In: ', element.logIn_time)  # for working on things I always do lots of comments to see what im looking at as I go!
-        # print('log Out: ', element.logOut_time) 
+    differenceValue = dateTimeLogIn - dateTimeLogOut
 
-        ## dateTime objects cannot be subtracted in python..... booooooo!!!! they can in javascript! :) ... anyways no big deal lets turn them into things that can be subrtracted
-        ### apparently the way to do this is turn them into datetime.datetime objects, and combine them with a null value to get the delta that can be compared... silly!
-        date = datetime.date(1, 1, 1)  # null time value to compare our log in and log out times to
+    differenceValue = str(abs(differenceValue))  # if you look at the console it says 8:00:00.... which is fine, but comment this out then look what postman gives you
+    myString = differenceValue.split()
 
-        dateTimeLogIn = datetime.datetime.combine(date, element.logIn_time)  # lots here... but combining null time and our elements log in time
-        dateTimeLogOut = datetime.datetime.combine(date, element.logOut_time)  # same but log out, and now we can actually subrat them
-
-        ## for each item in the object do the following computation and save it in a variable calledd differenceValue... reassigned for each iteration of the loop
-        differenceValue = dateTimeLogIn - dateTimeLogOut
-
-        # print(differenceValue)
-        ### so I looked at the output and it was 28800..... wtf is that.... welll, the difference value here is 8, and 8 times 3600 is 28800 . awesome, thanks python. so we have to convert this 
-        ## number into something not silly
-        differenceValue = differenceValue/60   # if you look at the console it says 8:00:00.... which is fine, but comment this out then look what postman gives you
-
-        ## now the result is in hours.. with decimal places for minutes... <3
-
-        ## now that we have the value we want to return, let push each value into the array we will return to be put into the object for the front end
-        myReturnArray.append(abs(differenceValue))
-
-    ## make sure to return a value so that when the function is called the array is the actual value that is given back
-    return myReturnArray    
+    return myString
 
 
 def returnOrderdData(driversList, datesList):
@@ -67,10 +46,11 @@ def returnOrderdData(driversList, datesList):
 
     for ele in datesList:
         myTransientObjectDates = {}
-        myTransientObjectDates['driver_id'] = ele.driver_id
-        myObj = myTransientObjectDates['driver_id']
-        myNewObj = str(myObj)
-        myTransientObjectDates['driver_id'] = myNewObj
+
+        def __str__(self):
+            return self.name
+
+        myTransientObjectDates['driver_id'] = __str__(ele.driver_id)
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
@@ -89,7 +69,7 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['dates_differences_list'] = timeDifference(datesList)
+        myTransientObjectDates['dates_differences_list'] = timeDifference("08:15:00", "18:26:00")
         myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.supportDeductions + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
@@ -132,7 +112,7 @@ def returnOrderdData(driversList, datesList):
             # for dateObject in datesList:
             #   print(dateObject)  --> this would throw an error ...
             
-            print(dateObject['driver_id']) 
+            # print(dateObject['driver_id']) 
 
             ## so what I want is that if the scheduled dates objects foreign key matches the driver... i want to add it into an array I am going to 
             # create on teh drivers object:
