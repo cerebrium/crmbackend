@@ -10,6 +10,7 @@ import pytz
 
 
 # Create your models here.
+# new model .... i followed this websites syntax exactly https://docs.djangoproject.com/en/3.0/ref/models/instances/
 class DriverManager(models.Manager):
     def create_driver(self, name):
         driver = self.create(name=name)
@@ -23,7 +24,7 @@ class Driver(models.Model):
     documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     vehicleDocuments = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
-    objects = DriverManager()
+    objects = DriverManager() # allows us to call method above
 
     def __str__(self):
         return self.name

@@ -52,17 +52,14 @@ class DataViewSet(APIView):
 
 class MapViewSet(APIView):
     # Authentication
-    # permission_classes = (IsAuthenticated,)    
+    # permission_classes = (IsAuthenticated,)  
+    # This route is just a route that allows us to call the function in the test_data.py file with the correct environment  
 
     # function for all data
     def get(self, request):
-        ## defining overall data objects
-        driverManager = DriverManager
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
-
         content = {
-            'data': importData(schedule, Driver, driverManager)
+            'data': importData(ScheduledDate, Driver, DriverManager) # the function is actually called in this file... so it has this files scope.... why we put things in 
+            # functions... makes them modular and then we can control their scope 
         }
 
         return Response(content)
