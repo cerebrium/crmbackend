@@ -1,42 +1,29 @@
 import csv
-#from django.contrib.auth.models import User
-#from .models import Driver, ScheduledDate
 import pandas as pd
-#import matplotlib.pyplot as plt
-#from .settings import import_export
-#form import_export import resources
+
+def importData(schedule, drivers, driverManager):
+    print(__name__)
+    print(__package__)
+
+    # create array
+    myArray = []
 
 
-#load data in jyputer 
+    # create variable for import
+    data = pd.read_csv("sunday2.csv")
 
-# #first laod the csv file in the project, then run
-data = pd.read_csv("sunday2.csv")
+    # clean data -- good job, this is exactly what jupyter notebooks is for
+    data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
 
+    # loop through data and write data to database
+    for row in data['NAME']:
+        driver = drivers.objects.create_driver(row)
+        myArray.append(row)
 
-# #here i am just dropping the rows in which Route = NaN, ie the driver has 
-# #     not been on the road
-data.dropna(subset=['ROUTE'],axis = 'rows', how ='all', inplace = True) 
-print(data) #display the data 
-for row in data:
-    print(row)
-
-
-
-
-# def run():
-#     fhand = open('sunday2.csv')
-#     reader = csv.reader(fhand)
-
-    
+    return(myArray)    
 
 
 
 
-
-
-#ScheduledDate.objects.all().delete()
-
-
- #   s, created = ScheduledDate.objects.get_or_create(name = row[0])
 
 

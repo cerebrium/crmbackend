@@ -20,27 +20,8 @@ def timeDifference(logIn, logOut):
 
 def returnOrderdData(driversList, datesList):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
+    print(__package__)
 
-    # Ginishka ----
-    # so cool!! LVP and LWP are different thought, we won't add them
-    #LWP means late wave payment and if there is "1" that menas we pay the driver 10 extra pounds
-
-    # LVP means large van payment  "1" that means we pay the driver i think 16 extra pounds
-    #for the invoice we will need to sum all the extra reposrt stuff and substract deductions, we have
-    #time for that though :*
-
-    # --- end
-
-    # here we want to return the sum of the dedcution fields in shceduleDates
-    #     #  that sum will be deducted from the driver payment
-
-    #  Here we want to check the number of day a driver has been on training
-        #  CRT and RL needs to be 4 for every driver
-        # Every driver needs to comlete the trainings before starting to work
-        # CRT (classroom) and RL (on the road) training needs to be 4  (2 of each)
-        # if the driver has been on RL the managers rights '1' that means he has completed one ride along training for the day
-        # same for CRT
-        # maybe we can usethis someweher else later, to keep track of the drivers info
     myDriverArray = []
     myDatesArray = []
 
@@ -111,21 +92,10 @@ def returnOrderdData(driversList, datesList):
         # # if it can be avoided.
         datesObjectArray = []
         for dateObject in myDatesArray:
-            ## see, now we can actually access everything as objects not stupid psql untouchable data fields
-            ## i . e if this was:
-            # for dateObject in datesList:
-            #   print(dateObject)  --> this would throw an error ...
-            
-            # print(dateObject['driver_id']) 
 
-            ## so what I want is that if the scheduled dates objects foreign key matches the driver... i want to add it into an array I am going to 
-            # create on teh drivers object:
             if dateObject['driver_id'] == ele.name:
                 datesObjectArray.append(dateObject)
 
-            ## all the data is in the array now ... cool ... now lets add the array to the object visible on the front end    
-
-        ## im making up the name dates array, it is not a field on the driver class.... but the object returned here it will look like it is with all the scheduled dates added in! :D
         myTransientObjectDriver['datesArray'] = datesObjectArray    
 
         ## append object to array
