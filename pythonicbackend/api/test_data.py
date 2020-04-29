@@ -1,5 +1,6 @@
 import csv
 import pandas as pd
+import math
 
 # always put stuff in functions... it scopes your variables and its cleaner.. making different functions do different things is modular and good code
 def importData(schedule, drivers, driverManager,ScheduledDatesManager):
@@ -20,16 +21,21 @@ def importData(schedule, drivers, driverManager,ScheduledDatesManager):
     data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
 
     # loop through data and grab every row that belongs to the 'name' column in the data
+    print(data)
     for row in data:
+        print(str(data[row]))
 
+
+#PARCEL, LWP, LVP, CRT, SUP, FUEL, SUPPORT, FDDS
+        # print(schedule.objects.create_scheduledDate(row[2]))
+        # print(drivers.objects.create_driver(row))
         # This line calls the function on the driver manager class that is attached to the driver class that makes a new driver
-        driver = drivers.objects.create_driver(row[0]),  # comment this after the data appears or it will multiply
+        # driver = drivers.objects.create_driver(row[0]),  # comment this after the data appears or it will multiply
         # this line just attaches a name to the array that is returned so the route looks pretty.
+        # routeType = schedule.objects.create_scheduledDate(row[2])
 
-        routeType = schedule.payroll.create_scheduledDatesManager(row[2])
+    return myArray
 
-    # return the array just so that the route displays what has been added. go check the drivers class afterwards to make sure it contains all the names
-    return(myArray)    
 
 
    

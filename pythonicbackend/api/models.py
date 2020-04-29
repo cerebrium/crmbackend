@@ -38,14 +38,16 @@ class Driver(models.Model):
 # 
 # Not needed: FDDS,PHR,CALL,POD,CONS,DAILY DPMO 
 class ScheduledDatesManager(models.Manager):
-
-    def create_scheduledDatesManager(self, route):
-        routeType = self.create(route = route)
-        return routeType
+    
+    def create_scheduledDate(self, route):
+        scheduledDate = self.create(route=route)
+        return scheduledDate
   
 
-
 class ScheduledDate(models.Model):
+    # have to add this
+    objects = ScheduledDatesManager()
+
     # all fields needed for the daily feeling sheet report 
     date_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 50, null = True)
