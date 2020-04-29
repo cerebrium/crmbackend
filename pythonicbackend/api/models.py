@@ -14,7 +14,9 @@ import pytz
 class DriverManager(models.Manager):
     def create_driver(self, name):
         driver = self.create(name=name)
+
         return driver
+    
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
@@ -27,7 +29,21 @@ class Driver(models.Model):
     objects = DriverManager() # allows us to call method above
 
     def __str__(self):
-        return self.name
+        return self.name 
+
+#Field names from the csv file
+# added: NAME,
+#need to add: IN,ROUTE,LOG_IN,LOG_OUT,TORH,MILEAGE,PARCEL,LWP,LVP,
+#CRT,RL,SUP,FUEL,SUPPORT,VANS,
+# 
+# Not needed: FDDS,PHR,CALL,POD,CONS,DAILY DPMO 
+class ScheduledDatesManager(models.Manager):
+
+    def create_scheduledDatesManager(self, route):
+        routeType = self.create(route = route)
+        return routeType
+  
+
 
 class ScheduledDate(models.Model):
     # all fields needed for the daily feeling sheet report 
@@ -57,7 +73,9 @@ class ScheduledDate(models.Model):
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    
+
+    payroll = ScheduledDatesManager()
+
     def __str__(self):
         return self.name
 

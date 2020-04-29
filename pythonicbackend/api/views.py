@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, DriverManager
+from .models import Driver, ScheduledDate, DriverManager,ScheduledDatesManager
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -58,7 +58,7 @@ class MapViewSet(APIView):
     # function for all data
     def get(self, request):
         content = {
-            'data': importData(ScheduledDate, Driver, DriverManager) # the function is actually called in this file... so it has this files scope.... why we put things in 
+            'data': importData(ScheduledDate, Driver, DriverManager,ScheduledDatesManager) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
         }
 
