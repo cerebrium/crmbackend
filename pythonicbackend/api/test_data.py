@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 
 # always put stuff in functions... it scopes your variables and its cleaner.. making different functions do different things is modular and good code
-def importData(schedule, drivers, driverManager):
+def importData(schedule, drivers, driverManager,ScheduledDatesManager):
 
     # These two comments explain why you cant import scheduleddates.... the name is main. which is fine... but youll notice the package is null... which is not fine. and try as I might
     # I could not get the package name to change... hence my other solutions... which actually i think is better because it makes this process reproducable
@@ -20,16 +20,23 @@ def importData(schedule, drivers, driverManager):
     data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
 
     # loop through data and grab every row that belongs to the 'name' column in the data
-    for row in data['NAME']:
+    for row in data:
 
         # This line calls the function on the driver manager class that is attached to the driver class that makes a new driver
-        driver = drivers.objects.create_driver(row)  # comment this after the data appears or it will multiply
-
+        driver = drivers.objects.create_driver(row[0]),  # comment this after the data appears or it will multiply
         # this line just attaches a name to the array that is returned so the route looks pretty.
-        myArray.append(row)
+
+        routeType = schedule.payroll.create_scheduledDatesManager(row[2])
 
     # return the array just so that the route displays what has been added. go check the drivers class afterwards to make sure it contains all the names
     return(myArray)    
+
+
+   
+
+
+
+
 
 
 
