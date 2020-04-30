@@ -1,5 +1,6 @@
 import csv
 import pandas as pd
+import numpy as np
 import math
 
 # always put stuff in functions... it scopes your variables and its cleaner.. making different functions do different things is modular and good code
@@ -19,6 +20,13 @@ def importData(schedule, drivers, driverManager,ScheduledDatesManager):
     # clean data -- good job, this is exactly what jupyter notebooks is for... youll need to do more of this kind of thing... for instances I removed the spaces from the 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
     data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
+    data.fillna(0,inplace = True)
+    print(data)
+
+    for row in data:
+        clean_data = {}
+        clean_data[row] = data[row]
+
 
     # loop through data and grab every row that belongs to the 'name' column in the data
     print(data)
