@@ -4,12 +4,7 @@ import numpy as np
 import math
 
 # always put stuff in functions... it scopes your variables and its cleaner.. making different functions do different things is modular and good code
-def importData(schedule, drivers, driverManager,ScheduledDatesManager):
-
-    # These two comments explain why you cant import scheduleddates.... the name is main. which is fine... but youll notice the package is null... which is not fine. and try as I might
-    # I could not get the package name to change... hence my other solutions... which actually i think is better because it makes this process reproducable
-    print('hello, my name is: ', __name__)
-    print('and i live in package: ', __package__)
+def importData(schedule, drivers, driverManager, ScheduledDatesManager):
 
     # create array
     myArray = []
@@ -21,27 +16,25 @@ def importData(schedule, drivers, driverManager,ScheduledDatesManager):
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
     data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
     data.fillna(0,inplace = True)
-    print(data)
 
-    for row in data:
-        clean_data = {}
-        clean_data[row] = data[row]
-
-
+    # driver = drivers.objects.create_driver(row[0]) -- example :)
     # loop through data and grab every row that belongs to the 'name' column in the data
+
     print(data)
-    for row in data:
-        print(str(data[row]))
+    for row in data['NAME']:
+        driver = drivers.objects.create_driver(row)
 
+    myNum = 0
+    while myNum < 13:
+        localArray = []
+        for num, row in enumerate(data):
+            localArray.append(data[row][data[row].index[myNum]])
+            myArray.append(localArray)
+        scheduledDate = schedule.objects.create_date(localArray[0], localArray[1], localArray[2], localArray[3], localArray[4], localArray[5], localArray[6], localArray[7], localArray[8], localArray[9], localArray[10], localArray[11], 18.00, localArray[13], localArray[14], localArray[15], localArray[16][0:5] if len(str(localArray[16])) > 1 else 0, localArray[17], localArray[18][0:5] if len(str(localArray[18])) > 1 else 0, localArray[19][0:5] if len(str(localArray[19])) > 1 else 0, localArray[20], myNum+1)
+        localArray = []    
+        myNum = myNum + 1
 
-#PARCEL, LWP, LVP, CRT, SUP, FUEL, SUPPORT, FDDS
-        # print(schedule.objects.create_scheduledDate(row[2]))
-        # print(drivers.objects.create_driver(row))
-        # This line calls the function on the driver manager class that is attached to the driver class that makes a new driver
-        # driver = drivers.objects.create_driver(row[0]),  # comment this after the data appears or it will multiply
-        # this line just attaches a name to the array that is returned so the route looks pretty.
-        # routeType = schedule.objects.create_scheduledDate(row[2])
-
+         
     return myArray
 
 

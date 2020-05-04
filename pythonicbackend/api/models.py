@@ -36,12 +36,35 @@ class Driver(models.Model):
 #need to add: IN,ROUTE,LOG_IN,LOG_OUT,TORH,MILEAGE,PARCEL,LWP,LVP,
 #CRT,RL,SUP,FUEL,SUPPORT,VANS,
 # 
-# Not needed: FDDS,PHR,CALL,POD,CONS,DAILY DPMO 
 class ScheduledDatesManager(models.Manager):
     
-    def create_scheduledDate(self, route):
-        scheduledDate = self.create(route=route)
-        return scheduledDate
+    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, FDDS, PHR, CALL, POD, CONS, driver_id):
+        date = self.create(
+            name=name,
+            inOff=inOff,
+            route=route,
+            logIn_time=logIn_time,
+            logOut_time=logOut_time,
+            TORH=TORH,
+            mileage=mileage,
+            parcel=parcel,
+            LWP=LWP,
+            LVP=LVP,
+            CRT=CRT,
+            RL=RL,
+            SUP=SUP,
+            fuel=fuel,
+            support=support,
+            vans=vans,
+            FDDS=FDDS,
+            PHR=PHR,
+            CALL=CALL,
+            POD=POD,
+            CONS=CONS,
+            driver_id=Driver(driver_id)
+        )
+
+        return date
   
 
 class ScheduledDate(models.Model):
@@ -53,8 +76,8 @@ class ScheduledDate(models.Model):
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
     route = models.CharField("Route", max_length = 10, default = "0", null = True)
-    logIn_time = models.TimeField("LOG IN", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
+    logIn_time = models.TimeField("LOG IN", null = True)
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
@@ -65,18 +88,25 @@ class ScheduledDate(models.Model):
     parcel = models.IntegerField("PARCEL", default=0, editable=True, null = True)
 
     #the following fields are Extra's report fields 
+    TORH = models.TimeField("TORH", null = True)
     LWP = models.IntegerField("LWP", default=0, null = True)
     LVP = models.IntegerField("LVP", default=0,  null = True)
     CRT = models.IntegerField("CRT", default=0, null = True)
     RL = models.IntegerField("RL", default=0, null = True)
+    FDDS = models.FloatField("FDDS", default=0, null = True)
+    PHR = models.FloatField("PHR", default=0, null = True)
+    CALL = models.FloatField("CALL", default=0, null = True)
+    POD = models.FloatField("POD", default=0, null = True)
+    CONS = models.FloatField("FDDS", default=0, null = True)
+    DPMO = models.FloatField("DPMO", default=0, null = True)
     
     #the following fields are money DEDUCTION fields 
     SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    supportDeductions = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
-    payroll = ScheduledDatesManager()
+    objects = ScheduledDatesManager()
 
     def __str__(self):
         return self.name
