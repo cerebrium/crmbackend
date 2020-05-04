@@ -30,6 +30,7 @@ class Driver(models.Model):
         return self.name 
 
 class Images(models.Model):
+    image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=100, blank=True)
     Verified = models.BooleanField(default=False)
     ImageName = models.CharField(max_length=20, blank=True)
