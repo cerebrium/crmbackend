@@ -18,12 +18,23 @@ def timeDifference(logIn, logOut):
     return myString
 
 
-def returnOrderdData(driversList, datesList):
+def returnOrderdData(driversList, datesList, imagesList):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
     print(__package__)
 
+    myImagesArray = []
     myDriverArray = []
     myDatesArray = []
+
+    for ele in imagesList:
+        myTransientImage = {}
+
+        myTransientImage['ImagesLink'] = ele.ImagesLink
+        myTransientImage['Verified'] = ele.Verified
+        myTransientImage['ImageName'] = ele.ImageName
+        myTransientImage['driver_id'] = str(ele.driver_id)
+
+        myImagesArray.append(myTransientImage)
 
     for ele in datesList:
         myTransientObjectDates = {}
@@ -45,9 +56,9 @@ def returnOrderdData(driversList, datesList):
         myTransientObjectDates['RL'] = ele.RL
         myTransientObjectDates['SUP'] = str(ele.SUP)
         myTransientObjectDates['fuel'] = str(ele.fuel)
-        myTransientObjectDates['supportDeductions'] = str(ele.supportDeductions)
+        myTransientObjectDates['support'] = str(ele.support)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.supportDeductions + ele.vans) # here
+        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
         myDatesArray.append(myTransientObjectDates)
@@ -55,27 +66,10 @@ def returnOrderdData(driversList, datesList):
     ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
-        documentArray = []
         datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
-
-        ## iterate through each document in documents
-        if len(ele.documents) > 0:
-            for item in ele.documents:
-                documentArray.append(item)
-            myTransientObjectDriver['documents'] = documentArray
-        else:
-            myTransientObjectDriver['documents'] = [] 
-
-        ## iterate through each document in vehicle documents
-        if len(ele.vehicleDocuments) > 0:
-            for item in ele.vehicleDocuments:
-                documentArray.append(item)
-            myTransientObjectDriver['vehicleDocuments'] = documentArray
-        else:
-            myTransientObjectDriver['vehicleDocuments'] = [] 
 
         ## iterate through each date in datesList
         if len(ele.datesList) > 0:
@@ -98,12 +92,22 @@ def returnOrderdData(driversList, datesList):
 
         myTransientObjectDriver['datesArray'] = datesObjectArray    
 
+        # images version
+        imagesArray = []
+        for imgObject in myImagesArray:
+
+            if imgObject['driver_id'] == ele.name:
+                imagesArray.append(imgObject)
+
+        myTransientObjectDriver['imgArray'] = imagesArray  
+
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
 
     myFinalObject = {
         'drivers': myDriverArray,
-        'dates': myDatesArray
+        'dates': myDatesArray,
+        'images': myImagesArray
     }   
     
 

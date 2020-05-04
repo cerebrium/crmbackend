@@ -23,19 +23,18 @@ class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 30, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
-    documents = ArrayField(models.CharField(max_length=100), default=list, blank=True)
-    vehicleDocuments = ArrayField(models.CharField(max_length=100), default=list, blank=True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     objects = DriverManager() # allows us to call method above
 
     def __str__(self):
         return self.name 
 
-#Field names from the csv file
-# added: NAME,
-#need to add: IN,ROUTE,LOG_IN,LOG_OUT,TORH,MILEAGE,PARCEL,LWP,LVP,
-#CRT,RL,SUP,FUEL,SUPPORT,VANS,
-# 
+class Images(models.Model):
+    ImagesLink = models.CharField(max_length=100, blank=True)
+    Verified = models.BooleanField(default=False)
+    ImageName = models.CharField(max_length=20, blank=True)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
 class ScheduledDatesManager(models.Manager):
     
     def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, FDDS, PHR, CALL, POD, CONS, driver_id):
@@ -61,7 +60,8 @@ class ScheduledDatesManager(models.Manager):
             CALL=CALL,
             POD=POD,
             CONS=CONS,
-            driver_id=Driver(driver_id)
+            driver_id=Driver(driver_id),
+            location='DBS2'
         )
 
         return date
@@ -81,7 +81,7 @@ class ScheduledDate(models.Model):
 
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
-    location = models.CharField(max_length = 15, null=True)
+    location = models.CharField(max_length = 15, default='DBS2', null=True)
     date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)

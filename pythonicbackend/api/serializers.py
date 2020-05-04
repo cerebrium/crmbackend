@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate
+from .models import Driver, ScheduledDate, Images
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,9 +20,17 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'driver_id',
             'name',
             'location',
-            'documents',
-            'vehicleDocuments',
             'datesList'
+        ]
+
+class ImagesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Images
+        fields = [
+            'ImagesLink',
+            'Verified',
+        'ImageName',
+            'driver_id'       
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
