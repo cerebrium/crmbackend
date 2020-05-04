@@ -48,7 +48,7 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'RL',
             'SUP',
             'fuel',
-            'supportDeductions',
+            'support',
             'vans'
         ]
 
