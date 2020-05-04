@@ -36,6 +36,9 @@ class Images(models.Model):
     ImageName = models.CharField(max_length=20, blank=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name 
+
 class ScheduledDatesManager(models.Manager):
     
     def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, FDDS, PHR, CALL, POD, CONS, driver_id):
