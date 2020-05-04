@@ -27,10 +27,32 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     myNum = 0
     while myNum < 13:
         localArray = []
-        for num, row in enumerate(data):
+        for row in data:
             localArray.append(data[row][data[row].index[myNum]])
             myArray.append(localArray)
-        scheduledDate = schedule.objects.create_date(localArray[0], localArray[1], localArray[2], localArray[3], localArray[4], localArray[5], localArray[6], localArray[7], localArray[8], localArray[9], localArray[10], localArray[11], 18.00, localArray[13], localArray[14], localArray[15], localArray[16][0:5] if len(str(localArray[16])) > 1 else 0, localArray[17], localArray[18][0:5] if len(str(localArray[18])) > 1 else 0, localArray[19][0:5] if len(str(localArray[19])) > 1 else 0, localArray[20], myNum+1)
+        scheduledDate = schedule.objects.create_date(
+            localArray[0], 
+            localArray[1], 
+            localArray[2], 
+            localArray[3], 
+            localArray[4], 
+            localArray[5], 
+            localArray[6], 
+            localArray[7], 
+            localArray[8], 
+            localArray[9], 
+            localArray[10], 
+            localArray[11], 
+            18.00, 
+            localArray[13], 
+            localArray[14], 
+            localArray[15], 
+            localArray[16][0:5] if len(str(localArray[16])) > 1 else 0, 
+            localArray[17], 
+            localArray[18][0:5] if len(str(localArray[18])) > 1 else 0, 
+            localArray[19][0:5] if len(str(localArray[19])) > 1 else 0, 
+            localArray[20], 
+            myNum+1)
         localArray = []    
         myNum = myNum + 1
 
