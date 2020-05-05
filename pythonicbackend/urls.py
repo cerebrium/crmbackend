@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'drivers', views.DriverViewSet)
 router.register(r'schedule', views.ScheduleViewSet)
+router.register(r'images', views.ImagesViewSet)
 
 # Setup automatic URL routing
 # Additionally, we include login URLs for the browsable API.
