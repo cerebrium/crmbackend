@@ -2,6 +2,9 @@
 ## make sure to import anything you plan to use
 import datetime
 import math
+import pandas as pd
+import numpy as np
+import math
 
 ## declare a function - this one is going to return an array containing the difference between log in and log out times
 def timeDifference(logIn, logOut):
@@ -16,6 +19,11 @@ def timeDifference(logIn, logOut):
     myString = differenceValue.split()
 
     return myString
+
+
+# def statistics():
+
+#     return 'hello'
 
 
 def returnOrderdData(driversList, datesList, imagesList):
