@@ -65,7 +65,6 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     # create variable for import
 data = pd.read_csv("monday.csv")
 
-    # clean data -- good job, this is exactly what jupyter notebooks is for... youll need to do more of this kind of thing... for instances I removed the spaces from the 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
 data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
 data.fillna(0,inplace = True)

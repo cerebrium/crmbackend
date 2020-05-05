@@ -34,6 +34,11 @@ def returnOrderdData(driversList, datesList, imagesList):
         myTransientImage['Verified'] = ele.Verified
         myTransientImage['ImageName'] = ele.ImageName
         myTransientImage['driver_id'] = str(ele.driver_id)
+        myTransientImage['ManagerSigned'] = ele.ManagerSigned
+        myTransientImage['DriverSigned'] = ele.DriverSigned
+        myTransientImage['ExpiryDate'] = ele.ExpiryDate
+        myTransientImage['SignitureToken'] = ele.SignitureToken
+        myTransientImage['SignitureManagerEmail'] = ele.SignitureManagerEmail
 
         myImagesArray.append(myTransientImage)
 
