@@ -33,6 +33,10 @@ class Images(models.Model):
     image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=100, blank=True)
     Verified = models.BooleanField(default=False)
+    Signed = models.BooleanField(default=False)
+    ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    SignitureToken = models.CharField(max_length = 400, null = True)
+    SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, blank=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
