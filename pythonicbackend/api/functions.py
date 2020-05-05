@@ -5,6 +5,7 @@ import math
 import pandas as pd
 import numpy as np
 import math
+import csv
 
 ## declare a function - this one is going to return an array containing the difference between log in and log out times
 def timeDifference(logIn, logOut):
@@ -23,12 +24,49 @@ def timeDifference(logIn, logOut):
 
 def statistics(datesList):
         #----- Below are the statistics we will need
+    myDatesArray = []
 
-    data = datesList
+    for ele in datesList:
+        myTransientObjectDates = {}
+
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
+        myTransientObjectDates['date_id'] = ele.date_id
+        myTransientObjectDates['name'] = ele.name
+        myTransientObjectDates['inOff'] = ele.inOff
+        myTransientObjectDates['route'] = ele.route
+        myTransientObjectDates['logIn_time'] = ele.logIn_time
+        myTransientObjectDates['logOut_time'] = ele.logOut_time
+        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+        myTransientObjectDates['location'] = ele.location
+        myTransientObjectDates['date'] = ele.date
+        myTransientObjectDates['parcel'] = ele.parcel
+        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['LVP'] = ele.LVP
+        myTransientObjectDates['CRT'] = ele.CRT
+        myTransientObjectDates['RL'] = ele.RL
+        myTransientObjectDates['SUP'] = str(ele.SUP)
+        myTransientObjectDates['fuel'] = str(ele.fuel)
+        myTransientObjectDates['support'] = str(ele.support)
+        myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
+
+        myDatesArray.append(myTransientObjectDates)
+
+    # data = pd.read_csv("monday.csv")
+    df = pd.DataFrame(data=myDatesArray)
+    data = df
+
+    print(df)
+
+    # csv file manually.... cant have spaces in names or will cause errors elsewhere
+    data.dropna(subset=['route'], axis = 'rows', how ='all', inplace = True) 
+    data.fillna(0,inplace = True)
+    #print(data)
 
     #count the number of ALL routes
     #data['IN'] = data['IN'].astype(float)
-    numOfRoutes = data['IN'].value_counts()['1']   #pay attention to this  "['1']",  I am using it only for monday, 
+    numOfRoutes = data['inOff'].value_counts()[1]   #pay attention to this  "['1']",  I am using it only for monday, 
     #for the other days of the week i just use [1] have on clue way but it works, i will figure it out 
 
     #count number of LVP and LWP respectively
@@ -52,6 +90,7 @@ def statistics(datesList):
         n3 = names[2] + f" " + values[2]+ f"{nl}"
         text = f"Statistics for t2oday:{nl}{nl}"
     print(text,n1,n2,n3)
+    return [text,n1,n2,n3]
 
 
 def returnOrderdData(driversList, datesList, imagesList):

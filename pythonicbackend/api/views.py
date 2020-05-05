@@ -37,7 +37,7 @@ class ImagesViewSet(viewsets.ModelViewSet):
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     # schedule
     queryset = ScheduledDate.objects.all().order_by('driver_id')
@@ -59,7 +59,7 @@ class DataViewSet(APIView):
         }
         return Response(content)
 
-class DataViewSet(APIView):
+class StatisticsViewSet(APIView):
     # permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
@@ -71,6 +71,8 @@ class DataViewSet(APIView):
         content = {
             'data': statistics(schedule)
         }
+
+        return Response(content)
 
 class MapViewSet(APIView):
     # Authentication
