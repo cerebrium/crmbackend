@@ -21,9 +21,37 @@ def timeDifference(logIn, logOut):
     return myString
 
 
-def statistics():
+def statistics(datesList):
+        #----- Below are the statistics we will need
 
-    return 'hello'
+    data = datesList
+
+    #count the number of ALL routes
+    #data['IN'] = data['IN'].astype(float)
+    numOfRoutes = data['IN'].value_counts()['1']   #pay attention to this  "['1']",  I am using it only for monday, 
+    #for the other days of the week i just use [1] have on clue way but it works, i will figure it out 
+
+    #count number of LVP and LWP respectively
+    numOfLVP = int(data['LVP'].sum())
+    numOfLWP = int(data['LWP'].sum())
+
+
+    #here I just print out the results
+    names = ['Routes: ', 'LVP: ', 'LWP: ']
+
+    #print(names)
+    values = [str(numOfRoutes), str(numOfLWP),str(numOfLVP)]
+    
+    #print(values)
+    nl = '\n'
+    myNum = len(values)
+
+    for i in names:
+        n1 = names[0] + f" " + values[0] + f"{nl}"
+        n2 = names[1] + f" " + values[1]+ f"{nl}"
+        n3 = names[2] + f" " + values[2]+ f"{nl}"
+        text = f"Statistics for t2oday:{nl}{nl}"
+    print(text,n1,n2,n3)
 
 
 def returnOrderdData(driversList, datesList, imagesList):
