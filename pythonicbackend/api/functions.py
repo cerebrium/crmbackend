@@ -21,9 +21,9 @@ def timeDifference(logIn, logOut):
     return myString
 
 
-# def statistics():
+def statistics():
 
-#     return 'hello'
+    return 'hello'
 
 
 def returnOrderdData(driversList, datesList, imagesList):
