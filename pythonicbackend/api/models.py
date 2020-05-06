@@ -36,7 +36,7 @@ class Images(models.Model):
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)
     ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
-    SignitureToken = models.CharField(max_length = 400, null = True)
+    SignitureToken = models.CharField(max_length = 1000, null = True)
     SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, blank=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)

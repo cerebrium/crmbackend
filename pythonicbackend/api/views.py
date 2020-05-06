@@ -13,7 +13,7 @@ import csv,io
 
 class UserViewSet(viewsets.ModelViewSet):
     # Authentication
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     # Users
     queryset = User.objects.all().order_by('-date_joined')
@@ -21,7 +21,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class DriverViewSet(viewsets.ModelViewSet):
     # Authentication
-    # permission_classes = (IsAuthenticated,) 
+    permission_classes = (IsAuthenticated,) 
 
     # drivers
     queryset = Driver.objects.all().order_by('name')
@@ -29,7 +29,7 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 class ImagesViewSet(viewsets.ModelViewSet):
     # Authentication
-    # permission_classes = (IsAuthenticated,) 
+    permission_classes = (IsAuthenticated,) 
 
     # drivers
     queryset = Images.objects.all().order_by('driver_id')
@@ -37,7 +37,7 @@ class ImagesViewSet(viewsets.ModelViewSet):
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     # Authentication
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     # schedule
     queryset = ScheduledDate.objects.all().order_by('driver_id')
@@ -45,7 +45,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 
 class DataViewSet(APIView):
     # Authentication
-    # permission_classes = (IsAuthenticated,)    
+    permission_classes = (IsAuthenticated,)    
 
     # function for all data
     def get(self, request):
@@ -60,7 +60,7 @@ class DataViewSet(APIView):
         return Response(content)
 
 class StatisticsViewSet(APIView):
-    # permission_classes = (IsAuthenticated,)    
+    permission_classes = (IsAuthenticated,)    
 
     def get(self, request):
         ## defining overall data objects
@@ -76,7 +76,7 @@ class StatisticsViewSet(APIView):
 
 class MapViewSet(APIView):
     # Authentication
-    # permission_classes = (IsAuthenticated,)  
+    permission_classes = (IsAuthenticated,)  
     # This route is just a route that allows us to call the function in the test_data.py file with the correct environment  
 
     # function for all data
