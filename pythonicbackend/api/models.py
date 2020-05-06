@@ -25,7 +25,7 @@ class Driver(models.Model):
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     objects = DriverManager() # allows us to call method above
-
+    #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
     def __str__(self):
         return self.name 
 
@@ -33,6 +33,11 @@ class Images(models.Model):
     image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=100, blank=True)
     Verified = models.BooleanField(default=False)
+    ManagerSigned = models.BooleanField(default=False)
+    DriverSigned = models.BooleanField(default=False)
+    ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    SignitureToken = models.CharField(max_length = 1000, null = True)
+    SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, blank=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 

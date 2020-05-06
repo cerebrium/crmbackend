@@ -31,7 +31,12 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
             'ImagesLink',
             'Verified',
             'ImageName',
-            'driver_id'       
+            'driver_id',
+            'ManagerSigned',
+            'DriverSigned',
+            'ExpiryDate', 
+            'SignitureToken',
+            'SignitureManagerEmail'
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  

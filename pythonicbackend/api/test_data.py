@@ -59,50 +59,99 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     return myArray
 
 
-#below os the code that works for Monday
-#you first have to run 
 
-    # create variable for import
+#get our csv data script, the "data" will repsresents sunday
+#any other day will be in a file named after it, expect for saturday
+
+# create variable for import
 data = pd.read_csv("monday.csv")
 
-    # clean data -- good job, this is exactly what jupyter notebooks is for... youll need to do more of this kind of thing... for instances I removed the spaces from the 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
 data.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
 data.fillna(0,inplace = True)
 #print(data)
 
-
-
-
-
-#----- Below are the statistics we will need
-
-
-
 #count the number of ALL routes
 #data['IN'] = data['IN'].astype(float)
-numOfRoutes = data['IN'].value_counts()['1']   #pay attention to this  "['1']",  I am using it only for monday, 
-#for the other days of the week i just use [1] have on clue way but it works, i will figure it out 
+numOfRoutes = data['IN'].value_counts()[1]  
+numOfMFNRoutes = data['ROUTE'].value_counts()['MFN']
+numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
+
 
 #count number of LVP and LWP respectively
 numOfLVP = int(data['LVP'].sum())
 numOfLWP = int(data['LWP'].sum())
+numOfParcels = int(data['PARCEL'].sum())
 
 
 #here I just print out the results
-names = ['Routes: ', 'LVP: ', 'LWP: ']
+names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
 #print(names)
-values = [str(numOfRoutes), str(numOfLWP),str(numOfLVP)]
+#print(names)
+values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
+          str(numOfLVP),str(numOfLWP),str(numOfParcels)]
 #print(values)
-nl = '\n'
-myNum = len(values)
-
+#myNum = len(values)
 for i in names:
-    n1 = names[0] + f" " + values[0] + f"{nl}"
-    n2 = names[1] + f" " + values[1]+ f"{nl}"
-    n3 = names[2] + f" " + values[2]+ f"{nl}"
-    text = f"Statistics for t2oday:{nl}{nl}"
-print(text,n1,n2,n3)
+    n1 = names[0] + f" " + values[0] 
+    n2 = names[1] + f" " + values[1]
+    n3 = names[2] + f" " + values[2]
+    n4 = names[3] + f" " + values[3]
+    n5 = names[4] + f" " + values[4]
+    n6 = names[5] + f" " + values[5]
+    text = f"Statistics for today:"
+    datStats = [text,n1,n2,n3,n4,n5,n6]
+print("Monday Report:", datStats)
+print(text,n1,n2,n3,n4,n5,n6)
+
+
+
+
+
+
+# ##------------------------get some statistics for Saturday WEEK 18 --------------------------
+# saturday = pd.read_csv("saturday.csv")
+# saturday.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
+# saturday.fillna(0,inplace = True)
+# saturday.drop(["VANS ", "FDDS", "PHR","POD","CALL","CONS","DAILY DPMO ","week"],axis = 1,inplace = True, errors = 'ignore')
+# #RUn just once, the follwoing 2 lines just create the week column in the csv file, we can change it do a specific date if you want
+# #saturday["WEEK"] = "18"
+# #saturday.to_csv("saturday.csv", index=False)
+# #saturday.head(15)
+# numOfRoutes_sat = saturday['IN'].value_counts()[1] 
+# numOfLVP_sat = int(saturday['LVP'].sum())
+# numOfLWP_sat = int(saturday['LWP'].sum())
+# numOfParcels_sat = int(saturday['PARCEL'].sum())
+
+
+
+# names = ['Routes: ', 'LVP: ', 'LWP: ','Parcels: ']
+# #print(names)
+# values = [str(numOfRoutes_sat), str(numOfLWP_sat),str(numOfLVP_sat),str(numOfParcels_sat)]
+# #print(values)
+# #nl = '\n'
+# myNum = len(values)
+
+# for i in names:
+#     n1 = names[0] + f" " + values[0] 
+#     n2 = names[1] + f" " + values[1]
+#     n3 = names[2] + f" " + values[2]
+#     n4 = names[3] + f" " + values[3]
+#     text = f"Statistics for today:"
+# #print(text,n1,n2,n3,n4)
+# satStats = [text,n1,n2,n3,n4]
+# print("Saturday Report:", satStats)
+
+
+###------------------------------ end ------------------------------
+
+
+
+
+
+ 
+
+
 
 
 

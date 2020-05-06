@@ -2,6 +2,10 @@
 ## make sure to import anything you plan to use
 import datetime
 import math
+import pandas as pd
+import numpy as np
+import math
+import csv
 
 ## declare a function - this one is going to return an array containing the difference between log in and log out times
 def timeDifference(logIn, logOut):
@@ -16,6 +20,102 @@ def timeDifference(logIn, logOut):
     myString = differenceValue.split()
 
     return myString
+
+
+def statistics(datesList):
+        #----- Below are the statistics we will need
+    myDatesArray = []
+
+    for ele in datesList:
+        myTransientObjectDates = {}
+
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
+        myTransientObjectDates['date_id'] = ele.date_id
+        myTransientObjectDates['name'] = ele.name
+        myTransientObjectDates['inOff'] = ele.inOff
+        myTransientObjectDates['route'] = ele.route
+        myTransientObjectDates['logIn_time'] = ele.logIn_time
+        myTransientObjectDates['logOut_time'] = ele.logOut_time
+        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+        myTransientObjectDates['location'] = ele.location
+        myTransientObjectDates['date'] = ele.date
+        myTransientObjectDates['parcel'] = ele.parcel
+        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['LVP'] = ele.LVP
+        myTransientObjectDates['CRT'] = ele.CRT
+        myTransientObjectDates['RL'] = ele.RL
+        myTransientObjectDates['SUP'] = str(ele.SUP)
+        myTransientObjectDates['fuel'] = str(ele.fuel)
+        myTransientObjectDates['support'] = str(ele.support)
+        myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
+
+        myDatesArray.append(myTransientObjectDates)
+
+
+
+
+
+    # get data
+    df = pd.DataFrame(data=myDatesArray)    #turns the current data in the backend into panda dataframe 
+    data = df
+    print(df)
+
+    # csv file manually.... cant have spaces in names or will cause errors elsewhere
+    data.dropna(subset=['route'], axis = 'rows', how ='all', inplace = True) 
+    data.fillna(0,inplace = True)
+    #add week column
+    #data["week"] = "18"
+    #data.to_csv("data.csv", index=False)
+    #print(data)
+
+    #count the number of ALL routes
+    #data['IN'] = data['IN'].astype(float)
+    # numOfRoutes = data['inOff'].value_counts()[1]
+    # #count number of LVP and LWP respectively
+    # numOfLVP = int(data['LVP'].sum())
+    # numOfLWP = int(data['LWP'].sum())
+    # numOfParcels = int(data['parcel'].sum())
+
+
+    # #here I just print out the results
+    # names = ['Routes: ', 'LVP: ', 'LWP: ', 'Parcels:']
+
+
+
+    numOfRoutes = data['inOff'].value_counts()[1]  
+    numOfMFNRoutes = data['route'].value_counts()[MFN]
+    numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
+
+
+    #count number of LVP and LWP respectively
+    numOfLVP = int(data['LVP'].sum())
+    numOfLWP = int(data['LWP'].sum())
+    numOfParcels = int(data['parcel'].sum())
+
+
+    #here I just print out the results
+    names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
+
+    #print(names)
+    values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
+          str(numOfLVP),str(numOfLWP),str(numOfParcels)]
+
+    
+    #print(values)
+    myNum = len(values)
+
+    for i in names:
+        n1 = names[0] + f" " + values[0] 
+        n2 = names[1] + f" " + values[1]
+        n3 = names[2] + f" " + values[2]
+        n4 = names[3] + f" " + values[3]
+        n5 = names[4] + f" " + values[4]
+        n6 = names[5] + f" " + values[5]
+        text = f"Statistics for today:"
+    print(text,n1,n2,n3,n4,n5,n6)
+    return [text,n1,n2,n3,n4,n5,n6]
 
 
 def returnOrderdData(driversList, datesList, imagesList):
@@ -34,6 +134,11 @@ def returnOrderdData(driversList, datesList, imagesList):
         myTransientImage['Verified'] = ele.Verified
         myTransientImage['ImageName'] = ele.ImageName
         myTransientImage['driver_id'] = str(ele.driver_id)
+        myTransientImage['ManagerSigned'] = ele.ManagerSigned
+        myTransientImage['DriverSigned'] = ele.DriverSigned
+        myTransientImage['ExpiryDate'] = ele.ExpiryDate
+        myTransientImage['SignitureToken'] = ele.SignitureToken
+        myTransientImage['SignitureManagerEmail'] = ele.SignitureManagerEmail
 
         myImagesArray.append(myTransientImage)
 
