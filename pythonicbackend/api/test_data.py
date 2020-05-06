@@ -22,7 +22,12 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
 
     print(data)
     for row in data['NAME']:
-        driver = drivers.objects.create_driver(row)
+        driver = drivers.objects.create_driver(row)  
+
+    myNum = 0
+    while myNum < len(data) - 1:
+        for row in data:
+            data[row][data[row].index[myNum]] = myNum
 
     myNum = 0
     while myNum < 13:

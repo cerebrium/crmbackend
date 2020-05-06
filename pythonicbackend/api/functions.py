@@ -85,10 +85,10 @@ def statistics(datesList):
     myNum = len(values)
 
     for i in names:
-        n1 = names[0] + f" " + values[0] + f"{nl}"
-        n2 = names[1] + f" " + values[1]+ f"{nl}"
-        n3 = names[2] + f" " + values[2]+ f"{nl}"
-        text = f"Statistics for t2oday:{nl}{nl}"
+        n1 = names[0] + f" " + values[0]
+        n2 = names[1] + f" " + values[1]
+        n3 = names[2] + f" " + values[2]
+        text = f"Statistics for t2oday: "
     print(text,n1,n2,n3)
     return [text,n1,n2,n3]
 

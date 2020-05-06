@@ -24,6 +24,7 @@ class Driver(models.Model):
     name = models.CharField(max_length = 30, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
+    statue = models.CharField(max_length = 30, null = True)
     objects = DriverManager() # allows us to call method above
 
     def __str__(self):
