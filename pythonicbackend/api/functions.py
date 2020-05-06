@@ -53,44 +53,69 @@ def statistics(datesList):
 
         myDatesArray.append(myTransientObjectDates)
 
-    # data = pd.read_csv("monday.csv")
-    df = pd.DataFrame(data=myDatesArray)
-    data = df
 
+
+
+
+    # get data
+    df = pd.DataFrame(data=myDatesArray)    #turns the current data in the backend into panda dataframe 
+    data = df
     print(df)
 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
     data.dropna(subset=['route'], axis = 'rows', how ='all', inplace = True) 
     data.fillna(0,inplace = True)
+    #add week column
+    #data["week"] = "18"
+    #data.to_csv("data.csv", index=False)
     #print(data)
 
     #count the number of ALL routes
     #data['IN'] = data['IN'].astype(float)
-    numOfRoutes = data['inOff'].value_counts()[1]   #pay attention to this  "['1']",  I am using it only for monday, 
-    #for the other days of the week i just use [1] have on clue way but it works, i will figure it out 
+    # numOfRoutes = data['inOff'].value_counts()[1]
+    # #count number of LVP and LWP respectively
+    # numOfLVP = int(data['LVP'].sum())
+    # numOfLWP = int(data['LWP'].sum())
+    # numOfParcels = int(data['parcel'].sum())
+
+
+    # #here I just print out the results
+    # names = ['Routes: ', 'LVP: ', 'LWP: ', 'Parcels:']
+
+
+
+    numOfRoutes = data['inOff'].value_counts()[1]  
+    numOfMFNRoutes = data['route'].value_counts()[MFN]
+    numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
+
 
     #count number of LVP and LWP respectively
     numOfLVP = int(data['LVP'].sum())
     numOfLWP = int(data['LWP'].sum())
+    numOfParcels = int(data['parcel'].sum())
 
 
     #here I just print out the results
-    names = ['Routes: ', 'LVP: ', 'LWP: ']
+    names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
 
     #print(names)
-    values = [str(numOfRoutes), str(numOfLWP),str(numOfLVP)]
+    values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
+          str(numOfLVP),str(numOfLWP),str(numOfParcels)]
+
     
     #print(values)
-    nl = '\n'
     myNum = len(values)
 
     for i in names:
-        n1 = names[0] + f" " + values[0]
+        n1 = names[0] + f" " + values[0] 
         n2 = names[1] + f" " + values[1]
         n3 = names[2] + f" " + values[2]
-        text = f"Statistics for t2oday: "
-    print(text,n1,n2,n3)
-    return [text,n1,n2,n3]
+        n4 = names[3] + f" " + values[3]
+        n5 = names[4] + f" " + values[4]
+        n6 = names[5] + f" " + values[5]
+        text = f"Statistics for today:"
+    print(text,n1,n2,n3,n4,n5,n6)
+    return [text,n1,n2,n3,n4,n5,n6]
 
 
 def returnOrderdData(driversList, datesList, imagesList):

@@ -26,7 +26,7 @@ class Driver(models.Model):
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     statue = models.CharField(max_length = 30, null = True)
     objects = DriverManager() # allows us to call method above
-
+    #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
     def __str__(self):
         return self.name 
 
