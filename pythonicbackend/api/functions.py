@@ -28,7 +28,6 @@ def statistics(datesList):
 
     for ele in datesList:
         myTransientObjectDates = {}
-
         myTransientObjectDates['driver_id'] = str(ele.driver_id)
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
@@ -56,11 +55,10 @@ def statistics(datesList):
 
 
 
-
     # get data
     df = pd.DataFrame(data=myDatesArray)    #turns the current data in the backend into panda dataframe 
     data = df
-    print(df)
+    # print('dataframe: ', data)
 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
     data.dropna(subset=['route'], axis = 'rows', how ='all', inplace = True) 
@@ -85,8 +83,36 @@ def statistics(datesList):
 
 
     numOfRoutes = data['inOff'].value_counts()[1]  
-    numOfMFNRoutes = data['route'].value_counts()[MFN]
+    # print('routes: ', numOfRoutes)
+
+    # this is how I would do this.... I am sure pandas has a way, but i dont know it
+    numOfMFNRoutesOne = data['route'].value_counts()
+    # set a counter variable
+    numOfMFNRoutes = 0
+
+    # set a loop variable
+    x = 0
+
+    # loop through each item in the data set you made
+    while x < len(numOfMFNRoutesOne):
+
+        # display the information in the terminal
+        print (
+            'Route found: ', numOfMFNRoutesOne.index[x] , ' : ',  numOfMFNRoutesOne[numOfMFNRoutesOne.index[x]]
+        )
+
+        # make a conitional statment that if it finds what you are looking for it will increment the counter variable above
+        if numOfMFNRoutesOne.index[x] == 'MFN':
+            numOfMFNRoutes = numOfMFNRoutes + 1
+
+        # increment the loop    
+        x = x + 1
+
+    # numOfMFNRoutes = data['route'].value_counts()['MFN']
+    # print('mfn: ', numOfMFNRoutes)
+    
     numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
+    # print('full: ', numOfFUllRoutes)
 
 
     #count number of LVP and LWP respectively

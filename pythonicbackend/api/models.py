@@ -21,12 +21,13 @@ class DriverManager(models.Manager):
 #----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length = 30, null = True)
+    name = models.CharField(max_length = 100, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     statue = models.CharField(max_length = 30, null = True)
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
+    
     def __str__(self):
         return self.name 
 

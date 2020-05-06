@@ -25,16 +25,16 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
         driver = drivers.objects.create_driver(row)  
 
     myNum = 0
-    while myNum < len(data) - 1:
-        for row in data:
-            data[row][data[row].index[myNum]] = myNum
-
-    myNum = 0
-    while myNum < 13:
+    while myNum < len(data):
         localArray = []
         for row in data:
+            # this line adds the data to the local array
             localArray.append(data[row][data[row].index[myNum]])
-            myArray.append(localArray)
+
+            # this line adds the local array to the returned array
+            myArray.append(localArray)    
+
+            # this line uses array indexing to add each item to the date class
         scheduledDate = schedule.objects.create_date(
             localArray[0], 
             localArray[1], 
