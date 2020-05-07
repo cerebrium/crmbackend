@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, Images, TrainingDate
+from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,8 +20,35 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'driver_id',
             'name',
             'location',
-            'datesList'
+            'datesList',
+            'status',
+            'onboarding',
+            'phone',
+            'email',
+            'DandATest',
+            'DriverUniqueId',
+            'Badge',
+            'BadgeNumber',
+            'Active',
+            'VanEConfirmed',
+            'NINNumber',
+            'UTRNumber',
+            'VatNumber'
         ]
+
+class VehiclesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Vehicles
+        fields = [
+            'Vehicle_id',
+            'VehiclesRegistration',
+            'VehiclesDVLANumber',
+            'VehicleOwned',
+            'driver_id'
+        ]
+
+
+       
 
 class ImagesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -36,7 +63,10 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
             'DriverSigned',
             'ExpiryDate', 
             'SignitureToken',
-            'SignitureManagerEmail'
+            'SignitureManagerEmail',
+            'Points',
+            'NextDVLAScreenshot',
+            'LicenseOrigin'
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
