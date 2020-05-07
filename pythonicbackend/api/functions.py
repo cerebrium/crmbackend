@@ -200,7 +200,20 @@ def returnOrderdData(driversList, datesList, imagesList):
     for ele in driversList:
         myTransientObjectDriver = {}
         datesArray = []
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['onboarding'] = ele.onboarding
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['DandATest'] = ele.DandATest
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['Badge'] = ele.Badge
+        myTransientObjectDriver['BadgeNumber'] = ele.BadgeNumber
+        myTransientObjectDriver['Active'] = ele.Active
+        myTransientObjectDriver['VanEConfirmed'] = ele.VanEConfirmed
+        myTransientObjectDriver['NINNumber'] = ele.NINNumber
         myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['UTRNumber'] = ele.UTRNumber
+        myTransientObjectDriver['VatNumber'] = ele.VatNumber
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
 
