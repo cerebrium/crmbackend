@@ -10,7 +10,6 @@ import pytz
 
 
 # Create your models here.
-# new model .... i followed this websites syntax exactly https://docs.djangoproject.com/en/3.0/ref/models/instances/
 class DriverManager(models.Manager):
     def create_driver(self, name):
         driver = self.create(name=name)
@@ -25,6 +24,10 @@ class Driver(models.Model):
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     statue = models.CharField(max_length = 30, null = True)
+    onboarding = models.IntegerField("Onboarding", default=0, null=True)
+    phone = models.CharField(max_length = 20, null=True)
+    email = models.CharField(max_length = 50, null=True)
+
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
     
@@ -33,7 +36,7 @@ class Driver(models.Model):
 
 class Images(models.Model):
     image_id = models.AutoField(primary_key=True)
-    ImagesLink = models.CharField(max_length=100, blank=True)
+    ImagesLink = models.CharField(max_length=150, blank=True)
     Verified = models.BooleanField(default=False)
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)

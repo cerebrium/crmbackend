@@ -87,6 +87,7 @@ def statistics(datesList):
 
     # this is how I would do this.... I am sure pandas has a way, but i dont know it
     numOfMFNRoutesOne = data['route'].value_counts()
+    
     # set a counter variable
     numOfMFNRoutes = 0
 
