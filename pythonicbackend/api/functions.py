@@ -80,7 +80,7 @@ def statistics(datesList):
     # #here I just print out the results
     # names = ['Routes: ', 'LVP: ', 'LWP: ', 'Parcels:']
 
-
+    
 
     numOfRoutes = data['inOff'].value_counts()[1]  
     # print('routes: ', numOfRoutes)
