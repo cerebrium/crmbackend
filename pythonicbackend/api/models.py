@@ -21,11 +21,13 @@ class DriverManager(models.Manager):
 #----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length = 30, null = True)
+    name = models.CharField(max_length = 100, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
+    statue = models.CharField(max_length = 30, null = True)
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
+    
     def __str__(self):
         return self.name 
 
@@ -46,7 +48,7 @@ class Images(models.Model):
 
 class ScheduledDatesManager(models.Manager):
     
-    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, FDDS, PHR, CALL, POD, CONS, driver_id):
+    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, deductions, PHR, CALL, POD, CONS, driver_id):
         date = self.create(
             name=name,
             inOff=inOff,
@@ -64,7 +66,7 @@ class ScheduledDatesManager(models.Manager):
             fuel=fuel,
             support=support,
             vans=vans,
-            FDDS=FDDS,
+            deductions=deductions, 
             PHR=PHR,
             CALL=CALL,
             POD=POD,
@@ -108,12 +110,17 @@ class ScheduledDate(models.Model):
     POD = models.FloatField("POD", default=0, null = True)
     CONS = models.FloatField("FDDS", default=0, null = True)
     DPMO = models.FloatField("DPMO", default=0, null = True)
+    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
+
     
     #the following fields are money DEDUCTION fields 
-    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+
+    deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+
+    
 
     objects = ScheduledDatesManager()
 
@@ -122,3 +129,26 @@ class ScheduledDate(models.Model):
 
     #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
     # that person with default = 1, will work and have data for that day
+
+
+
+    #here i want to create a class that will get just the training if there are any
+    #then I plan to use it in fucntions to check if there are trainings
+class TrainingDate(Models.model):
+    objects = ScheduledDatesManager():
+
+    date_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 50, null = True)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    location = models.CharField(max_length = 15, default='DBS2', null=True)
+    CRT = models.IntegerField("CRT", default=0, null = True)
+    RL = models.IntegerField("RL", default=0, null = True)
+    deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+
+    objects = ScheduledDatesManager()
+
+    def __str__(self):
+        return self.name
+
