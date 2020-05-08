@@ -265,7 +265,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
             if vehicleObject['driver_id'] == ele.name:
                 vehiclesArray.append(vehicleObject)
 
-        myTransientObjectDriver['vehicleArray'] = imagesArray  
+        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
