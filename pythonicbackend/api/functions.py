@@ -145,13 +145,24 @@ def statistics(datesList):
     return [text,n1,n2,n3,n4,n5,n6]
 
 
-def returnOrderdData(driversList, datesList, imagesList):
+def returnOrderdData(driversList, datesList, imagesList, vehicles):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
     print(__package__)
 
     myImagesArray = []
     myDriverArray = []
     myDatesArray = []
+    myVehiclesArray = []
+
+    for ele in vehicles:
+        myTransientVehicle = {}
+        myTransientImage['Vehicle_id'] = ele.Vehicle_id
+        myTransientImage['VehiclesRegistration'] = ele.VehiclesRegistration
+        myTransientImage['VehiclesDVLANumber'] = ele.VehiclesDVLANumber
+        myTransientImage['VehicleOwned'] = ele.VehicleOwned
+        myTransientImage['driver_id'] = str(ele.driver_id)
+
+        myVehiclesArray.append(myTransientVehicle)
 
     for ele in imagesList:
         myTransientImage = {}
@@ -247,13 +258,23 @@ def returnOrderdData(driversList, datesList, imagesList):
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
+        # vehicles version
+        vehiclesArray = []
+        for vehicleObject in myVehiclesArray:
+
+            if vehicleObject['driver_id'] == ele.name:
+                vehiclesArray.append(vehicleObject)
+
+        myTransientObjectDriver['vehicleArray'] = imagesArray  
+
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
 
     myFinalObject = {
         'drivers': myDriverArray,
         'dates': myDatesArray,
-        'images': myImagesArray
+        'images': myImagesArray,
+        'vehicles': myVehiclesArray
     }   
     
 

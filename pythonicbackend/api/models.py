@@ -36,6 +36,7 @@ class Driver(models.Model):
     NINNumber = models.CharField(max_length=15, null=True)
     UTRNumber = models.CharField(max_length=20, null=True)
     VatNumber = models.CharField(max_length=15, null=True)
+    address = models.CharField(max_length=100, null=True)
 
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])

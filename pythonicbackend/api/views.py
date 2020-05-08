@@ -65,12 +65,13 @@ class DataViewSet(APIView):
     # function for all data
     def get(self, request):
         ## defining overall data objects
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
-        images = Images.objects.all()
+        drivers = Driver.objects.all().order_by('driver_id')
+        schedule = ScheduledDate.objects.all().order_by('driver_id')
+        images = Images.objects.all().order_by('driver_id')
+        vehicles = Vehicles.objects.all().order_by('driver_id')
 
         content = {
-            'data': returnOrderdData(drivers, schedule, images)
+            'data': returnOrderdData(drivers, schedule, images, vehicles)
         }
         return Response(content)
 
