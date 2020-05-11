@@ -304,7 +304,7 @@ def invoice(driversList, datesList, vehiclesList):
 
     # at this point we have three arrays containing all of our data for each database model set... they are accessible now via object refrencing
 
-    # establish what goes on the invoice?
+    # establish what goes on the invoice? 
 
     # loop through the driver data .... find all dates that are greater in seconds than the start date and less than the end date ( logic inside of here that determines start and end date as based on the vehicle array ownership field) ... probably the hardest part .... 
         # once this logic is done sum all of the found elements relevant data for the end field you need
