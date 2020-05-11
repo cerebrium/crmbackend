@@ -20,20 +20,14 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'driver_id',
             'name',
             'location',
+            'email',
+            'phone',
+            'address',
             'datesList',
             'status',
-            'onboarding',
-            'phone',
-            'email',
-            'DandATest',
             'DriverUniqueId',
-            'Badge',
-            'BadgeNumber',
-            'Active',
-            'VanEConfirmed',
-            'NINNumber',
-            'UTRNumber',
-            'VatNumber'
+            'SigningUrlNumber',
+            'Signed'
         ]
 
 class VehiclesSerializer(serializers.HyperlinkedModelSerializer):

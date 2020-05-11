@@ -31,6 +31,7 @@ class Driver(models.Model):
     status = models.CharField(max_length = 30, null = True)
     DriverUniqueId = models.CharField(max_length = 30, null=True)
     SigningUrlNumber = models.CharField(max_length = 100, null=True)
+    Signed = models.BooleanField(default=False)
 
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])

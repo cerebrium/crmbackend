@@ -207,26 +207,29 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     
         myDatesArray.append(myTransientObjectDates)
 
+    ## array for checking urls
+    urlArray = []
+
+
     ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
         datesArray = []
-        myTransientObjectDriver['status'] = ele.status
-        myTransientObjectDriver['onboarding'] = ele.onboarding
-        myTransientObjectDriver['phone'] = ele.phone
-        myTransientObjectDriver['email'] = ele.email
-        myTransientObjectDriver['DandATest'] = ele.DandATest
-        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
-        myTransientObjectDriver['Badge'] = ele.Badge
-        myTransientObjectDriver['BadgeNumber'] = ele.BadgeNumber
-        myTransientObjectDriver['Active'] = ele.Active
-        myTransientObjectDriver['VanEConfirmed'] = ele.VanEConfirmed
-        myTransientObjectDriver['NINNumber'] = ele.NINNumber
         myTransientObjectDriver['driver_id'] = ele.driver_id
-        myTransientObjectDriver['UTRNumber'] = ele.UTRNumber
-        myTransientObjectDriver['VatNumber'] = ele.VatNumber
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['address'] = ele.address
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
+        myTransientObjectDriver['Signed'] = ele.Signed
+
+        ## iterate through numbers
+        if ele.SigningUrlNumber:
+            if ele.Signed:
+                urlArray.append(ele.SigningUrlNumber)
 
         ## iterate through each date in datesList
         if len(ele.datesList) > 0:
@@ -274,7 +277,8 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         'drivers': myDriverArray,
         'dates': myDatesArray,
         'images': myImagesArray,
-        'vehicles': myVehiclesArray
+        'vehicles': myVehiclesArray,
+        'urls': urlArray
     }   
     
 
