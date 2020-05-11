@@ -8,6 +8,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'drivers', views.DriverViewSet)
 router.register(r'schedule', views.ScheduleViewSet)
 router.register(r'images', views.ImagesViewSet)
+router.register(r'vehicles', views.VehiclesViewSet)
+router.register(r'trainingdate', views.TrainingViewSet)
 
 # Setup automatic URL routing
 # Additionally, we include login URLs for the browsable API.

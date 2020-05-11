@@ -87,6 +87,7 @@ def statistics(datesList):
 
     # this is how I would do this.... I am sure pandas has a way, but i dont know it
     numOfMFNRoutesOne = data['route'].value_counts()
+    
     # set a counter variable
     numOfMFNRoutes = 0
 
@@ -105,7 +106,7 @@ def statistics(datesList):
         if numOfMFNRoutesOne.index[x] == 'MFN':
             numOfMFNRoutes = numOfMFNRoutes + 1
 
-        #increment the loop    
+        # increment the loop    
         x = x + 1
 
     # numOfMFNRoutes = data['route'].value_counts()['MFN']
@@ -144,13 +145,24 @@ def statistics(datesList):
     return [text,n1,n2,n3,n4,n5,n6]
 
 
-def returnOrderdData(driversList, datesList, imagesList):
+def returnOrderdData(driversList, datesList, imagesList, vehicles):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
     print(__package__)
 
     myImagesArray = []
     myDriverArray = []
     myDatesArray = []
+    myVehiclesArray = []
+
+    for ele in vehicles:
+        myTransientVehicle = {}
+        myTransientImage['Vehicle_id'] = ele.Vehicle_id
+        myTransientImage['VehiclesRegistration'] = ele.VehiclesRegistration
+        myTransientImage['VehiclesDVLANumber'] = ele.VehiclesDVLANumber
+        myTransientImage['VehicleOwned'] = ele.VehicleOwned
+        myTransientImage['driver_id'] = str(ele.driver_id)
+
+        myVehiclesArray.append(myTransientVehicle)
 
     for ele in imagesList:
         myTransientImage = {}
@@ -199,7 +211,20 @@ def returnOrderdData(driversList, datesList, imagesList):
     for ele in driversList:
         myTransientObjectDriver = {}
         datesArray = []
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['onboarding'] = ele.onboarding
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['DandATest'] = ele.DandATest
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['Badge'] = ele.Badge
+        myTransientObjectDriver['BadgeNumber'] = ele.BadgeNumber
+        myTransientObjectDriver['Active'] = ele.Active
+        myTransientObjectDriver['VanEConfirmed'] = ele.VanEConfirmed
+        myTransientObjectDriver['NINNumber'] = ele.NINNumber
         myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['UTRNumber'] = ele.UTRNumber
+        myTransientObjectDriver['VatNumber'] = ele.VatNumber
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
 
@@ -233,13 +258,23 @@ def returnOrderdData(driversList, datesList, imagesList):
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
+        # vehicles version
+        vehiclesArray = []
+        for vehicleObject in myVehiclesArray:
+
+            if vehicleObject['driver_id'] == ele.name:
+                vehiclesArray.append(vehicleObject)
+
+        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
+
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
 
     myFinalObject = {
         'drivers': myDriverArray,
         'dates': myDatesArray,
-        'images': myImagesArray
+        'images': myImagesArray,
+        'vehicles': myVehiclesArray
     }   
     
 

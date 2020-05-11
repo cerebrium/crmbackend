@@ -10,7 +10,6 @@ import pytz
 
 
 # Create your models here.
-# new model .... i followed this websites syntax exactly https://docs.djangoproject.com/en/3.0/ref/models/instances/
 class DriverManager(models.Manager):
     def create_driver(self, name):
         driver = self.create(name=name)
@@ -20,29 +19,52 @@ class DriverManager(models.Manager):
 
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-    driver_id = models.AutoField(primary_key=True)
+    driver_id = models.AutoField(primary_key=True) #need to connect to DA Compliance Check
+
+    #the following fields will be displayed when a manager clicks on "Add Driver"
     name = models.CharField(max_length = 100, null = True)
-    location = models.CharField(max_length = 15, default = 'DBS2', null = True)
+    location = models.CharField(max_length = 15, default = 'DBS2', null = True) #want to change to depot
+    email = models.CharField(max_length = 50, null=True)
+    phone = models.CharField(max_length = 20, null=True)
+    address = models.CharField(max_length=100, null=True)
+
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
-    statue = models.CharField(max_length = 30, null = True)
+    status = models.CharField(max_length = 30, null = True)
+    DriverUniqueId = models.CharField(max_length = 30, null=True)
+
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
     
     def __str__(self):
         return self.name 
 
+class Vehicles(models.Model):
+    Vehicle_id = models.AutoField(primary_key=True)
+    VehiclesRegistration = models.CharField(max_length=20, null=True)
+    VehiclesDVLANumber = models.CharField(max_length=40, null=True)
+    VehicleOwned = models.BooleanField(default=False)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 class Images(models.Model):
+    photo = models.CharField(max_length=15, null=True)
+
     image_id = models.AutoField(primary_key=True)
-    ImagesLink = models.CharField(max_length=100, blank=True)
+    ImagesLink = models.CharField(max_length=150, null=True)
     Verified = models.BooleanField(default=False)
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)
     ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
     SignitureToken = models.CharField(max_length = 1000, null = True)
     SignitureManagerEmail = models.CharField(max_length = 100, null = True)
-    ImageName = models.CharField(max_length=20, blank=True)
+    ImageName = models.CharField(max_length=20, null=True)
+    Points = models.IntegerField(default = 0, null = True)
+    NextDVLAScreenshot = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    LicenseOrigin = models.CharField(max_length = 15, null=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
+ 
     def __str__(self):
         return self.name 
 
@@ -120,8 +142,6 @@ class ScheduledDate(models.Model):
 
     deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
-    
-
     objects = ScheduledDatesManager()
 
     def __str__(self):
@@ -134,12 +154,11 @@ class ScheduledDate(models.Model):
 
     #here i want to create a class that will get just the training if there are any
     #then I plan to use it in fucntions to check if there are trainings
-class TrainingDate(Models.model):
-    objects = ScheduledDatesManager():
+class TrainingDate(models.Model):
 
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     date_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 50, null = True)
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     location = models.CharField(max_length = 15, default='DBS2', null=True)
     CRT = models.IntegerField("CRT", default=0, null = True)
