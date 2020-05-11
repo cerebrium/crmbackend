@@ -246,7 +246,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         # # if it can be avoided.
         datesObjectArray = []
         for dateObject in myDatesArray:
-
             if dateObject['driver_id'] == ele.name:
                 datesObjectArray.append(dateObject)
 
@@ -255,7 +254,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         # images version
         imagesArray = []
         for imgObject in myImagesArray:
-
             if imgObject['driver_id'] == ele.name:
                 imagesArray.append(imgObject)
 
@@ -264,7 +262,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         # vehicles version
         vehiclesArray = []
         for vehicleObject in myVehiclesArray:
-
             if vehicleObject['driver_id'] == ele.name:
                 vehiclesArray.append(vehicleObject)
 
@@ -283,4 +280,44 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     
 
     return myFinalObject
-            
+
+def invoice(driversList, datesList, vehiclesList):
+    # create an array for drivers
+
+    # create an array for dates
+
+    # create an array for vehicles
+
+    # loop through each item in dates and put each field into the new array of objects
+
+    # loop through each item in vehicles and put each field into the new array of objects
+
+    # loop through each item in drivers and put each field into the new array of objects
+        
+        # create array to go onto the driver that will contain all the drivers dates
+
+        # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
+
+        # create vehicles driver array
+
+        # inside of the driver array loop write some logic that links each vehicle to the driver and push the vegicle into the driver vegicle array
+
+    # at this point we have three arrays containing all of our data for each database model set... they are accessible now via object refrencing
+
+    # establish what goes on the invoice?
+
+    # loop through the driver data .... find all dates that are greater in seconds than the start date and less than the end date ( logic inside of here that determines start and end date as based on the vehicle array ownership field) ... probably the hardest part .... 
+        # once this logic is done sum all of the found elements relevant data for the end field you need
+        # another loop ... for item in stuff: endValue += item sort of thing
+        # retun as an object the information .... 
+        # {
+        #   name: 'Nicholas Shankland',
+        #   week: '15-16',
+        #   numbers: [
+        #               256, 314
+        #            ] 
+        # }
+
+
+
+    return           
