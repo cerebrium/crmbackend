@@ -20,9 +20,9 @@ class DriverManager(models.Manager):
 #----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True)
+    datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     name = models.CharField(max_length = 100, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True)
-    datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     status = models.CharField(max_length = 30, null = True)
     onboarding = models.IntegerField("Onboarding", default=0, null=True)
     phone = models.CharField(max_length = 20, null=True)
@@ -46,28 +46,28 @@ class Driver(models.Model):
 
 class Vehicles(models.Model):
     Vehicle_id = models.AutoField(primary_key=True)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     VehiclesRegistration = models.CharField(max_length=20, null=True)
     VehiclesDVLANumber = models.CharField(max_length=40, null=True)
     VehicleOwned = models.BooleanField(default=False)
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 class Images(models.Model):
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=150, null=True)
     Verified = models.BooleanField(default=False)
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)
-    ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    ExpiryDate = models.CharField(max_length = 50, null = True, default = datetime.datetime.now())
     SignitureToken = models.CharField(max_length = 1000, null = True)
     SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, null=True)
     Points = models.IntegerField(default = 0, null = True)
-    NextDVLAScreenshot = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    NextDVLAScreenshot = models.CharField(max_length = 50, null = True, default = datetime.datetime.now())
     LicenseOrigin = models.CharField(max_length = 15, null=True)
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
  
     def __str__(self):
         return self.name 
@@ -150,14 +150,7 @@ class ScheduledDate(models.Model):
 
     def __str__(self):
         return self.name
-
-    #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
-    # that person with default = 1, will work and have data for that day
-
-
-
-    #here i want to create a class that will get just the training if there are any
-    #then I plan to use it in fucntions to check if there are trainings
+        
 class TrainingDate(models.Model):
 
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
