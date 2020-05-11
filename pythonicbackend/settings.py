@@ -91,11 +91,11 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 
-#Ginishka local database Configuration
+# Ginishka local database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test60',
+        'NAME': 'test61',
         'USER': 'ginovevailieva',
         'PASSWORD': 'Ginishka95',
         'HOST': 'localhost',

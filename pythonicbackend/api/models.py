@@ -27,10 +27,11 @@ class Driver(models.Model):
     email = models.CharField(max_length = 50, null=True)
     phone = models.CharField(max_length = 20, null=True)
     address = models.CharField(max_length=100, null=True)
-
     datesList = ArrayField(models.CharField(max_length=20), default=list, blank=True)
     status = models.CharField(max_length = 30, null = True)
     DriverUniqueId = models.CharField(max_length = 30, null=True)
+    SigningUrlNumber = models.CharField(max_length = 100, null=True)
+    Signed = models.BooleanField(default=False)
 
     objects = DriverManager() # allows us to call method above
     #week = models.DateField("week", default = datetime.date.today.isocalendar()[1])
@@ -50,13 +51,12 @@ class Vehicles(models.Model):
 
 class Images(models.Model):
     photo = models.CharField(max_length=15, null=True)
-
     image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=150, null=True)
     Verified = models.BooleanField(default=False)
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)
-    ExpiryDate = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    ExpiryDate = models.CharField(max_length = 50, null = True, default = datetime.datetime.now())
     SignitureToken = models.CharField(max_length = 1000, null = True)
     SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, null=True)
@@ -146,14 +146,7 @@ class ScheduledDate(models.Model):
 
     def __str__(self):
         return self.name
-
-    #set default = 1, becasue if the manager has already chose to complete the daily filling sheet
-    # that person with default = 1, will work and have data for that day
-
-
-
-    #here i want to create a class that will get just the training if there are any
-    #then I plan to use it in fucntions to check if there are trainings
+        
 class TrainingDate(models.Model):
 
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
