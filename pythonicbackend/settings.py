@@ -55,8 +55,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://crmfrontend.netlify.app",
-    "https://h20signitures.netlify.app",
-    'https://h20signitures.netlify.app/',
+    "https://crmsignitures.netlify.app",
 ]
 
 CORS_ALLOW_METHODS = [
