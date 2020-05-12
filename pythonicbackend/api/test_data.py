@@ -91,12 +91,8 @@ numOfParcels = int(data['PARCEL'].sum())
 
 #here I just print out the results
 names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
-#print(names)
-#print(names)
 values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
           str(numOfLVP),str(numOfLWP),str(numOfParcels)]
-#print(values)
-#myNum = len(values)
 for i in names:
     n1 = names[0] + f" " + values[0] 
     n2 = names[1] + f" " + values[1]

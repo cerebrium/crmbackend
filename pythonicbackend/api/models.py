@@ -134,14 +134,11 @@ class ScheduledDate(models.Model):
     DPMO = models.FloatField("DPMO", default=0, null = True)
     SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
 
-    
     #the following fields are money DEDUCTION fields 
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-
     deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-
     objects = ScheduledDatesManager()
 
     def __str__(self):
