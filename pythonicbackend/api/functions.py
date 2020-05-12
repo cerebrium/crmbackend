@@ -281,30 +281,110 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
     return myFinalObject
 
-def invoice(driversList, datesList, vehiclesList):
-    # create an array for drivers
 
+
+
+def invoice(driversList, datesList, vehiclesList):
+    
+    # create an array for drivers
+    myDriverArray = []
+    
     # create an array for dates
+    myDatesArray = []
 
     # create an array for vehicles
+    myVehiclesArray = []
 
-    # loop through each item in dates and put each field into the new array of objects
+
+    ## recreate the driver dataset
 
     # loop through each item in vehicles and put each field into the new array of objects
+    for ele in vehiclesList:
+        myTransientVehicle = {}
+        myTransientVehicle['Vehicle_id'] = ele.Vehicle_id
+        myTransientVehicle['VehiclesRegistration'] = ele.VehiclesRegistration
+        myTransientVehicle['VehiclesDVLANumber'] = ele.VehiclesDVLANumber
+        myTransientVehicle['VehicleOwned'] = ele.VehicleOwned
+        myTransientVehicle['driver_id'] = str(ele.driver_id)
+
+        myVehiclesArray.append(myTransientVehicle)
+
+    # loop through each item in dates and put each field into the new array of objects
+    for ele in datesList:
+        myTransientObjectDates = {}
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
+        myTransientObjectDates['date_id'] = ele.date_id
+        myTransientObjectDates['name'] = ele.name
+        myTransientObjectDates['inOff'] = ele.inOff
+        myTransientObjectDates['route'] = ele.route
+        myTransientObjectDates['logIn_time'] = ele.logIn_time
+        myTransientObjectDates['logOut_time'] = ele.logOut_time
+        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+        myTransientObjectDates['location'] = ele.location
+        myTransientObjectDates['date'] = ele.date
+        myTransientObjectDates['parcel'] = ele.parcel
+        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['LVP'] = ele.LVP
+        myTransientObjectDates['CRT'] = ele.CRT
+        myTransientObjectDates['RL'] = ele.RL
+        myTransientObjectDates['SUP'] = str(ele.SUP)
+        myTransientObjectDates['fuel'] = str(ele.fuel)
+        myTransientObjectDates['support'] = str(ele.support)
+        myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
+    
+        myDatesArray.append(myTransientObjectDates)
+
 
     # loop through each item in drivers and put each field into the new array of objects
+
+    for ele in driversList:
+        myTransientObjectDriver = {}
+        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['name'] = ele.name
+        myTransientObjectDriver['location'] = ele.location
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['address'] = ele.address
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
+        myTransientObjectDriver['Signed'] = ele.Signed
+        
         
         # create array to go onto the driver that will contain all the drivers dates
+        myDriverDatesArray = []
 
         # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
 
+        if len(ele.datesList) > 0:
+            for item in ele.datesList:
+                myDriverDatesArray.append(item)
+            myTransientObjectDriver['datesList'] = myDriverDatesArray
+        else:
+            myTransientObjectDriver['datesList'] = [] 
+
+
         # create vehicles driver array
 
+        myVehicleDriverArray = []
+
         # inside of the driver array loop write some logic that links each vehicle to the driver and push the vegicle into the driver vegicle array
+        # vehicles version
+        vehiclesArray = []
+        for vehicleObject in myVehiclesArray:
+            if vehicleObject['driver_id'] == ele.name:
+                myVehicleDriverArray.append(vehicleObject)
+
+        myTransientObjectDriver['vehicleArray'] = myVehicleDriverArray  
+
+
+        myDriverArray.append(myTransientObjectDriver)
 
     # at this point we have three arrays containing all of our data for each database model set... they are accessible now via object refrencing
 
-    # establish what goes on the invoice? 
+    # establish what goes on the invoice?
 
     # loop through the driver data .... find all dates that are greater in seconds than the start date and less than the end date ( logic inside of here that determines start and end date as based on the vehicle array ownership field) ... probably the hardest part .... 
         # once this logic is done sum all of the found elements relevant data for the end field you need
@@ -319,5 +399,16 @@ def invoice(driversList, datesList, vehiclesList):
         # }
 
 
+<<<<<<< HEAD
 
     return           
+=======
+    myFinalObject = {
+        'drivers': myDriverArray,
+        'dates': myDatesArray,
+        'vehicles': myVehiclesArray
+         }   
+    
+
+    return myFinalObject          
+>>>>>>> 47847228573a45751a9bfc0d71789009159dffc5
