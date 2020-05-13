@@ -54,8 +54,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "https://crmfrontend.netlify.app",
     "https://crmsignitures.netlify.app",
+    "https://crmfrontend.netlify.app",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test63',
+        'NAME': 'test72',
         'USER': 'ginovevailieva',
         'PASSWORD': 'Ginishka95',
         'HOST': 'localhost',

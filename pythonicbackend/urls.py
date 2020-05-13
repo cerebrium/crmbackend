@@ -18,7 +18,7 @@ urlpatterns = [
     path('', include(router.urls), name='rest routes'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('data/', views.DataViewSet.as_view(), name='data'),
-    path('datesInvoice/', views.DatesViewSet.as_view(), name='datesInvoice'),
+    path('invoice/', views.InvoiceViewSet.as_view(), name='invoice'),
     path('statistics/', views.StatisticsViewSet.as_view(), name='stats'),
     path('csv/', views.MapViewSet.as_view(), name='csv')
 ]

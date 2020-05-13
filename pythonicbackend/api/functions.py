@@ -352,35 +352,54 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
         myTransientObjectDriver['Signed'] = ele.Signed
         
-        
-        # create array to go onto the driver that will contain all the drivers dates
-        myDriverDatesArray = []
 
-        # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
+        # # create array to go onto the driver that will contain all the drivers dates
+        payrollArray = []
 
-        if len(ele.datesList) > 0:
-            for item in ele.datesList:
-                myDriverDatesArray.append(item)
-            myTransientObjectDriver['datesList'] = myDriverDatesArray
-        else:
-            myTransientObjectDriver['datesList'] = [] 
+        # # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
 
+        # if len(ele.datesList) > 0:
+        #     for item in ele.datesList:
+        #         datesArray.append(item)
+        #         myTransientObjectDriver['datesList'] = datesArray
+        # else:
+        #     myTransientObjectDriver['datesList'] = [] 
 
-        # create vehicles driver array
-
-        myVehicleDriverArray = []
-
-        # inside of the driver array loop write some logic that links each vehicle to the driver and push the vegicle into the driver vegicle array
-        # vehicles version
-        vehiclesArray = []
-        for vehicleObject in myVehiclesArray:
-            if vehicleObject['driver_id'] == ele.name:
-                myVehicleDriverArray.append(vehicleObject)
-
-        myTransientObjectDriver['vehicleArray'] = myVehicleDriverArray  
+        datesObjectArray = []
+        for dateObject in myDatesArray:
+            if dateObject['driver_id'] == ele.name:
+                datesObjectArray.append(dateObject)
 
 
+        for dateObject in myDatesArray:
+            if dateObject['driver_id'] == ele.name:
+                payrollArray.append(dateObject['date'])
+                myTransientObjectDriver['datesList'] = payrollArray 
+        myTransientObjectDriver['payroll'] = datesObjectArray    
         myDriverArray.append(myTransientObjectDriver)
+
+### --- 
+
+
+        invoiceArray = {}
+        #fields we will need for invoice calulations
+
+        for dateObject in myDatesArray:
+            if dateObject['driver_id'] == ele.name:
+                invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
+                invoiceArray['Route type'] = dateObject['route']
+                invoiceArray['LWP'] = dateObject['LWP']
+                invoiceArray['LVP'] = dateObject['LVP']
+                invoiceArray['Support'] = dateObject['SUP']
+                invoiceArray['Deductions'] = dateObject['deductions']
+                invoiceArray['Fuel'] = dateObject['fuel']
+                myTransientObjectDriver['Invoice'] = invoiceArray
+                myDriverArray.append(myTransientObjectDriver)
+    
+
+
+
+#datetime.datetime(2020, 5, 12, 19, 38, 30, 397221)
 
     # at this point we have three arrays containing all of our data for each database model set... they are accessible now via object refrencing
 
@@ -407,3 +426,14 @@ def invoice(driversList, datesList, vehiclesList):
     
 
     return myFinalObject          
+
+
+
+
+
+
+
+
+
+
+
