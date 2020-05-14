@@ -285,7 +285,23 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
 
 def invoice(driversList, datesList, vehiclesList):
-    
+    # find out today
+    currentDate = datetime.date.today()
+    dateWeekDay = currentDate.weekday()
+    mostRecentSunday = 0
+    weekBeforeSunday = 0
+    twoWeeksBeforeSunday = 0
+    dateWeekDay+=1
+    if currentDate.weekday() > 0:
+        if currentDate.weekday() == 6:
+            print(currentDate)    
+        else:
+            mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
+            weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
+            twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
+            print('last week was from: ', weekBeforeSunday, ' until: ', mostRecentSunday, ' last two weeks were: ', twoWeeksBeforeSunday, ' until ', mostRecentSunday)
+            
+
     # create an array for drivers
     myDriverArray = []
     
@@ -294,9 +310,6 @@ def invoice(driversList, datesList, vehiclesList):
 
     # create an array for vehicles
     myVehiclesArray = []
-
-
-    ## recreate the driver dataset
 
     # loop through each item in vehicles and put each field into the new array of objects
     for ele in vehiclesList:
@@ -336,7 +349,6 @@ def invoice(driversList, datesList, vehiclesList):
     
         myDatesArray.append(myTransientObjectDates)
 
-
     # loop through each item in drivers and put each field into the new array of objects
 
     for ele in driversList:
@@ -352,18 +364,10 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
         myTransientObjectDriver['Signed'] = ele.Signed
         
-
         # # create array to go onto the driver that will contain all the drivers dates
         payrollArray = []
 
         # # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
-
-        # if len(ele.datesList) > 0:
-        #     for item in ele.datesList:
-        #         datesArray.append(item)
-        #         myTransientObjectDriver['datesList'] = datesArray
-        # else:
-        #     myTransientObjectDriver['datesList'] = [] 
 
         datesObjectArray = []
         for dateObject in myDatesArray:
@@ -377,46 +381,43 @@ def invoice(driversList, datesList, vehiclesList):
                 myTransientObjectDriver['datesList'] = payrollArray 
         myTransientObjectDriver['payroll'] = datesObjectArray    
         myDriverArray.append(myTransientObjectDriver)
-
 ### --- 
-
 
         invoiceArray = {}
         #fields we will need for invoice calulations
+        # invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
 
         for dateObject in myDatesArray:
             if dateObject['driver_id'] == ele.name:
-                invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
-                invoiceArray['Route type'] = dateObject['route']
-                invoiceArray['LWP'] = dateObject['LWP']
-                invoiceArray['LVP'] = dateObject['LVP']
-                invoiceArray['Support'] = dateObject['SUP']
-                invoiceArray['Deductions'] = dateObject['deductions']
-                invoiceArray['Fuel'] = dateObject['fuel']
-                myTransientObjectDriver['Invoice'] = invoiceArray
-                myDriverArray.append(myTransientObjectDriver)
-    
-
-
+                if dateObject['date']:
+                    if len(dateObject['date']) > 11:
+                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date() < mostRecentSunday:
+                            print('found a match: ', (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date())
+                            # print(' current date ', currentDate)
+                            # print(' date found , ', (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).date())
+                            invoiceArray['Route type'] = dateObject['route']
+                            invoiceArray['LWP'] = dateObject['LWP']
+                            invoiceArray['LVP'] = dateObject['LVP']
+                            invoiceArray['Support'] = dateObject['SUP']
+                            invoiceArray['Deductions'] = dateObject['deductions']
+                            invoiceArray['Fuel'] = dateObject['fuel']
+                            myTransientObjectDriver['Invoice'] = invoiceArray
+                            myDriverArray.append(myTransientObjectDriver)
+                    else:    
+                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
+                            print('found a match')
+                            # print(' current date ', currentDate)
+                            # print(' date found , ', (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).date())
+                            invoiceArray['Route type'] = dateObject['route']
+                            invoiceArray['LWP'] = dateObject['LWP']
+                            invoiceArray['LVP'] = dateObject['LVP']
+                            invoiceArray['Support'] = dateObject['SUP']
+                            invoiceArray['Deductions'] = dateObject['deductions']
+                            invoiceArray['Fuel'] = dateObject['fuel']
+                            myTransientObjectDriver['Invoice'] = invoiceArray
+                            myDriverArray.append(myTransientObjectDriver)
 
 #datetime.datetime(2020, 5, 12, 19, 38, 30, 397221)
-
-    # at this point we have three arrays containing all of our data for each database model set... they are accessible now via object refrencing
-
-    # establish what goes on the invoice?
-
-    # loop through the driver data .... find all dates that are greater in seconds than the start date and less than the end date ( logic inside of here that determines start and end date as based on the vehicle array ownership field) ... probably the hardest part .... 
-        # once this logic is done sum all of the found elements relevant data for the end field you need
-        # another loop ... for item in stuff: endValue += item sort of thing
-        # retun as an object the information .... 
-        # {
-        #   name: 'Nicholas Shankland',
-        #   week: '15-16',
-        #   numbers: [
-        #               256, 314
-        #            ] 
-        # }
-
 
     myFinalObject = {
         'drivers': myDriverArray,

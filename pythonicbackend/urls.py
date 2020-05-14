@@ -10,6 +10,7 @@ router.register(r'schedule', views.ScheduleViewSet)
 router.register(r'images', views.ImagesViewSet)
 router.register(r'vehicles', views.VehiclesViewSet)
 router.register(r'trainingdate', views.TrainingViewSet)
+router.register(r'invoices', views.InvoicesViewSet)
 
 
 # Setup automatic URL routing

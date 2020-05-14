@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles
+from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -29,6 +29,22 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'SigningUrlNumber',
             'Signed'
         ]
+        
+class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Invoice
+        fields = [
+            'invoice_id',
+            'driver_id',
+            'day',
+            'routeType',
+            'LWP',
+            'LVP',
+            'SUP',
+            'deductions',
+            'fuel'
+        ]
+
 
 class VehiclesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -66,7 +82,7 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
     logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
     logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
-    date =  serializers.TimeField(input_formats= ['%Y:%M:%D'])  
+    # date =  serializers.TimeField(input_formats= ['%Y:%M:%D'])  
     class Meta:
         model = ScheduledDate
         fields = [

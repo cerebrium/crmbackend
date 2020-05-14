@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, TrainingDateSerializer
+from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, TrainingDateSerializer, InvoiceSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice
 from .test_data import importData
 import csv,io 
@@ -25,6 +25,22 @@ class DriverViewSet(viewsets.ModelViewSet):
     # drivers
     queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
+
+class DriverViewSet(viewsets.ModelViewSet):
+    # Authentication
+    #permission_classes = (IsAuthenticated,) 
+
+    # drivers
+    queryset = Driver.objects.all().order_by('name')
+    serializer_class = DriverSerializer
+
+class InvoicesViewSet(viewsets.ModelViewSet):
+    # Authentication
+    #permission_classes = (IsAuthenticated,) 
+
+    queryset = Invoice.objects.all().order_by('driver_id')
+    serializer_class = InvoiceSerializer
+        
 
 class ImagesViewSet(viewsets.ModelViewSet):
     # Authentication
@@ -82,6 +98,7 @@ class InvoiceViewSet(APIView):
     # function for all data
     def get(self, request):
         ## defining overall data objects
+        invoices = Invoice.objects.all().order_by('driver_id')
         drivers = Driver.objects.all().order_by('driver_id')
         schedule = ScheduledDate.objects.all().order_by('driver_id')
         vehicles = Vehicles.objects.all().order_by('driver_id')

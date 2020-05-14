@@ -15,8 +15,7 @@ class DriverManager(models.Manager):
         driver = self.create(name=name)
 
         return driver
-    
-
+        
 #----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True) #need to connect to DA Compliance Check
@@ -39,6 +38,36 @@ class Driver(models.Model):
     def __str__(self):
         return self.name 
 
+# Create your models here.
+class InvoiceManager(models.Manager):
+    def create_Invoice(self, driver_id, day, routeType, LWP, LVP, SUP, deductions, fuel):
+        invoice = self.create(
+            driver_id = driver_id,
+            day = day,
+            routeType =routeType, 
+            LWP = LWP,
+            LVP = LVP,
+            SUP = SUP, 
+            deductions = deductions,
+            fuel = fuel
+            )
+
+        return invoice
+
+class Invoice(models.Model):
+    invoice_id = models.AutoField(primary_key=True)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    day = models.CharField(max_length = 50, null = True)
+    routeType = models.CharField(max_length = 10, null = True)
+    LWP = models.IntegerField("LWP", default=0, null = True)
+    LVP = models.IntegerField("LVP", default=0,  null = True)
+    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
+    deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+
+    def __str__(self):
+        return self.name
+
 class Vehicles(models.Model):
     Vehicle_id = models.AutoField(primary_key=True)
     VehiclesRegistration = models.CharField(max_length=20, null=True)
@@ -56,12 +85,12 @@ class Images(models.Model):
     Verified = models.BooleanField(default=False)
     ManagerSigned = models.BooleanField(default=False)
     DriverSigned = models.BooleanField(default=False)
-    ExpiryDate = models.CharField(max_length = 50, null = True, default = datetime.datetime.now())
+    ExpiryDate = models.CharField(max_length = 50, null = True)
     SignitureToken = models.CharField(max_length = 1000, null = True)
     SignitureManagerEmail = models.CharField(max_length = 100, null = True)
     ImageName = models.CharField(max_length=20, null=True)
     Points = models.IntegerField(default = 0, null = True)
-    NextDVLAScreenshot = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    NextDVLAScreenshot = models.CharField(max_length = 50, null = True)
     LicenseOrigin = models.CharField(max_length = 15, null=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
  
@@ -115,14 +144,17 @@ class ScheduledDate(models.Model):
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 15, default='DBS2', null=True)
-    date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    date = models.CharField(max_length = 50, null = True, default = datetime.date.today())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
+    start_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
+    finish_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     parcel = models.IntegerField("PARCEL", default=0, editable=True, null = True)
 
     #the following fields are Extra's report fields 
     TORH = models.TimeField("TORH", null = True)
     LWP = models.IntegerField("LWP", default=0, null = True)
+    LateWavePayment = models.IntegerField("LWP", default=0, null = True)
     LVP = models.IntegerField("LVP", default=0,  null = True)
     CRT = models.IntegerField("CRT", default=0, null = True)
     RL = models.IntegerField("RL", default=0, null = True)
@@ -154,7 +186,7 @@ class TrainingDate(models.Model):
     CRT = models.IntegerField("CRT", default=0, null = True)
     RL = models.IntegerField("RL", default=0, null = True)
     deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    date = models.CharField(max_length = 50, null = True, default= datetime.datetime.now())
+    date = models.CharField(max_length = 50, null = True)
 
     objects = ScheduledDatesManager()
 
