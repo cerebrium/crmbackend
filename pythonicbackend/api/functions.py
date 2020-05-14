@@ -399,16 +399,11 @@ def invoice(driversList, datesList, vehiclesList):
         # }
 
 
-<<<<<<< HEAD
-
-    return           
-=======
     myFinalObject = {
         'drivers': myDriverArray,
         'dates': myDatesArray,
         'vehicles': myVehiclesArray
-         }   
+    }   
     
 
     return myFinalObject          
->>>>>>> 47847228573a45751a9bfc0d71789009159dffc5
