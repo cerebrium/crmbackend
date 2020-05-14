@@ -75,7 +75,7 @@ class DataViewSet(APIView):
         }
         return Response(content)
 
-class DatesViewSet(APIView):
+class InvoiceViewSet(APIView):
     # Authentication
     #permission_classes = (IsAuthenticated,)    
 

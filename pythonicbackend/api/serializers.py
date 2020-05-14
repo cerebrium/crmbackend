@@ -66,6 +66,7 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
     logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
     logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
+    date =  serializers.TimeField(input_formats= ['%Y:%M:%D'])  
     class Meta:
         model = ScheduledDate
         fields = [
