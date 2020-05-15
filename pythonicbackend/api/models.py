@@ -56,6 +56,7 @@ class InvoiceManager(models.Manager):
 
 class Invoice(models.Model):
     invoice_id = models.AutoField(primary_key=True)
+    date = models.CharField(max_length = 50, null = True, default = datetime.date.today())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     day = models.CharField(max_length = 50, null = True)
     routeType = models.CharField(max_length = 10, null = True)

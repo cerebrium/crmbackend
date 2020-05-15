@@ -353,7 +353,10 @@ def invoice(driversList, datesList, vehiclesList):
 
     # loop through each item in drivers and put each field into the new array of objects
 
-    for ele in driversList:
+    for id, ele in enumerate(driversList):
+        # create an array to store the dates inside the time period we want to analyse
+        myTwoWeekArray = []
+
         myTransientObjectDriver = {}
         myTransientObjectDriver['driver_id'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
@@ -385,35 +388,53 @@ def invoice(driversList, datesList, vehiclesList):
         myDriverArray.append(myTransientObjectDriver)
 ### --- 
 
-        invoiceArray = {}
+        
         #fields we will need for invoice calulations
         # invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
 
         for dateObject in myDatesArray:
             if dateObject['driver_id'] == ele.name:
+                invoiceObject = {}
                 if dateObject['date']:
                     if len(dateObject['date']) > 11:
-                        print(dateObject['date'])
                         if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date() < mostRecentSunday:
+                            if len(myTwoWeekArray) > 0:
+                                for element in myTwoWeekArray[0]:
+                                    if element == 'LVP':
+                                        myTwoWeekArray[0][element] = myTwoWeekArray[0][element] + dateObject['LVP']
+                                    if element == 'LWP':
+                                        myTwoWeekArray[0][element] = myTwoWeekArray[0][element] + dateObject['LWP']
+                                    if element == 'Support':
+                                        print(float(myTwoWeekArray[0][element][3::]))
+                                        myValue= float(myTwoWeekArray[0][element][3::]) + float(dateObject['SUP'][3::])
+                                        myTwoWeekArray[0][element] = "GB£%f" % myValue
+                                        print(myTwoWeekArray[0][element])
+
+                            else:    
                             # at this point we have sorted the dates for billing period into their respective catagory
-                            invoiceArray['Route type'] = dateObject['route']
-                            invoiceArray['LWP'] = dateObject['LWP']
-                            invoiceArray['LVP'] = dateObject['LVP']
-                            invoiceArray['Support'] = dateObject['SUP']
-                            invoiceArray['Deductions'] = dateObject['deductions']
-                            invoiceArray['Fuel'] = dateObject['fuel']
-                            myTransientObjectDriver['Invoice'] = invoiceArray
-                            myDriverArray.append(myTransientObjectDriver)
+                            # now we need to sum all the numbers on the dates we have found
+                            # sum fuel... deduction... support
+                                invoiceObject['Route type'] = dateObject['route']
+                                invoiceObject['LWP'] = dateObject['LWP']
+                                invoiceObject['LVP'] = dateObject['LVP']
+                                invoiceObject['Support'] = dateObject['SUP']
+                                invoiceObject['Deductions'] = dateObject['deductions']
+                                invoiceObject['Fuel'] = dateObject['fuel']
+                                myTwoWeekArray.append(invoiceObject)
                     else:    
                         if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
-                            invoiceArray['Route type'] = dateObject['route']
-                            invoiceArray['LWP'] = dateObject['LWP']
-                            invoiceArray['LVP'] = dateObject['LVP']
-                            invoiceArray['Support'] = dateObject['SUP']
-                            invoiceArray['Deductions'] = dateObject['deductions']
-                            invoiceArray['Fuel'] = dateObject['fuel']
-                            myTransientObjectDriver['Invoice'] = invoiceArray
-                            myDriverArray.append(myTransientObjectDriver)
+                            invoiceObject = {}
+                            # at this point we have sorted the dates for billing period into their respective catagory
+                            # now we need to sum all the numbers on the dates we have found
+                            invoiceObject['Route type'] = dateObject['route']
+                            invoiceObject['LWP'] = dateObject['LWP']
+                            invoiceObject['LVP'] = dateObject['LVP']
+                            invoiceObject['Support'] = dateObject['SUP']
+                            invoiceObject['Deductions'] = dateObject['deductions']
+                            invoiceObject['Fuel'] = dateObject['fuel']
+                            myTwoWeekArray.append(invoiceObject)
+
+        print('driver ', ele.name, ' has this in their array: ', myTwoWeekArray)  
 
 #datetime.datetime(2020, 5, 12, 19, 38, 30, 397221)
 
