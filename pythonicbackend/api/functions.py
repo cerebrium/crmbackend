@@ -291,6 +291,7 @@ def invoice(driversList, datesList, vehiclesList):
     mostRecentSunday = 0
     weekBeforeSunday = 0
     twoWeeksBeforeSunday = 0
+    fourWeeksBeforeSunday = 0
     dateWeekDay+=1
     if currentDate.weekday() > 0:
         if currentDate.weekday() == 6:
@@ -299,6 +300,7 @@ def invoice(driversList, datesList, vehiclesList):
             mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
             weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
             twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
+            fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)
             print('last week was from: ', weekBeforeSunday, ' until: ', mostRecentSunday, ' last two weeks were: ', twoWeeksBeforeSunday, ' until ', mostRecentSunday)
             
 
@@ -391,10 +393,9 @@ def invoice(driversList, datesList, vehiclesList):
             if dateObject['driver_id'] == ele.name:
                 if dateObject['date']:
                     if len(dateObject['date']) > 11:
+                        print(dateObject['date'])
                         if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date() < mostRecentSunday:
-                            print('found a match: ', (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date())
-                            # print(' current date ', currentDate)
-                            # print(' date found , ', (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).date())
+                            # at this point we have sorted the dates for billing period into their respective catagory
                             invoiceArray['Route type'] = dateObject['route']
                             invoiceArray['LWP'] = dateObject['LWP']
                             invoiceArray['LVP'] = dateObject['LVP']
@@ -405,9 +406,6 @@ def invoice(driversList, datesList, vehiclesList):
                             myDriverArray.append(myTransientObjectDriver)
                     else:    
                         if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
-                            print('found a match')
-                            # print(' current date ', currentDate)
-                            # print(' date found , ', (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).date())
                             invoiceArray['Route type'] = dateObject['route']
                             invoiceArray['LWP'] = dateObject['LWP']
                             invoiceArray['LVP'] = dateObject['LVP']
