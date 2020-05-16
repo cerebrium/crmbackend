@@ -138,7 +138,7 @@ class ScheduledDate(models.Model):
     date_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
-    route = models.CharField("Route", max_length = 10, default = "0", null = True)
+    route = models.CharField("Route", max_length = 30, default = "0", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
 
@@ -151,6 +151,7 @@ class ScheduledDate(models.Model):
     start_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     finish_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     parcel = models.IntegerField("PARCEL", default=0, editable=True, null = True)
+    parcelNotDelivered = models.IntegerField("PARCEL NOT DELIVERED", default=0, editable=True, null = True)
 
     #the following fields are Extra's report fields 
     TORH = models.TimeField("TORH", null = True)
