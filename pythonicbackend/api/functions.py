@@ -186,6 +186,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
         myTransientObjectDates['route'] = ele.route
+        myTransientObjectDates['routeNumber'] = ele.routeNumber
         myTransientObjectDates['logOut_time'] = ele.logOut_time
         myTransientObjectDates['logIn_time'] = ele.logIn_time
         myTransientObjectDates['location'] = ele.location
