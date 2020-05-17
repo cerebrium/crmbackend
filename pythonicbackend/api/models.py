@@ -100,7 +100,7 @@ class Images(models.Model):
 
 class ScheduledDatesManager(models.Manager):
     
-    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LWP, LVP, CRT, RL, SUP, fuel, support, vans, deductions, PHR, CALL, POD, CONS, driver_id):
+    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LateWavePayment, LVP, CRT, RL, SUP, fuel, support, vans, deductions, PHR, CALL, POD, CONS, driver_id):
         date = self.create(
             name=name,
             inOff=inOff,
@@ -110,11 +110,11 @@ class ScheduledDatesManager(models.Manager):
             TORH=TORH,
             mileage=mileage,
             parcel=parcel,
-            LWP=LWP,
+            LateWavePayment=LateWavePayment,
             LVP=LVP,
             CRT=CRT,
             RL=RL,
-            SUP=SUP,
+            DPMO=SUP,
             fuel=fuel,
             support=support,
             vans=vans,
@@ -139,6 +139,7 @@ class ScheduledDate(models.Model):
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
     route = models.CharField("Route", max_length = 30, default = "0", null = True)
+    routeNumber = models.CharField("Route", max_length = 30, default = "0", null = True)
     logOut_time = models.TimeField("LOG OUT", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
 
@@ -155,7 +156,6 @@ class ScheduledDate(models.Model):
 
     #the following fields are Extra's report fields 
     TORH = models.TimeField("TORH", null = True)
-    LWP = models.IntegerField("LWP", default=0, null = True)
     LateWavePayment = models.IntegerField("LWP", default=0, null = True)
     LVP = models.IntegerField("LVP", default=0,  null = True)
     CRT = models.IntegerField("CRT", default=0, null = True)
@@ -166,7 +166,6 @@ class ScheduledDate(models.Model):
     POD = models.FloatField("POD", default=0, null = True)
     CONS = models.FloatField("FDDS", default=0, null = True)
     DPMO = models.FloatField("DPMO", default=0, null = True)
-    SUP = MoneyField("SUP", default=0, max_digits=10, decimal_places=2, default_currency='GBP', null = True)
 
     #the following fields are money DEDUCTION fields 
     fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)

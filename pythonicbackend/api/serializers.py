@@ -82,7 +82,6 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
     logIn_time = serializers.TimeField(input_formats= ['%H:%M'])
     logOut_time = serializers.TimeField(input_formats= ['%H:%M'])  
-    # date =  serializers.TimeField(input_formats= ['%Y:%M:%D'])  
     class Meta:
         model = ScheduledDate
         fields = [
@@ -90,18 +89,28 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'inOff',
             'route',
+            'routeNumber',
             'logIn_time',
             'logOut_time',   
             'location',
             'date',
             'driver_id',
             'mileage',
+            'start_mileage',
+            'finish_mileage',
             'parcel',
-            'LWP',
+            'parcelNotDelivered',
+            'TORH',
+            'LateWavePayment',
             'LVP',
             'CRT',
             'RL',
-            'SUP',
+            'FDDS',
+            'PHR',
+            'CALL',
+            'POD',
+            'CONS',
+            'DPMO',
             'fuel',
             'support',
             'vans',

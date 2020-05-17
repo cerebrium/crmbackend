@@ -183,27 +183,36 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     for ele in datesList:
         myTransientObjectDates = {}
 
-        myTransientObjectDates['driver_id'] = str(ele.driver_id)
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
         myTransientObjectDates['inOff'] = ele.inOff
         myTransientObjectDates['route'] = ele.route
-        myTransientObjectDates['logIn_time'] = ele.logIn_time
         myTransientObjectDates['logOut_time'] = ele.logOut_time
-        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+        myTransientObjectDates['logIn_time'] = ele.logIn_time
         myTransientObjectDates['location'] = ele.location
         myTransientObjectDates['date'] = ele.date
+        myTransientObjectDates['driver_id'] = str(ele.driver_id)
+        myTransientObjectDates['mileage'] = ele.mileage
+        myTransientObjectDates['start_mileage'] = ele.start_mileage
+        myTransientObjectDates['finish_mileage'] = ele.finish_mileage
+        myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
         myTransientObjectDates['parcel'] = ele.parcel
-        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
+        myTransientObjectDates['TORH'] = ele.TORH
+        myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
         myTransientObjectDates['LVP'] = ele.LVP
         myTransientObjectDates['CRT'] = ele.CRT
         myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['SUP'] = str(ele.SUP)
-        myTransientObjectDates['fuel'] = str(ele.fuel)
+        myTransientObjectDates['FDDS'] = ele.FDDS
+        myTransientObjectDates['PHR'] = ele.PHR
+        myTransientObjectDates['CALL'] = ele.CALL
+        myTransientObjectDates['POD'] = ele.POD
+        myTransientObjectDates['CONS'] = ele.CONS
+        myTransientObjectDates['DPMO'] = ele.DPMO
         myTransientObjectDates['support'] = str(ele.support)
+        myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
-        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
+        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
     
         myDatesArray.append(myTransientObjectDates)
 
