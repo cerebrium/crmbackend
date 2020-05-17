@@ -43,11 +43,10 @@ def statistics(datesList):
         myTransientObjectDates['LVP'] = ele.LVP
         myTransientObjectDates['CRT'] = ele.CRT
         myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['SUP'] = str(ele.SUP)
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['support'] = str(ele.support)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
 
         myDatesArray.append(myTransientObjectDates)
@@ -351,11 +350,10 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDates['LVP'] = ele.LVP
         myTransientObjectDates['CRT'] = ele.CRT
         myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['SUP'] = str(ele.SUP)
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['support'] = str(ele.support)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.SUP + ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
     
         myDatesArray.append(myTransientObjectDates)
@@ -415,7 +413,7 @@ def invoice(driversList, datesList, vehiclesList):
                                         myTwoWeekArray[0][element] = myTwoWeekArray[0][element] + dateObject['LWP']
                                     if element == 'Support':
                                         print(float(myTwoWeekArray[0][element][3::]))
-                                        myValue= float(myTwoWeekArray[0][element][3::]) + float(dateObject['SUP'][3::])
+                                        myValue= float(myTwoWeekArray[0][element][3::]) + float(dateObject['support'][3::])
                                         myTwoWeekArray[0][element] = "GB£%f" % myValue
                                         print(myTwoWeekArray[0][element])
 
@@ -426,7 +424,7 @@ def invoice(driversList, datesList, vehiclesList):
                                 invoiceObject['Route type'] = dateObject['route']
                                 invoiceObject['LWP'] = dateObject['LWP']
                                 invoiceObject['LVP'] = dateObject['LVP']
-                                invoiceObject['Support'] = dateObject['SUP']
+                                invoiceObject['Support'] = dateObject['support']
                                 invoiceObject['Deductions'] = dateObject['deductions']
                                 invoiceObject['Fuel'] = dateObject['fuel']
                                 myTwoWeekArray.append(invoiceObject)
@@ -438,7 +436,7 @@ def invoice(driversList, datesList, vehiclesList):
                             invoiceObject['Route type'] = dateObject['route']
                             invoiceObject['LWP'] = dateObject['LWP']
                             invoiceObject['LVP'] = dateObject['LVP']
-                            invoiceObject['Support'] = dateObject['SUP']
+                            invoiceObject['Support'] = dateObject['support']
                             invoiceObject['Deductions'] = dateObject['deductions']
                             invoiceObject['Fuel'] = dateObject['fuel']
                             myTwoWeekArray.append(invoiceObject)
