@@ -26,14 +26,6 @@ class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
 
-class DriverViewSet(viewsets.ModelViewSet):
-    # Authentication
-    permission_classes = (IsAuthenticated,) 
-
-    # drivers
-    queryset = Driver.objects.all().order_by('name')
-    serializer_class = DriverSerializer
-
 class InvoicesViewSet(viewsets.ModelViewSet):
     # Authentication
     permission_classes = (IsAuthenticated,) 
