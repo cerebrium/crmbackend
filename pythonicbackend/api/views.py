@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice, User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     # Users
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):

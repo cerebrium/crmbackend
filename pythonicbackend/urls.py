@@ -17,7 +17,7 @@ router.register(r'invoices', views.InvoicesViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls), name='rest routes'),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('asdjflkasj24dflasd43fhapsdjnfkqjwne2r2oqwiefkasjd43nfkjl4nwe31ofiqwefkjan51dmfnqoweifqk123wjenfaskjdnfasdf/', obtain_auth_token, name='api_token_auth'),
     path('data/', views.DataViewSet.as_view(), name='data'),
     path('invoice/', views.InvoiceViewSet.as_view(), name='invoice'),
     path('statistics/', views.StatisticsViewSet.as_view(), name='stats'),

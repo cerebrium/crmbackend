@@ -1,13 +1,18 @@
 from djmoney.models.fields import MoneyField
 import locale
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 import datetime
 from django import forms
 from django.utils import timezone
 import pytz
 
+class User(AbstractUser):
+    email = models.CharField(max_length = 100, null=True, unique=True)
+    name = models.CharField(max_length = 100, null = True, unique=True)
+    station = models.CharField(max_length = 20, null = True)
+    creationDate = models.CharField(max_length = 50, default = datetime.date.today())
 
 # Create your models here.
 class DriverManager(models.Manager):

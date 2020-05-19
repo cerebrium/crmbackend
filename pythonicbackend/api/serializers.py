@@ -1,17 +1,17 @@
-from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice
+from django.contrib.auth.models import User, Group
+from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice, User
 from rest_framework import serializers
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = [
-            'url', 
-            'username', 
-            'email', 
-            'groups',
-            'is_superuser'
-        ]
+            'email',
+            'name',
+            'station',
+            'creationDate'
+        ]        
   
 class DriverSerializer(serializers.HyperlinkedModelSerializer): 
     class Meta:
