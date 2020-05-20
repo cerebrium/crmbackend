@@ -1,16 +1,22 @@
 from djmoney.models.fields import MoneyField
 import locale
+from django.contrib.auth.models import User
+import uuid
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 import datetime
 from django import forms
 from django.utils import timezone
 import pytz
 
-class User(AbstractUser):
-    email = models.CharField(max_length = 100, null=True, unique=True)
-    name = models.CharField(max_length = 100, null = True, unique=True)
+class managers(models.Model):
+    user_id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+        )
+    email = models.CharField(max_length = 100, unique=True)
+    name = models.CharField(max_length = 100, null = True)
     station = models.CharField(max_length = 20, null = True)
     creationDate = models.CharField(max_length = 50, default = datetime.date.today())
 
@@ -23,7 +29,7 @@ class DriverManager(models.Manager):
         
 #----rename it to Driver(models.model)
 class Driver(models.Model):
-    driver_id = models.AutoField(primary_key=True) #need to connect to DA Compliance Check
+    driver_id = models.AutoField(primary_key=True, unique=True) #need to connect to DA Compliance Check
 
     #the following fields will be displayed when a manager clicks on "Add Driver"
     name = models.CharField(max_length = 100, null = True)
@@ -140,7 +146,7 @@ class ScheduledDate(models.Model):
     objects = ScheduledDatesManager()
 
     # all fields needed for the daily feeling sheet report 
-    date_id = models.AutoField(primary_key=True)
+    date_id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
     route = models.CharField("Route", max_length = 30, default = "0", null = True)

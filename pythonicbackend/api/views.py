@@ -1,22 +1,21 @@
-from django.contrib.auth.models import User
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice, User
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice, managers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, TrainingDateSerializer, InvoiceSerializer
+from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, TrainingDateSerializer, InvoiceSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice
 from .test_data import importData
 import csv,io 
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class managersViewSet(viewsets.ModelViewSet):
     # Authentication
     permission_classes = (IsAuthenticated,)
 
     # Users
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = managers.objects.all()
+    serializer_class = managersSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):
     # Authentication

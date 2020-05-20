@@ -1,12 +1,12 @@
-from django.contrib.auth.models import User, Group
-from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice, User
+from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice, managers
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class managersSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = managers
         fields = [
+            'user_id',
             'email',
             'name',
             'station',
