@@ -82,34 +82,35 @@ class Invoice(models.Model):
         return self.name
 
 class Vehicles(models.Model):
-    name = models.CharField(max_length = 100, null = True)
-
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     Vehicle_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 100, null = True)
     VehiclesRegistration = models.CharField(max_length=20, null=True)
     VehiclesDVLANumber = models.CharField(max_length=40, null=True)
     VehicleOwned = models.BooleanField(default=False)
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    vehicleType = models.CharField(max_length=20, default='standard')
 
     def __str__(self):
         return self.name
 
+# DA compliance check
 class Images(models.Model):
-    name = models.CharField(max_length = 100, null = True)
-
-    photo = models.CharField(max_length=15, null=True)
-    image_id = models.AutoField(primary_key=True)
-    ImagesLink = models.CharField(max_length=150, null=True)
-    Verified = models.BooleanField(default=False)
-    ManagerSigned = models.BooleanField(default=False)
-    DriverSigned = models.BooleanField(default=False)
-    ExpiryDate = models.CharField(max_length = 50, null = True)
-    SignitureToken = models.CharField(max_length = 1000, null = True)
-    SignitureManagerEmail = models.CharField(max_length = 100, null = True)
-    ImageName = models.CharField(max_length=20, null=True)
-    Points = models.IntegerField(default = 0, null = True)
-    NextDVLAScreenshot = models.CharField(max_length = 50, null = True)
-    LicenseOrigin = models.CharField(max_length = 15, null=True)
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    vehicle_id = models.ForeignKey(Vehicles, blank=True, null=True, on_delete=models.CASCADE)
+    image_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 100, null = True)
+    countryOfIssue = models.CharField(max_length = 30, null=True)
+    expiryDate = models.CharField(max_length = 50, null = True)
+    dueDate = models.CharField(max_length = 50, null = True)
+    datePassed = models.CharField(max_length=30, null=True)
+    photo = models.CharField(max_length=15, null=True)
+    managerApprovedName = models.CharField(max_length = 30, null=True)
+    managerApprovedDate = models.CharField(max_length = 90, null=True)
+    imagesLink = models.CharField(max_length=150, null=True)
+    verified = models.BooleanField(default=False)
+    driverSigned = models.BooleanField(default=False)
+    points = models.IntegerField(default = 0, null = True)
+    nextDVLAScreenshot = models.CharField(max_length = 50, null = True)
  
     def __str__(self):
         return self.name 
