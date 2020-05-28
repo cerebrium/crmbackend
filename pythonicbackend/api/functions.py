@@ -148,6 +148,9 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     ############## this function just copies everything and puts it into one array that can be returned...  ###########
     print(__package__)
 
+    #### add an array of registrations for the vehicles that are owned by the company
+    #### add array containing the status of the drivers
+
     myImagesArray = []
     myDriverArray = []
     myDatesArray = []
@@ -311,6 +314,7 @@ def invoice(driversList, datesList, vehiclesList):
             twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
             fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)
             print('last week was from: ', weekBeforeSunday, ' until: ', mostRecentSunday, ' last two weeks were: ', twoWeeksBeforeSunday, ' until ', mostRecentSunday)
+    print(' what is the sunday two weeks ago', twoWeeksBeforeSunday)
             
 
     # create an array for drivers
@@ -347,7 +351,7 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDates['location'] = ele.location
         myTransientObjectDates['date'] = ele.date
         myTransientObjectDates['parcel'] = ele.parcel
-        myTransientObjectDates['LWP'] = ele.LWP
+        myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
         myTransientObjectDates['LVP'] = ele.LVP
         myTransientObjectDates['CRT'] = ele.CRT
         myTransientObjectDates['RL'] = ele.RL
@@ -401,13 +405,20 @@ def invoice(driversList, datesList, vehiclesList):
         # invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
 
         for dateObject in myDatesArray:
+            print('hello i am a date object', dateObject)
             if dateObject['driver_id'] == ele.name:
                 invoiceObject = {}
                 if dateObject['date']:
+
+                    # there are two string lengths for the dates the logic is different so this checks if the right string is found
                     if len(dateObject['date']) > 11:
-                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date() < mostRecentSunday:
+
+                        # makes sure that the date of the found scheduled date is within the time period we are looking for
+                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')) < mostRecentSunday:
+
                             if len(myTwoWeekArray) > 0:
                                 for element in myTwoWeekArray[0]:
+                                    # loop that sums all of the scheduled dates that aren't the first one
                                     if element == 'LVP':
                                         myTwoWeekArray[0][element] = myTwoWeekArray[0][element] + dateObject['LVP']
                                     if element == 'LWP':
@@ -419,9 +430,7 @@ def invoice(driversList, datesList, vehiclesList):
                                         print(myTwoWeekArray[0][element])
 
                             else:    
-                            # at this point we have sorted the dates for billing period into their respective catagory
-                            # now we need to sum all the numbers on the dates we have found
-                            # sum fuel... deduction... support
+                                # creation of the zero index of the myTwoWeeksArray.... also going to be the final invoice 
                                 invoiceObject['Route type'] = dateObject['route']
                                 invoiceObject['LWP'] = dateObject['LWP']
                                 invoiceObject['LVP'] = dateObject['LVP']
@@ -429,8 +438,10 @@ def invoice(driversList, datesList, vehiclesList):
                                 invoiceObject['Deductions'] = dateObject['deductions']
                                 invoiceObject['Fuel'] = dateObject['fuel']
                                 myTwoWeekArray.append(invoiceObject)
+                                
+                    # for the csv files
                     else:    
-                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
+                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')) < mostRecentSunday:
                             invoiceObject = {}
                             # at this point we have sorted the dates for billing period into their respective catagory
                             # now we need to sum all the numbers on the dates we have found

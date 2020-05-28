@@ -1,4 +1,4 @@
-from .models import Driver, ScheduledDate, Images, TrainingDate, Vehicles, Invoice, managers
+from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers
 from rest_framework import serializers
 
 
@@ -118,21 +118,5 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-
-
-class TrainingDateSerializer(serializers.HyperlinkedModelSerializer):  
-    class Meta:
-        model = TrainingDate
-        fields = [
-            'date_id',
-            'name',
-            'location',
-            'date',
-            'driver_id',
-            'CRT',
-            'RL',
-            'deductions',
-            'support'
-        ]
 
 
