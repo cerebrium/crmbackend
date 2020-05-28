@@ -400,6 +400,8 @@ def invoice(driversList, datesList, vehiclesList):
         myDriverArray.append(myTransientObjectDriver)
 ### --- 
 
+
+#Own vans
         
         #fields we will need for invoice calulations
         # invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
@@ -412,10 +414,7 @@ def invoice(driversList, datesList, vehiclesList):
 
                     # there are two string lengths for the dates the logic is different so this checks if the right string is found
                     if len(dateObject['date']) > 11:
-
-                        # makes sure that the date of the found scheduled date is within the time period we are looking for
-                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')) < mostRecentSunday:
-
+                        if weekBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %b %d %Y')).date() < mostRecentSunday:
                             if len(myTwoWeekArray) > 0:
                                 for element in myTwoWeekArray[0]:
                                     # loop that sums all of the scheduled dates that aren't the first one
@@ -441,7 +440,7 @@ def invoice(driversList, datesList, vehiclesList):
                                 
                     # for the csv files
                     else:    
-                        if twoWeeksBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')) < mostRecentSunday:
+                        if weekBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
                             invoiceObject = {}
                             # at this point we have sorted the dates for billing period into their respective catagory
                             # now we need to sum all the numbers on the dates we have found

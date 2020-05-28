@@ -66,6 +66,7 @@ class InvoiceManager(models.Manager):
         return invoice
 
 class Invoice(models.Model):
+    name = models.CharField(max_length = 100, null = True)
     invoice_id = models.AutoField(primary_key=True)
     date = models.CharField(max_length = 50, null = True, default = datetime.date.today())
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
@@ -81,6 +82,8 @@ class Invoice(models.Model):
         return self.name
 
 class Vehicles(models.Model):
+    name = models.CharField(max_length = 100, null = True)
+
     Vehicle_id = models.AutoField(primary_key=True)
     VehiclesRegistration = models.CharField(max_length=20, null=True)
     VehiclesDVLANumber = models.CharField(max_length=40, null=True)
@@ -91,6 +94,9 @@ class Vehicles(models.Model):
         return self.name
 
 class Images(models.Model):
+    name = models.CharField(max_length = 100, null = True)
+
+    photo = models.CharField(max_length=15, null=True)
     image_id = models.AutoField(primary_key=True)
     ImagesLink = models.CharField(max_length=150, null=True)
     Verified = models.BooleanField(default=False)
