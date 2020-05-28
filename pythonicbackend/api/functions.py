@@ -438,20 +438,6 @@ def invoice(driversList, datesList, vehiclesList):
                                 invoiceObject['Fuel'] = dateObject['fuel']
                                 myTwoWeekArray.append(invoiceObject)
                                 
-                    # for the csv files
-                    else:    
-                        if weekBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d')).date() < mostRecentSunday:
-                            invoiceObject = {}
-                            # at this point we have sorted the dates for billing period into their respective catagory
-                            # now we need to sum all the numbers on the dates we have found
-                            invoiceObject['Route type'] = dateObject['route']
-                            invoiceObject['LWP'] = dateObject['LWP']
-                            invoiceObject['LVP'] = dateObject['LVP']
-                            invoiceObject['Support'] = dateObject['support']
-                            invoiceObject['Deductions'] = dateObject['deductions']
-                            invoiceObject['Fuel'] = dateObject['fuel']
-                            myTwoWeekArray.append(invoiceObject)
-
         print('driver ', ele.name, ' has this in their array: ', myTwoWeekArray)  
 
 #datetime.datetime(2020, 5, 12, 19, 38, 30, 397221)

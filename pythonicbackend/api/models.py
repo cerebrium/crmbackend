@@ -117,31 +117,25 @@ class Images(models.Model):
 
 class ScheduledDatesManager(models.Manager):
     
-    def create_date(self, name, inOff, route, logIn_time, logOut_time, TORH, mileage, parcel, LateWavePayment, LVP, CRT, RL, SUP, fuel, support, vans, deductions, PHR, CALL, POD, CONS, driver_id):
+    def create_date(self, NAME, IN, ROUTE, LOGIN, LOGOUT, TORH, MILEAGE, PARCEL, LWP, LVP, CRT, RL, SUP, FUEL, deductions, date, driver_id):
         date = self.create(
-            name=name,
-            inOff=inOff,
-            route=route,
-            logIn_time=logIn_time,
-            logOut_time=logOut_time,
+            name=NAME,
+            inOff=IN,
+            route=ROUTE,
+            logIn_time=LOGIN,
+            logOut_time=LOGOUT,
             TORH=TORH,
-            mileage=mileage,
-            parcel=parcel,
-            LateWavePayment=LateWavePayment,
+            mileage=MILEAGE,
+            parcel=PARCEL,
+            LateWavePayment=LWP,
             LVP=LVP,
             CRT=CRT,
             RL=RL,
-            DPMO=SUP,
-            fuel=fuel,
-            support=support,
-            vans=vans,
-            deductions=deductions, 
-            PHR=PHR,
-            CALL=CALL,
-            POD=POD,
-            CONS=CONS,
+            support=SUP,
+            fuel=FUEL,
+            deductions=deductions,
+            date=date,
             driver_id=Driver(driver_id),
-            location='DBS2'
         )
 
         return date

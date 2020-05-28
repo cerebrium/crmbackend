@@ -10,7 +10,7 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     myArray = []
 
     # create variable for import
-    data = pd.read_csv("sunday2.csv")
+    data = pd.read_csv("sunday.csv")
 
     # clean data -- good job, this is exactly what jupyter notebooks is for... youll need to do more of this kind of thing... for instances I removed the spaces from the 
     # csv file manually.... cant have spaces in names or will cause errors elsewhere
@@ -23,6 +23,24 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     print(data)
     for row in data['NAME']:
         driver = drivers.objects.create_driver(row)  
+
+# NAME,IN,ROUTE,LOG IN,LOG OUT,TORH,MILEAGE,PARCEL,LWP,LVP,CRT,RL,SUP,FUEL,SUPPORT,date
+# ADRIAN MACIASZEK, 0
+# 1.0, 1
+# A133, 2
+# 10:15, 3
+# 16:25, 4
+# 6:10, 5
+# 124.0, 6
+# 171.0, 7
+# 0.0, 8
+# 0.0, 9
+# 0.0, 10
+# 0.0, 11
+# £18.00, 12
+# 0.0, 13
+# 0.0, 14
+# Sun 26 April 2020, 15
 
     myNum = 0
     while myNum < len(data):
@@ -48,15 +66,10 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
             localArray[9], 
             localArray[10], 
             localArray[11], 
-            18.00, 
+            localArray[12][1::],
             localArray[13], 
-            localArray[14], 
-            localArray[15], 
-            localArray[16][0:5] if len(str(localArray[16])) > 1 else 0, 
-            localArray[17], 
-            localArray[18][0:5] if len(str(localArray[18])) > 1 else 0, 
-            localArray[19][0:5] if len(str(localArray[19])) > 1 else 0, 
-            localArray[20], 
+            localArray[14],
+            localArray[15],
             myNum+1)
         localArray = []    
         myNum = myNum + 1
@@ -105,43 +118,3 @@ for i in names:
 print("Monday Report:", datStats)
 print(text,n1,n2,n3,n4,n5,n6)
 
-
-
-
-
-
-# ##------------------------get some statistics for Saturday WEEK 18 --------------------------
-# saturday = pd.read_csv("saturday.csv")
-# saturday.dropna(subset=['ROUTE'], axis = 'rows', how ='all', inplace = True) 
-# saturday.fillna(0,inplace = True)
-# saturday.drop(["VANS ", "FDDS", "PHR","POD","CALL","CONS","DAILY DPMO ","week"],axis = 1,inplace = True, errors = 'ignore')
-# #RUn just once, the follwoing 2 lines just create the week column in the csv file, we can change it do a specific date if you want
-# #saturday["WEEK"] = "18"
-# #saturday.to_csv("saturday.csv", index=False)
-# #saturday.head(15)
-# numOfRoutes_sat = saturday['IN'].value_counts()[1] 
-# numOfLVP_sat = int(saturday['LVP'].sum())
-# numOfLWP_sat = int(saturday['LWP'].sum())
-# numOfParcels_sat = int(saturday['PARCEL'].sum())
-
-
-
-# names = ['Routes: ', 'LVP: ', 'LWP: ','Parcels: ']
-# #print(names)
-# values = [str(numOfRoutes_sat), str(numOfLWP_sat),str(numOfLVP_sat),str(numOfParcels_sat)]
-# #print(values)
-# #nl = '\n'
-# myNum = len(values)
-
-# for i in names:
-#     n1 = names[0] + f" " + values[0] 
-#     n2 = names[1] + f" " + values[1]
-#     n3 = names[2] + f" " + values[2]
-#     n4 = names[3] + f" " + values[3]
-#     text = f"Statistics for today:"
-# #print(text,n1,n2,n3,n4)
-# satStats = [text,n1,n2,n3,n4]
-# print("Saturday Report:", satStats)
-
-
-###------------------------------ end ------------------------------
