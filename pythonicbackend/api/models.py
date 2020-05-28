@@ -193,20 +193,3 @@ class ScheduledDate(models.Model):
     def __str__(self):
         return self.name
         
-class TrainingDate(models.Model):
-
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    date_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length = 50, null = True)
-    support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    location = models.CharField(max_length = 15, default='DBS2', null=True)
-    CRT = models.IntegerField("CRT", default=0, null = True)
-    RL = models.IntegerField("RL", default=0, null = True)
-    deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    date = models.CharField(max_length = 50, null = True)
-
-    objects = ScheduledDatesManager()
-
-    def __str__(self):
-        return self.name
-

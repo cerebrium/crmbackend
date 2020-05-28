@@ -1,9 +1,9 @@
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, TrainingDate, Invoice, managers
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, TrainingDateSerializer, InvoiceSerializer
+from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice
 from .test_data import importData
 import csv,io 
@@ -56,14 +56,6 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     # schedule
     queryset = ScheduledDate.objects.all().order_by('driver_id')
     serializer_class = ScheduledDatesSerializer
-
-class TrainingViewSet(viewsets.ModelViewSet):
-    # Authentication
-    # permission_classes = (IsAuthenticated,)
-
-    # Training
-    queryset = TrainingDate.objects.all().order_by('driver_id')
-    serializer_class = TrainingDateSerializer
 
 class DataViewSet(APIView):
     # Authentication
