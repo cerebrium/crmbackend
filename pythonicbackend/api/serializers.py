@@ -64,19 +64,22 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Images
         fields = [
-            'image_id',
-            'ImagesLink',
-            'Verified',
-            'ImageName',
             'driver_id',
-            'ManagerSigned',
-            'DriverSigned',
-            'ExpiryDate', 
-            'SignitureToken',
-            'SignitureManagerEmail',
-            'Points',
-            'NextDVLAScreenshot',
-            'LicenseOrigin'
+            'vehicle_id',
+            'image_id',
+            'name',
+            'countryOfIssue',
+            'expiryDate', 
+            'dueDate',
+            'datePassed',
+            'photo',
+            'managerApprovedName',
+            'managerApprovedDate',
+            'imagesLink',
+            'verified',
+            'driverSigned',
+            'points',
+            'nextDVLAScreenshot',
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  

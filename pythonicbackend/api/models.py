@@ -100,7 +100,7 @@ class Images(models.Model):
     image_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 100, null = True)
     countryOfIssue = models.CharField(max_length = 30, null=True)
-    expiryDate = models.CharField(max_length = 50, null = True)
+    expiryDate = models.CharField(max_length = 100, null = True)
     dueDate = models.CharField(max_length = 50, null = True)
     datePassed = models.CharField(max_length=30, null=True)
     photo = models.CharField(max_length=15, null=True)

@@ -168,17 +168,22 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
     for ele in imagesList:
         myTransientImage = {}
-
-        myTransientImage['image_id'] = ele.image_id
-        myTransientImage['ImagesLink'] = ele.ImagesLink
-        myTransientImage['Verified'] = ele.Verified
-        myTransientImage['ImageName'] = ele.ImageName
         myTransientImage['driver_id'] = str(ele.driver_id)
-        myTransientImage['ManagerSigned'] = ele.ManagerSigned
-        myTransientImage['DriverSigned'] = ele.DriverSigned
-        myTransientImage['ExpiryDate'] = ele.ExpiryDate
-        myTransientImage['SignitureToken'] = ele.SignitureToken
-        myTransientImage['SignitureManagerEmail'] = ele.SignitureManagerEmail
+        myTransientImage['vehicle_id'] = str(ele.vehicle_id)
+        myTransientImage['image_id'] = ele.image_id
+        myTransientImage['imagesLink'] = ele.imagesLink
+        myTransientImage['verified'] = ele.verified
+        myTransientImage['name'] = ele.name
+        myTransientImage['expiryDate'] = ele.expiryDate
+        myTransientImage['dueDate'] = ele.dueDate
+        myTransientImage['countryOfIssue'] = ele.countryOfIssue
+        myTransientImage['datePassed'] = ele.datePassed
+        myTransientImage['photo'] = ele.photo
+        myTransientImage['managerApprovedName'] = ele.managerApprovedName
+        myTransientImage['managerApprovedDate'] = ele.managerApprovedDate
+        myTransientImage['driverSigned'] = ele.driverSigned
+        myTransientImage['points'] = ele.points
+        myTransientImage['nextDVLAScreenshot'] = ele.nextDVLAScreenshot
 
         myImagesArray.append(myTransientImage)
 
