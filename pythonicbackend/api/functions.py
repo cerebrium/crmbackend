@@ -286,13 +286,13 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
-        # vehicles version
-        vehiclesArray = []
-        for vehicleObject in myVehiclesArray:
-            if vehicleObject['driver_id'] == ele.name:
-                vehiclesArray.append(vehicleObject)
+        # # vehicles version
+        # vehiclesArray = []
+        # for vehicleObject in myVehiclesArray:
+        #     if vehicleObject['driver_id'] == ele.name:
+        #         vehiclesArray.append(vehicleObject)
 
-        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
+        # myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
