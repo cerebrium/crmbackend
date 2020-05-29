@@ -1,9 +1,9 @@
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer
+from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice
 from .test_data import importData
 import csv,io 
@@ -29,7 +29,7 @@ class InvoicesViewSet(viewsets.ModelViewSet):
     # Authentication
     permission_classes = (IsAuthenticated,) 
 
-    queryset = Invoice.objects.all().order_by('driver_id')
+    queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
         
 
@@ -38,7 +38,7 @@ class ImagesViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,) 
 
     # drivers
-    queryset = Images.objects.all().order_by('driver_id')
+    queryset = Images.objects.all()
     serializer_class = ImagesSerializer
 
 class VehiclesViewSet(viewsets.ModelViewSet):
@@ -46,8 +46,16 @@ class VehiclesViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,) 
 
     # drivers
-    queryset = Vehicles.objects.all().order_by('driver_id')
+    queryset = Vehicles.objects.all()
     serializer_class = VehiclesSerializer
+
+class VehicleDamagesViewSet(viewsets.ModelViewSet):
+    # Authentication
+    permission_classes = (IsAuthenticated,) 
+
+    # drivers
+    queryset = VehicleDamages.objects.all()
+    serializer_class = VehicleDamagesSerializer
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     # Authentication

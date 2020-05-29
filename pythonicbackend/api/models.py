@@ -30,6 +30,7 @@ class DriverManager(models.Manager):
 #----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True, unique=True) #need to connect to DA Compliance Check
+    vehicle_name = models.CharField(max_length=50, null = True)
 
     #the following fields will be displayed when a manager clicks on "Add Driver"
     name = models.CharField(max_length = 100, null = True)
@@ -82,20 +83,30 @@ class Invoice(models.Model):
         return self.name
 
 class Vehicles(models.Model):
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    Vehicle_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length = 100, null = True)
-    VehiclesRegistration = models.CharField(max_length=20, null=True)
-    VehiclesDVLANumber = models.CharField(max_length=40, null=True)
-    VehicleOwned = models.BooleanField(default=False)
-    vehicleType = models.CharField(max_length=20, default='standard')
+    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
+    vehicle_id = models.AutoField(primary_key=True)
+    registration = models.CharField(max_length=20, null=True)
+    make = models.CharField(max_length=30, null=True)
+    model = models.CharField(max_length=30, null=True)
+    year = models.CharField(max_length=10, null=True)
+    companyOwned = models.BooleanField(default=False)
+    vtype = models.CharField(max_length=20, default='standard')
+    quotePrice = MoneyField("RENTAL QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    invoice = MoneyField("INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
     def __str__(self):
         return self.name
 
+class VehicleDamages(models.Model):
+    VehicleDamages_id = models.AutoField(primary_key=True)
+    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
+    vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE)
+    statmentOfDamage = models.CharField(max_length = 500, null=True)
+    dateOfIncident = models.CharField(max_length = 100, null=True)
+
 # DA compliance check
 class Images(models.Model):
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
     vehicle_id = models.ForeignKey(Vehicles, blank=True, null=True, on_delete=models.CASCADE)
     image_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length = 100, null = True)

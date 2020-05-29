@@ -1,4 +1,4 @@
-from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers
+from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages
 from rest_framework import serializers
 
 
@@ -27,7 +27,8 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'status',
             'DriverUniqueId',
             'SigningUrlNumber',
-            'Signed'
+            'Signed',
+            'vehicle_name'
         ]
         
 class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
@@ -45,20 +46,32 @@ class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
             'fuel'
         ]
 
-
 class VehiclesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Vehicles
         fields = [
-            'Vehicle_id',
-            'VehiclesRegistration',
-            'VehiclesDVLANumber',
-            'VehicleOwned',
-            'driver_id'
+            'driver_id',
+            'vehicle_id',
+            'registration',
+            'make',
+            'model',
+            'year',
+            'companyOwned',
+            'vtype',
+            'quotePrice',
+            'invoice'
         ]
 
-
-       
+class VehicleDamagesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = VehicleDamages
+        fields = [
+            'VehicleDamages_id',
+            'driver_id',
+            'vehicle_id',
+            'statmentOfDamage',
+            'dateOfIncident'
+        ]
 
 class ImagesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
