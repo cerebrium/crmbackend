@@ -70,7 +70,10 @@ class VehicleDamagesSerializer(serializers.HyperlinkedModelSerializer):
             'driver_id',
             'vehicle_id',
             'statmentOfDamage',
-            'dateOfIncident'
+            'dateOfIncident',
+            'picturesOfIncident',
+            'quotePrice',
+            'invoice'
         ]
 
 class ImagesSerializer(serializers.HyperlinkedModelSerializer):

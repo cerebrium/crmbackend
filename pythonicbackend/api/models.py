@@ -98,8 +98,11 @@ class VehicleDamages(models.Model):
     VehicleDamages_id = models.AutoField(primary_key=True)
     driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
     vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE)
-    statmentOfDamage = models.CharField(max_length = 500, null=True)
-    dateOfIncident = models.CharField(max_length = 100, null=True)
+    statmentOfDamage = models.CharField(max_length = 500)
+    dateOfIncident = models.CharField(max_length = 100)
+    picturesOfIncident = ArrayField(models.CharField(max_length=100), default=list, blank=True)
+    quotePrice = MoneyField("INCIDENT QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    invoice = MoneyField("INCIDENT INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
 # DA compliance check
 class Images(models.Model):
