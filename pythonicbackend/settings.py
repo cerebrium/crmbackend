@@ -18,7 +18,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,8 +53,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "https://crmfrontend.netlify.com",
-    "https://crmfrontend.netlify.app"
+    "https://crmsignitures.netlify.app",
+    "https://crmfrontend.netlify.app",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -95,7 +94,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'test37',
+#         'NAME': 'test0',
 #         'USER': 'ginovevailieva',
 #         'PASSWORD': 'Ginishka95',
 #         'HOST': 'localhost',
@@ -104,24 +103,24 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # }
 
 # Nikitch Local Database Configuration
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crmbackend',
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
-
-# Deployment Database Configuration
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'crmbackend',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
 #     }
 # }
+
+# Deployment Database Configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
