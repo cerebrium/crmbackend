@@ -94,6 +94,9 @@ class Vehicles(models.Model):
     quotePrice = MoneyField("RENTAL QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     invoice = MoneyField("INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
+    def __str__(self):
+        return self.registration
+
 class VehicleDamages(models.Model):
     VehicleDamages_id = models.AutoField(primary_key=True)
     driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)

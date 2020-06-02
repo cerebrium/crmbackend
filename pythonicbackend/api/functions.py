@@ -160,21 +160,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     myDatesArray = []
     myVehiclesArray = []
 
-    for ele in vehicles:
-        myTransientVehicle = {}
-        myTransientVehicle['driver_id'] = str(ele.driver_id)
-        myTransientVehicle['vehicle_id'] = ele.vehicle_id
-        myTransientVehicle['registration'] = ele.registration
-        myTransientVehicle['make'] = ele.make
-        myTransientVehicle['model'] = ele.model
-        myTransientVehicle['year'] = ele.year
-        myTransientVehicle['companyOwned'] = ele.companyOwned
-        myTransientVehicle['vtype'] = ele.vtype
-        myTransientVehicle['quotePrice'] = str(ele.quotePrice)
-        myTransientVehicle['invoice'] = str(ele.invoice)
-
-        myVehiclesArray.append(myTransientVehicle)
-
     for ele in imagesList:
         myTransientImage = {}
         myTransientImage['driver_id'] = str(ele.driver_id)
@@ -195,6 +180,30 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientImage['nextDVLAScreenshot'] = ele.nextDVLAScreenshot
 
         myImagesArray.append(myTransientImage)
+
+    for ele in vehicles:
+        myTransientVehicle = {}
+        myTransientVehicle['driver_id'] = str(ele.driver_id)
+        myTransientVehicle['vehicle_id'] = ele.vehicle_id
+        myTransientVehicle['registration'] = ele.registration
+        myTransientVehicle['make'] = ele.make
+        myTransientVehicle['model'] = ele.model
+        myTransientVehicle['year'] = ele.year
+        myTransientVehicle['companyOwned'] = ele.companyOwned
+        myTransientVehicle['vtype'] = ele.vtype
+        myTransientVehicle['quotePrice'] = str(ele.quotePrice)
+        myTransientVehicle['invoice'] = str(ele.invoice)
+
+        myVehiclesArray.append(myTransientVehicle)
+
+        # images version
+        imagesArray = []
+        for imgObject in myImagesArray:
+            if imgObject['vehicle_id'] == ele.registration:
+                print(imgObject)
+                imagesArray.append(imgObject)
+
+        myTransientVehicle['imgArray'] = imagesArray  
 
     for ele in datesList:
         myTransientObjectDates = {}
