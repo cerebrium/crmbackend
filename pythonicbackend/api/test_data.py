@@ -38,79 +38,206 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
     # loop through data and grab every row that belongs to the 'name' column in the data
 
     #print(data)
-    for d in data:
-        if d['NAME'] == d['NAME']:
-            driver = drivers.objects.create_driver(d['NAME'])  
 
-# NAME,IN,ROUTE,LOG IN,LOG OUT,TORH,MILEAGE,PARCEL,LWP,LVP,CRT,RL,SUP,FUEL,SUPPORT,date
-# ADRIAN MACIASZEK, 0
-# 1.0, 1
-# A133, 2
-# 10:15, 3
-# 16:25, 4
-# 6:10, 5
-# 124.0, 6
-# 171.0, 7
-# 0.0, 8
-# 0.0, 9
-# 0.0, 10
-# 0.0, 11
-# 18.00, 12
-# 0.0, 13
-# 0.0, 14
-# Sun 26 April 2020, 15
+    # for d in data:
+    #     if d['NAME'] == d['NAME']:
+    #         driver = drivers.objects.create_driver(d['NAME'])  
 
-# NAME,IN,ROUTE,LOG IN,LOG OUT,TORH,MILEAGE,PARCEL,LWP,LVP,CRT,RL,SUP,FUEL,SUPPORT,date
-# ADRIAN MACIASZEK, 0
-# 1.0, 1
-# A133, 2
-# 10:15, 3
-# 16:25, 4
-# 6:10, 5
-# 124.0, 6
-# 171.0, 7
-# 0.0, 8
-# 0.0, 9
-# 0.0, 10
-# 0.0, 11
-# £18.00, 12
-# 0.0, 13
-# 0.0, 14
-# Sun 26 April 2020, 15
+    localList = []
+    for row in data['NAME']:
+        localList.append(row)
+    mylist = list(dict.fromkeys(localList))
+    for name in mylist:
+        driver = drivers.objects.create_driver(name) 
 
+
+
+        # driver = drivers.objects.create_driver(row)  
+
+
+
+
+#   ##################################### adding the set of arrays to the backend ####################################
+
+
+    myObj = {}
+
+    df = pd.DataFrame(data)
     myNum = 0
+    # Key in myObj = index of name in mylist
+    AllDriversArray = []
     while myNum < len(data):
         localArray = []
-        for row in data:
+        for element in df:
             # this line adds the data to the local array
-            localArray.append(data[row][data[row].index[myNum]])
+            localArray.append(df[element][df[element].index[myNum]])
+        myNum += 1        
+        AllDriversArray.append(localArray)
+        localArray = [] 
 
-            # this line adds the local array to the returned array
-            myArray.append(localArray)    
+    for element in AllDriversArray:
+        if mylist.index(element[0]) in myObj:
+            myObj[mylist.index(element[0])].append([
+                element[0], 
+                element[1], 
+                element[2], 
+                element[3], 
+                element[4], 
+                element[5], 
+                element[6], 
+                element[7], 
+                element[8], 
+                element[9], 
+                element[10], 
+                element[11], 
+                element[12],
+                element[13], 
+                element[14],
+                element[15],
+                ]
+            )
+        else:
+            myObj[mylist.index(element[0])] = [
+                [
+                element[0], 
+                element[1], 
+                element[2], 
+                element[3], 
+                element[4], 
+                element[5], 
+                element[6], 
+                element[7], 
+                element[8], 
+                element[9], 
+                element[10], 
+                element[11], 
+                element[12],
+                element[13], 
+                element[14],
+                element[15],
+                ]
+            ]  
+    # print(myObj)    
 
-            # this line uses array indexing to add each item to the date class
-        scheduledDate = schedule.objects.create_date(
-            localArray[0], 
-            localArray[1], 
-            localArray[2], 
-            localArray[3], 
-            localArray[4], 
-            localArray[5], 
-            localArray[6], 
-            localArray[7], 
-            localArray[8], 
-            localArray[9], 
-            localArray[10], 
-            localArray[11], 
-            localArray[12],
-            localArray[13], 
-            localArray[14],
-            localArray[15],
-            myNum+1)
-        localArray = []    
-        myNum = myNum + 1
+    for key in myObj:
+    
+        for ele in myObj[key]:
+            scheduledDate = schedule.objects.create_date(
+                ele[0], 
+                ele[1], 
+                ele[2], 
+                ele[3], 
+                ele[4], 
+                ele[5], 
+                ele[6], 
+                ele[7], 
+                ele[8], 
+                ele[9], 
+                ele[10], 
+                ele[11], 
+                ele[12],
+                ele[13], 
+                ele[14],
+                ele[15],
+                key+1,)
+
+
+
+
+                # myObj[mylist.index(df[element])].append(
+                    
+                # )
+
+    # for key in myObj .... if it exists, add array to the list, else create key value pair
+
+
+    # then iterate through myObj, for each element in it, iterate through that elements list and add that date to the backend with the foreign key of the driver equal to the key of myObj
+
+
+
+
+  ##################################### End ########################################################################
+
+
+
+
+    # while myNum < len(data):
+    #     localArray = []
+    #     for row in data:
+    #         print(data[row])
+    #         # print(mylist.index(data[row]))
+    #         # this line adds the data to the local array
+    #         # print(localArray.append(data[row][data[row].index[myNum]]))
+
+    #     #     if myNum+1 in myObj:
+    #     #         myObj[myNum+1].append(
+    #     #             [
+    #     #                 localArray[0], 
+    #     #                 localArray[1], 
+    #     #                 localArray[2], 
+    #     #                 localArray[3], 
+    #     #                 localArray[4], 
+    #     #                 localArray[5], 
+    #     #                 localArray[6], 
+    #     #                 localArray[7], 
+    #     #                 localArray[8], 
+    #     #                 localArray[9], 
+    #     #                 localArray[10], 
+    #     #                 localArray[11], 
+    #     #                 localArray[12],
+    #     #                 localArray[13], 
+    #     #                 localArray[14],
+    #     #                 localArray[15],
+
+    #     #             ]
+    #     #         )
+    #     #     else:
+    #     #         myObj[myNum+1] = [
+    #     #             localArray[0], 
+    #     #             localArray[1], 
+    #     #             localArray[2], 
+    #     #             localArray[3], 
+    #     #             localArray[4], 
+    #     #             localArray[5], 
+    #     #             localArray[6], 
+    #     #             localArray[7], 
+    #     #             localArray[8], 
+    #     #             localArray[9], 
+    #     #             localArray[10], 
+    #     #             localArray[11], 
+    #     #             localArray[12],
+    #     #             localArray[13], 
+    #     #             localArray[14],
+    #     #             localArray[15],
+    #     #         ]
+
+    #     #     # this line adds the local array to the returned array
+    #     #     myArray.append(localArray)    
+
+    #     #     # this line uses array indexing to add each item to the date class
+
+    #     # localArray = []    
+    #     myNum = myNum + 1
     return myArray
 
+        # scheduledDate = schedule.objects.create_date(
+        #     localArray[0], 
+        #     localArray[1], 
+        #     localArray[2], 
+        #     localArray[3], 
+        #     localArray[4], 
+        #     localArray[5], 
+        #     localArray[6], 
+        #     localArray[7], 
+        #     localArray[8], 
+        #     localArray[9], 
+        #     localArray[10], 
+        #     localArray[11], 
+        #     localArray[12],
+        #     localArray[13], 
+        #     localArray[14],
+        #     localArray[15],
+        #     myNum+1)
 
 
 #get our csv data script, the "data" will repsresents sunday

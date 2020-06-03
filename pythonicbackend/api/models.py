@@ -121,7 +121,7 @@ class Images(models.Model):
     managerApprovedName = models.CharField(max_length = 30, null=True)
     managerApprovedDate = models.CharField(max_length = 90, null=True)
     imagesLink = models.CharField(max_length=150, null=True)
-    verified = models.BooleanField(default=False)
+    verified = models.CharField(max_length = 20, null = True)
     driverSigned = models.BooleanField(default=False)
     points = models.IntegerField(default = 0, null = True)
     nextDVLAScreenshot = models.CharField(max_length = 50, null = True)
