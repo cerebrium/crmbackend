@@ -295,13 +295,13 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
-        # vehicles version
-        vehiclesArray = []
-        for vehicleObject in myVehiclesArray:
-            if vehicleObject['driver_id'] == ele.name:
-                vehiclesArray.append(vehicleObject)
+        # # vehicles version
+        # vehiclesArray = []
+        # for vehicleObject in myVehiclesArray:
+        #     if vehicleObject['driver_id'] == ele.name:
+        #         vehiclesArray.append(vehicleObject)
 
-        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
+        # myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
@@ -367,6 +367,7 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDates['driver_id'] = str(ele.driver_id)
         myTransientObjectDates['date_id'] = ele.date_id
         myTransientObjectDates['name'] = ele.name
+        myTransientObjectDates['mileage'] = ele.mileage
         myTransientObjectDates['inOff'] = ele.inOff
         myTransientObjectDates['route'] = ele.route
         myTransientObjectDates['logIn_time'] = ele.logIn_time
@@ -422,6 +423,7 @@ def invoice(driversList, datesList, vehiclesList):
                 myTransientObjectDriver['datesList'] = payrollArray 
         myTransientObjectDriver['payroll'] = datesObjectArray    
         myDriverArray.append(myTransientObjectDriver)
+        #print('This is myDriverArray:', myDriverArray)
 ### --- 
 
 
@@ -447,7 +449,7 @@ def invoice(driversList, datesList, vehiclesList):
         #                                 myOneWeekArray[0][element] = myOneWeekArray[0][element] + dateObject['LWP']
         #                             if element == 'Support':
         #                                 myValue= float(myOneWeekArray[0][element][3::]) + float(dateObject['support'][3::])
-        #                                 myOneWeekArray[0][element] = "GB£%f" % myValue
+        #                                 myOneWeekArray[0][element] = "GB%f" % myValue
 
         #                     else:    
         #                         # creation of the zero index of the myTwoWeeksArray.... also going to be the final invoice 
@@ -460,7 +462,8 @@ def invoice(driversList, datesList, vehiclesList):
         #                         myOneWeekArray.append(invoiceObject)
                             
         df = pd.DataFrame(myDatesArray)           
-        # print(df)         
+        
+        #print(df)         
         for row in df.itertuples(index=True, name='Pandas'):
             invoiceObject = {}
             #print(getattr(row, "date"))
@@ -478,55 +481,92 @@ def invoice(driversList, datesList, vehiclesList):
                                     #print(myOneWeekArray[0][element])
                 else:
                     invoiceObject['name'] = getattr(row, "name")
+                    invoiceObject['mileage'] = getattr(row, "mileage")
                     invoiceObject['route'] = getattr(row, "route")
                     invoiceObject['support'] = getattr(row, "support")
                     invoiceObject['deductions'] = getattr(row, "deductions")
-                    invoiceObject['Fuel'] = getattr(row, "fuel")
-                    myOneWeekArray.append(invoiceObject)    
-                
+                    invoiceObject['fuel'] = getattr(row, "fuel")
+                    
+
+
+                    myOneWeekArray.append(invoiceObject)   
+
+
+
+            #print(myOneWeekArray)    
             tempVar = defaultdict(list)
             payCheck = defaultdict(list)
             tempRoute = defaultdict(list)
                 
+
+            # for i in myOneWeekArray[0]:
+            #     if d['name'] == d['name']:
+                    
+
+
+            #         payCheck['name'].append(d['mileage'])
+            #         mileage = [{'name': k, 'mileage': v, 'count': sum(v)} for k, v in payCheck.items()] 
+
+                
+
+
+            #here we will get the total routes
             for d in myOneWeekArray:
-                tempRoute['name'].append(d['deductions'])
+                tempRoute['name'].append(d['route'])
                 routes = [{'name': k, 'route': v, 'count': len(v)} for k, v in tempRoute.items()] 
+
+
                 # routes = [{'name': k, 'route': v, 'count': len(v)} for k, v in tempRoute.items()] 
-        #     totalRoutes = sum(item['count'] for item in routes)
+            totalRoutes = sum(item['count'] for item in routes)
+        
+            
+        
+            #sort the routes
+            for d in myOneWeekArray:
+                print(d['name'])
+                if d['name'] == d['name']:
+                    if d['route'] == 'BULK':
+                        tempVar[d['name']].append(d['route'])
+                    elif d['route'] == 'Transportation':
+                        tempVar[d['name']].append(d['route'])
+                    elif d['route'] == 'MFN':
+                        tempVar[d['name']].append(d['route'])
+                    else:
+                        tempVar[d['name']].append(d['route'])
 
 
-            for d in routes:
-                   
-                tempRoute[d['name']].append(d['route'])
+                #tempRoute[d['name']].append(d['route'])
                 # for h in myOneWeekArray:
                 #     myTempArray = []
                 #     myTempArray.append([h['support']].append(h['support']))
                 # tempRoute[d['name']].append(myTempArray)
-                #print(type(d['ROUTE']))
-                for item in d['route']:
-                    if item == 'MFN':
-                        #print(item)
-                        tempVar[d['name']].append(item)
-                    elif item == 'Transportation':
-                            #myMFN.append(item)
-                        tempVar[d['name']].append(item)
-                    elif item == 'Missort':
-                            #myMFN.append(item)
-                        tempVar[d['name']].append(item)  
-                    elif item == 'Classroom Training':
-                        #print(item)
-                        tempVar[d['name']].append(item)
-                    elif item == 'Ride Along':
-                        #print(item)
-                        tempVar[d['name']].append(item)
-                    else:
-                            tempVar[d['name']].append(item)    
+                #print(d['route'])
+                    # for item in d['route']:
+                    #     if item == 'MFN':
+                            
+                        
+                    #         #myMFN.append(item)
+                    #         tempVar[d['name']].append(item)
+                    #     elif item == 'BULK':
+                    #         #myMFN.append(item)
+                    #         tempVar[d['name']].append(item)  
+                    #     elif item == 'Classroom Training':
+                    #     #print(item)
+                    #         tempVar[d['name']].append(item)
+                    #     elif item == 'Ride Along':
+                    #     #print(item)
+                    #         tempVar[d['name']].append(item)
+                    #     else:
+                    #         tempVar[d['name']].append(item)    
  
+    
+    print('my tempVar', tempVar)
+
     myFinalObject = {
         'drivers': myDriverArray,
-        # 'dates': myDatesArray,
+        'dates': myDatesArray,
         'vehicles': myVehiclesArray,
-        'tempVar': tempVar,
+        'tempVar': myOneWeekArray,
         # 'numberOfRoutesPerDriver': myCountObject
     }   
     

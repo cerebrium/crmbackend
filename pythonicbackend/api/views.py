@@ -11,7 +11,7 @@ import csv,io
 
 class managersViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
     # Users
     queryset = managers.objects.all()
@@ -19,7 +19,8 @@ class managersViewSet(viewsets.ModelViewSet):
 
 class DriverViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,)
+
 
     # drivers
     queryset = Driver.objects.all().order_by('name')
@@ -27,7 +28,8 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 class InvoicesViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,)
+
 
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
@@ -35,7 +37,8 @@ class InvoicesViewSet(viewsets.ModelViewSet):
 
 class ImagesViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,)
+
 
     # drivers
     queryset = Images.objects.all()
@@ -43,7 +46,8 @@ class ImagesViewSet(viewsets.ModelViewSet):
 
 class VehiclesViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,)
+
 
     # drivers
     queryset = Vehicles.objects.all()
@@ -51,7 +55,8 @@ class VehiclesViewSet(viewsets.ModelViewSet):
 
 class VehicleDamagesViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,)
+
 
     # drivers
     queryset = VehicleDamages.objects.all()
@@ -59,7 +64,7 @@ class VehicleDamagesViewSet(viewsets.ModelViewSet):
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     # Authentication
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
     # schedule
     queryset = ScheduledDate.objects.all().order_by('driver_id')
@@ -67,7 +72,8 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 
 class DataViewSet(APIView):
     # Authentication
-    permission_classes = (IsAuthenticated,)    
+    #permission_classes = (IsAuthenticated,)
+   
 
     # function for all data
     def get(self, request):
@@ -84,7 +90,8 @@ class DataViewSet(APIView):
 
 class InvoiceViewSet(APIView):
     # Authentication
-    permission_classes = (IsAuthenticated,)    
+    #permission_classes = (IsAuthenticated,)
+   
 
     # function for all data
     def get(self, request):
@@ -101,7 +108,8 @@ class InvoiceViewSet(APIView):
 
 
 class StatisticsViewSet(APIView):
-    permission_classes = (IsAuthenticated,)    
+    #permission_classes = (IsAuthenticated,)
+   
 
     def get(self, request):
         ## defining overall data objects
@@ -117,7 +125,8 @@ class StatisticsViewSet(APIView):
 
 class MapViewSet(APIView):
     # Authentication
-    permission_classes = (IsAuthenticated,)  
+    #permission_classes = (IsAuthenticated,)
+ 
     # This route is just a route that allows us to call the function in the test_data.py file with the correct environment  
 
     # function for all data
