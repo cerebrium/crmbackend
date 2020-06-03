@@ -317,9 +317,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
     return myFinalObject
 
-
-
-
 def invoice(driversList, datesList, vehiclesList):
     # find out today
     currentDate = datetime.date.today()
