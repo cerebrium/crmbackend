@@ -28,7 +28,9 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'DriverUniqueId',
             'SigningUrlNumber',
             'Signed',
-            'vehicle_name'
+            'vehicle_name',
+            'approvedBy',
+            'approvedDateAndTime'
         ]
         
 class InvoiceSerializer(serializers.HyperlinkedModelSerializer):

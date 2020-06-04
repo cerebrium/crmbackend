@@ -261,7 +261,9 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
         myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
         myTransientObjectDriver['Signed'] = ele.Signed
-
+        myTransientObjectDriver['approvedBy'] = ele.approvedBy
+        myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime
+            
         ## iterate through numbers
         if ele.SigningUrlNumber:
             if ele.Signed:
