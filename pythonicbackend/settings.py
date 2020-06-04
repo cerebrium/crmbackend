@@ -91,6 +91,18 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 # Ginishka local database Configuration
+<<<<<<< HEAD
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'test1',
+        'USER': 'ginovevailieva',
+        'PASSWORD': 'Ginishka95',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
+=======
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -101,6 +113,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #         'PORT': '5432'
 #     }
 # }
+>>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
 # Nikitch Local Database Configuration
 # DATABASES = {
@@ -123,6 +136,25 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #         'PASSWORD': 'Ginishka04121995',
 #         'HOST': 'localhost',
 #         'PORT': '5432'
+<<<<<<< HEAD
+#     }
+# }
+
+# Deployment Database Configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# REST_FRAMEWORK = {
+#         'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',  
+#     ],
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10000,
+=======
 #     }
 # }
 
@@ -140,8 +172,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10000,
+>>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
-}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
