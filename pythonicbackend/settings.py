@@ -102,49 +102,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #     }
 # }
 
-# Nikitch Local Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'crmbackend',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ginishka04121995',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
-# # Deployment Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'crmbackend',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ginishka04121995',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-
-#     }
-# }
-
-# Deployment Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# REST_FRAMEWORK = {
-#         'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication',  
-#     ],
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-#     'PAGE_SIZE': 10000,
-#     }
-# }
-
-# Deployment Database Configuration
+# Nikitch Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

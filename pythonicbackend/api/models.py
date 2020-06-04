@@ -130,7 +130,7 @@ class Images(models.Model):
         return self.name 
 
 class ScheduledDatesManager(models.Manager):
-    
+    # NAME,IN,ROUTE,LOG IN,LOG OUT,TORH,MILEAGE,PARCEL,LWP,LVP,CRT,RL,SUP,FUEL,SUPPORT,date
     def create_date(self, NAME, IN, ROUTE, LOGIN, LOGOUT, TORH, MILEAGE, PARCEL, LWP, LVP, CRT, RL, SUP, FUEL, deductions, date, driver_id):
         date = self.create(
             name=NAME,

@@ -117,11 +117,7 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
                 element[15],
                 ]
             ]  
-<<<<<<< HEAD
-    #print(myObj)    
-=======
     # print(myObj)    
->>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
     for key in myObj:
     
