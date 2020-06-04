@@ -94,6 +94,9 @@ class Vehicles(models.Model):
     quotePrice = MoneyField("RENTAL QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     invoice = MoneyField("INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
+    def __str__(self):
+        return self.registration
+
 class VehicleDamages(models.Model):
     VehicleDamages_id = models.AutoField(primary_key=True)
     driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
@@ -118,7 +121,7 @@ class Images(models.Model):
     managerApprovedName = models.CharField(max_length = 30, null=True)
     managerApprovedDate = models.CharField(max_length = 90, null=True)
     imagesLink = models.CharField(max_length=150, null=True)
-    verified = models.BooleanField(default=False)
+    verified = models.CharField(max_length = 20, null = True)
     driverSigned = models.BooleanField(default=False)
     points = models.IntegerField(default = 0, null = True)
     nextDVLAScreenshot = models.CharField(max_length = 50, null = True)
