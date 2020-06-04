@@ -493,7 +493,11 @@ def invoice(driversList, datesList, vehiclesList):
 
 
 
+<<<<<<< HEAD
     #print(myWeekArray)
+=======
+    # print(myWeekArray)
+>>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
         ##################################   FINAL INVOICE CREATION SECTION ############################################################################                    
     df = pd.DataFrame(myWeekArray)     # this is a dataframe with all the dates in the week we want      
@@ -509,15 +513,24 @@ def invoice(driversList, datesList, vehiclesList):
         allDatesArray.append(localArray)
         localArray = [] 
 
+<<<<<<< HEAD
     print("all", allDatesArray)    
+=======
+    # print(allDatesArray)    
+>>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
 # leaving out summing the time for a little while get the rest working then will do that one.... turns out that part is hard
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:
+<<<<<<< HEAD
 
             # support
             myfirstVar = float(myInvoiceObj[dateItem[9]][0][27][3::])
             #print(myfirstVar)
+=======
+            # support
+            myfirstVar = float(myInvoiceObj[dateItem[9]][0][27][3::])
+>>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
             myfirstVar += float(dateItem[27][3::])
             myStringFirstVar = str(myfirstVar)
             myInvoiceObj[dateItem[9]][0][27] = 'GB£{}'.format(myStringFirstVar) 
