@@ -89,11 +89,6 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
                 element[8], 
                 element[9], 
                 element[10], 
-                element[11], 
-                element[12],
-                element[13], 
-                element[14],
-                element[15],
                 ]
             )
         else:
@@ -110,18 +105,9 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
                 element[8], 
                 element[9], 
                 element[10], 
-                element[11], 
-                element[12],
-                element[13], 
-                element[14],
-                element[15],
                 ]
             ]  
-<<<<<<< HEAD
     #print(myObj)    
-=======
-    # print(myObj)    
->>>>>>> ba775267bc4df4ed77096dd44ba2c09c4cbb40e7
 
     for key in myObj:
     
@@ -137,16 +123,8 @@ def importData(schedule, drivers, driverManager, ScheduledDatesManager):
                 ele[7], 
                 ele[8], 
                 ele[9], 
-                ele[10], 
-                ele[11], 
-                ele[12],
-                ele[13], 
-                ele[14],
-                ele[15],
+                ele[10],
                 key+1,)
-
-
-
 
                 # myObj[mylist.index(df[element])].append(
                     

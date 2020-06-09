@@ -130,8 +130,8 @@ class Images(models.Model):
         return self.name 
 
 class ScheduledDatesManager(models.Manager):
-    
-    def create_date(self, NAME, IN, ROUTE, LOGIN, LOGOUT, TORH, MILEAGE, PARCEL, LWP, LVP, CRT, RL, SUP, FUEL, deductions, date, driver_id):
+
+    def create_date(self, NAME, IN, ROUTE, LOGIN, LOGOUT, TORH, MILEAGE, PARCEL, SUP, deductions, date, driver_id):
         date = self.create(
             name=NAME,
             inOff=IN,
@@ -141,12 +141,12 @@ class ScheduledDatesManager(models.Manager):
             TORH=TORH,
             mileage=MILEAGE,
             parcel=PARCEL,
-            LateWavePayment=LWP,
-            LVP=LVP,
-            CRT=CRT,
-            RL=RL,
+            #LateWavePayment=LWP,
+            #LVP=LVP,
+            #CRT=CRT,
+            #RL=RL,
             support=SUP,
-            fuel=FUEL,
+            #fuel=FUEL,
             deductions=deductions,
             date=date,
             driver_id=Driver(driver_id),
@@ -158,6 +158,8 @@ class ScheduledDatesManager(models.Manager):
 class ScheduledDate(models.Model):
     # have to add this
     objects = ScheduledDatesManager()
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
 
     # all fields needed for the daily feeling sheet report 
     date_id = models.AutoField(primary_key=True, unique=True)
@@ -172,7 +174,6 @@ class ScheduledDate(models.Model):
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 15, default='DBS2', null=True)
     date = models.CharField(max_length = 50, null = True, default = datetime.date.today())
-    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     start_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
     finish_mileage = models.IntegerField("MILEAGE", default=0, editable=True, null = True)
@@ -181,24 +182,44 @@ class ScheduledDate(models.Model):
 
     #the following fields are Extra's report fields 
     TORH = models.TimeField("TORH", null = True)
-    LateWavePayment = models.IntegerField("LWP", default=0, null = True)
-    LVP = models.IntegerField("LVP", default=0,  null = True)
-    CRT = models.IntegerField("CRT", default=0, null = True)
-    RL = models.IntegerField("RL", default=0, null = True)
-    FDDS = models.FloatField("FDDS", default=0, null = True)
-    PHR = models.FloatField("PHR", default=0, null = True)
-    CALL = models.FloatField("CALL", default=0, null = True)
-    POD = models.FloatField("POD", default=0, null = True)
-    CONS = models.FloatField("FDDS", default=0, null = True)
-    DPMO = models.FloatField("DPMO", default=0, null = True)
+    # LateWavePayment = models.IntegerField("LWP", default=0, null = True)
+    # LVP = models.IntegerField("LVP", default=0,  null = True)
+    # CRT = models.IntegerField("CRT", default=0, null = True)
+    # RL = models.IntegerField("RL", default=0, null = True)
+    # FDDS = models.FloatField("FDDS", default=0, null = True)
+    # PHR = models.FloatField("PHR", default=0, null = True)
+    # CALL = models.FloatField("CALL", default=0, null = True)
+    # POD = models.FloatField("POD", default=0, null = True)
+    # CONS = models.FloatField("FDDS", default=0, null = True)
+    # DPMO = models.FloatField("DPMO", default=0, null = True)
 
     #the following fields are money DEDUCTION fields 
-    fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    #fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    #vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     objects = ScheduledDatesManager()
 
     def __str__(self):
         return self.name
-        
+    
+
+class DeductionType(models.Model):
+    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
+
+    deduction = MoneyField("Deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    hiVis = MoneyField("HiVis", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    keyChain = MoneyField("Key Chain", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    fuelCard = MoneyField("Feul Card Charge", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    otherDeduction = MoneyField("Other deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+   
+class SupportType(models.Model):
+    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
+
+    lateWavePayment = MoneyField("Late Wave Payment", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    additionalSupport= MoneyField("Additional Support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    seasonalIncentive = MoneyField("Seasonal Incentive", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    dpmoIncentive= MoneyField("DPMO Incentive", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    otherSupport = MoneyField("Other support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+
+ 
