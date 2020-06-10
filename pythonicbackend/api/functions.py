@@ -25,7 +25,6 @@ def timeDifference(logIn, logOut):
 
     return myString
 
-
 def statistics(datesList):
         #----- Below are the statistics we will need
     myDatesArray = []
@@ -43,15 +42,15 @@ def statistics(datesList):
         myTransientObjectDates['location'] = ele.location
         myTransientObjectDates['date'] = ele.date
         myTransientObjectDates['parcel'] = ele.parcel
-        myTransientObjectDates['LWP'] = ele.LWP
-        myTransientObjectDates['LVP'] = ele.LVP
-        myTransientObjectDates['CRT'] = ele.CRT
-        myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['fuel'] = str(ele.fuel)
+        # myTransientObjectDates['LWP'] = ele.LWP
+        # myTransientObjectDates['LVP'] = ele.LVP
+        # myTransientObjectDates['CRT'] = ele.CRT
+        # myTransientObjectDates['RL'] = ele.RL
+        # myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['support'] = str(ele.support)
-        myTransientObjectDates['vans'] = str(ele.vans)
+        # myTransientObjectDates['vans'] = str(ele.vans)
         myTransientObjectDates['deductions'] = str(ele.deductions) # here
-        myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
+        # myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
 
         myDatesArray.append(myTransientObjectDates)
 
@@ -85,70 +84,69 @@ def statistics(datesList):
 
     
 
-    numOfRoutes = data['inOff'].value_counts()[1]  
-    # print('routes: ', numOfRoutes)
+    # numOfRoutes = data['inOff'].value_counts()[1]  
+    # # print('routes: ', numOfRoutes)
 
-    # this is how I would do this.... I am sure pandas has a way, but i dont know it
-    numOfMFNRoutesOne = data['route'].value_counts()
+    # # this is how I would do this.... I am sure pandas has a way, but i dont know it
+    # numOfMFNRoutesOne = data['route'].value_counts()
     
-    # set a counter variable
-    numOfMFNRoutes = 0
+    # # set a counter variable
+    # numOfMFNRoutes = 0
 
-    # set a loop variable
-    x = 0
+    # # set a loop variable
+    # x = 0
 
-    # loop through each item in the data set you made
-    while x < len(numOfMFNRoutesOne):
+    # # loop through each item in the data set you made
+    # while x < len(numOfMFNRoutesOne):
 
-        # display the information in the terminal
-        print (
-            'Route found: ', numOfMFNRoutesOne.index[x] , ' : ',  numOfMFNRoutesOne[numOfMFNRoutesOne.index[x]]
-        )
+    #     # display the information in the terminal
+    #     print (
+    #         'Route found: ', numOfMFNRoutesOne.index[x] , ' : ',  numOfMFNRoutesOne[numOfMFNRoutesOne.index[x]]
+    #     )
 
-        # make a conitional statment that if it finds what you are looking for it will increment the counter variable above
-        if numOfMFNRoutesOne.index[x] == 'MFN':
-            numOfMFNRoutes = numOfMFNRoutes + 1
+    #     # make a conitional statment that if it finds what you are looking for it will increment the counter variable above
+    #     if numOfMFNRoutesOne.index[x] == 'MFN':
+    #         numOfMFNRoutes = numOfMFNRoutes + 1
 
-        # increment the loop    
-        x = x + 1
+    #     # increment the loop    
+    #     x = x + 1
 
-    # numOfMFNRoutes = data['route'].value_counts()['MFN']
-    # print('mfn: ', numOfMFNRoutes)
+    # # numOfMFNRoutes = data['route'].value_counts()['MFN']
+    # # print('mfn: ', numOfMFNRoutes)
     
-    numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
-    # print('full: ', numOfFUllRoutes)
+    # numOfFUllRoutes = numOfRoutes - numOfMFNRoutes
+    # # print('full: ', numOfFUllRoutes)
 
 
-    #count number of LVP and LWP respectively
-    numOfLVP = int(data['LVP'].sum())
-    numOfLWP = int(data['LWP'].sum())
-    numOfParcels = int(data['parcel'].sum())
+    # #count number of LVP and LWP respectively
+    # # numOfLVP = int(data['LVP'].sum())
+    # # numOfLWP = int(data['LWP'].sum())
+    # numOfParcels = int(data['parcel'].sum())
 
 
-    #here I just print out the results
-    names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
+    # #here I just print out the results
+    # names = ['Routes: ',"FULL: ", 'MFN: ', 'LVP: ', 'LWP: ','Parcels: ']
 
-    #print(names)
-    values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
-          str(numOfLVP),str(numOfLWP),str(numOfParcels)]
+    # #print(names)
+    # values = [str(numOfRoutes),str(numOfFUllRoutes),str(numOfMFNRoutes),
+    #       str(numOfLVP),str(numOfLWP),str(numOfParcels)]
 
     
-    #print(values)
-    myNum = len(values)
+    # #print(values)
+    # myNum = len(values)
 
-    for i in names:
-        n1 = names[0] + f" " + values[0] 
-        n2 = names[1] + f" " + values[1]
-        n3 = names[2] + f" " + values[2]
-        n4 = names[3] + f" " + values[3]
-        n5 = names[4] + f" " + values[4]
-        n6 = names[5] + f" " + values[5]
-        text = f"Statistics for today:"
-    print(text,n1,n2,n3,n4,n5,n6)
-    return [text,n1,n2,n3,n4,n5,n6]
+    # for i in names:
+    #     n1 = names[0] + f" " + values[0] 
+    #     n2 = names[1] + f" " + values[1]
+    #     n3 = names[2] + f" " + values[2]
+    #     n4 = names[3] + f" " + values[3]
+    #     n5 = names[4] + f" " + values[4]
+    #     n6 = names[5] + f" " + values[5]
+    #     text = f"Statistics for today:"
+    # print(text,n1,n2,n3,n4,n5,n6)
+    # return [text,n1,n2,n3,n4,n5,n6]
 
-
-def returnOrderdData(driversList, datesList, imagesList, vehicles):
+def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, support):
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
@@ -157,6 +155,26 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
     myDriverArray = []
     myDatesArray = []
     myVehiclesArray = []
+    myDeductionArray = []
+    mySupportArray = []
+
+    for ele in deductions:
+        myTransientDeduction = {}
+        myTransientDeduction['deduction_id'] = ele.deduction_id
+        myTransientDeduction['date_id'] = str(ele.date_id)
+        myTransientDeduction['name'] = ele.name
+        myTransientDeduction['amount'] = str(ele.amount)
+
+        myDeductionArray.append(myTransientDeduction)
+
+    for ele in support:
+        myTransientSupport = {}
+        myTransientSupport['support_id'] = ele.support_id
+        myTransientSupport['date_id'] = str(ele.date_id)
+        myTransientSupport['name'] = ele.name
+        myTransientSupport['amount'] = str(ele.amount)
+
+        mySupportArray.append(myTransientSupport)
 
     for ele in imagesList:
         myTransientImage = {}
@@ -176,6 +194,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientImage['driverSigned'] = ele.driverSigned
         myTransientImage['points'] = ele.points
         myTransientImage['nextDVLAScreenshot'] = ele.nextDVLAScreenshot
+        
 
         myImagesArray.append(myTransientImage)
 
@@ -223,21 +242,33 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientObjectDates['parcel'] = ele.parcel
         myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
         myTransientObjectDates['TORH'] = ele.TORH
-        # myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
-        # myTransientObjectDates['LVP'] = ele.LVP
-        # myTransientObjectDates['CRT'] = ele.CRT
-        # myTransientObjectDates['RL'] = ele.RL
-        # myTransientObjectDates['FDDS'] = ele.FDDS
-        # myTransientObjectDates['PHR'] = ele.PHR
-        # myTransientObjectDates['CALL'] = ele.CALL
-        # myTransientObjectDates['POD'] = ele.POD
-        # myTransientObjectDates['CONS'] = ele.CONS
-        # myTransientObjectDates['DPMO'] = ele.DPMO
-        myTransientObjectDates['support'] = str(ele.support)
-        # myTransientObjectDates['fuel'] = str(ele.fuel)
-        # myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.deductions) # here
     
+        myDeductionSum = 0
+        mySupportSum = 0
+        total = 0
+        deductionList = []
+        supportList = []
+
+        for element in myDeductionArray: 
+            if element['date_id'] == ele.date:
+                myDeductionSum += float(element['amount'][3::])
+                deductionList.append(element)
+
+        myTransientObjectDates['deductionSum'] = 'GB£{}'.format(myDeductionSum) 
+        myTransientObjectDates['deductionList'] = deductionList 
+
+        for element in mySupportArray: 
+            if element['date_id'] == ele.date:
+                mySupportSum += float(element['amount'][3::])
+                supportList.append(element)
+
+        total = mySupportSum - myDeductionSum        
+
+        myTransientObjectDates['supportSum'] ='GB£{}'.format(mySupportSum) 
+        myTransientObjectDates['supportList'] = supportList 
+        myTransientObjectDates['total'] = total
+
+
         myDatesArray.append(myTransientObjectDates)
 
     ## array for checking urls
@@ -317,9 +348,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
 
     return myFinalObject
 
-def invoice(driversList, datesList, vehiclesList):
-        ############## this function just copies everything and puts it into one array that can be returned...  ###########
-    print(__package__)
+def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
@@ -328,6 +357,26 @@ def invoice(driversList, datesList, vehiclesList):
     myDriverArray = []
     myDatesArray = []
     myVehiclesArray = []
+    myDeductionArray = []
+    mySupportArray = []
+
+    for ele in deductions:
+        myTransientDeduction = {}
+        myTransientDeduction['deduction_id'] = ele.deduction_id
+        myTransientDeduction['date_id'] = str(ele.date_id)
+        myTransientDeduction['name'] = ele.name
+        myTransientDeduction['amount'] = str(ele.amount)
+
+        myDeductionArray.append(myTransientDeduction)
+
+    for ele in support:
+        myTransientSupport = {}
+        myTransientSupport['support_id'] = ele.support_id
+        myTransientSupport['date_id'] = str(ele.date_id)
+        myTransientSupport['name'] = ele.name
+        myTransientSupport['amount'] = str(ele.amount)
+
+        mySupportArray.append(myTransientSupport)
 
     for ele in vehiclesList:
         myTransientVehicle = {}
@@ -373,29 +422,41 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDates['parcel'] = ele.parcel
         myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
         myTransientObjectDates['TORH'] = ele.TORH
-        # myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
-        # myTransientObjectDates['LVP'] = ele.LVP
-        # myTransientObjectDates['CRT'] = ele.CRT
-        # myTransientObjectDates['RL'] = ele.RL
-        # myTransientObjectDates['FDDS'] = ele.FDDS
-        # myTransientObjectDates['PHR'] = ele.PHR
-        # myTransientObjectDates['CALL'] = ele.CALL
-        # myTransientObjectDates['POD'] = ele.POD
-        # myTransientObjectDates['CONS'] = ele.CONS
-        # myTransientObjectDates['DPMO'] = ele.DPMO
-        myTransientObjectDates['support'] = str(ele.support)
-        # myTransientObjectDates['fuel'] = str(ele.fuel)
-        # myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.deductions) # here
     
+        myDeductionSum = 0
+        mySupportSum = 0
+        total = 0
+        deductionList = []
+        supportList = []
+
+        for element in myDeductionArray: 
+            if element['date_id'] == ele.date:
+                myDeductionSum += float(element['amount'][3::])
+                deductionList.append(element)
+
+        myTransientObjectDates['deductionSum'] = 'GB£{}'.format(myDeductionSum) 
+        myTransientObjectDates['deductionList'] = deductionList 
+
+        for element in mySupportArray: 
+            if element['date_id'] == ele.date:
+                mySupportSum += float(element['amount'][3::])
+                supportList.append(element)
+
+        total = mySupportSum - myDeductionSum        
+
+        myTransientObjectDates['supportSum'] ='GB£{}'.format(mySupportSum) 
+        myTransientObjectDates['supportList'] = supportList 
+        myTransientObjectDates['total'] = total
+
+
         myDatesArray.append(myTransientObjectDates)
 
     ## array for checking urls
     urlArray = []
 
+
     ## recreate the driver dataset
     for ele in driversList:
-        myOneWeekArray = []
         myTransientObjectDriver = {}
         datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
@@ -409,7 +470,9 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
         myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
         myTransientObjectDriver['Signed'] = ele.Signed
-
+        myTransientObjectDriver['approvedBy'] = ele.approvedBy
+        myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime
+            
         ## iterate through numbers
         if ele.SigningUrlNumber:
             if ele.Signed:
@@ -443,17 +506,17 @@ def invoice(driversList, datesList, vehiclesList):
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
-        # # vehicles version
-        # vehiclesArray = []
-        # for vehicleObject in myVehiclesArray:
-        #     if vehicleObject['driver_id'] == ele.name:
-        #         vehiclesArray.append(vehicleObject)
+        # vehicles version
+        vehiclesArray = []
+        for vehicleObject in myVehiclesArray:
+            if vehicleObject['driver_id'] == ele.name:
+                vehiclesArray.append(vehicleObject)
 
-        # myTransientObjectDriver['vehicleArray'] = vehiclesArray  
+        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
-    
+
 
     # find out today
     currentDate = datetime.date.today()
@@ -479,21 +542,30 @@ def invoice(driversList, datesList, vehiclesList):
     myWeekArray = []
     for ele in myDriverArray:
         for date in ele["datesArray"]:
-            isValidDate = True
+            isValidDate = 0
+            
             try:
                 datetime.datetime.strptime(date['date'], '%a %d %B %Y').date()
             except ValueError:
-                isValidDate = False
-            if isValidDate:
+                isValidDate = 1
+
+            try:
+                datetime.datetime.strptime(date['date'], '%Y-%m-%d').date()
+            except ValueError:
+                isValidDate = 2
+
+            if isValidDate == 1:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)
-            else:
+                    myWeekArray.append(date)  
+
+            if isValidDate == 0:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
                     myWeekArray.append(date)
 
+            if isValidDate == 2:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d').date() < mostRecentSunday:
+                    myWeekArray.append(date)       
 
-
-    # print(myWeekArray)
 
         ##################################   FINAL INVOICE CREATION SECTION ############################################################################                    
     df = pd.DataFrame(myWeekArray)     # this is a dataframe with all the dates in the week we want      
@@ -509,51 +581,21 @@ def invoice(driversList, datesList, vehiclesList):
         allDatesArray.append(localArray)
         localArray = [] 
 
-
-    #print(allDatesArray)    
-
 # leaving out summing the time for a little while get the rest working then will do that one.... turns out that part is hard
+
+# instead of looping through each item in allDatesArray... loop through each deduction in dateItem in allDatesArray.... these are all the deductions. take them and seperate them into the correct place and then return them as values
+
+# loop through all the dates and find per driver how many of each route type there are
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:
-            
-            #print(myInvoiceObj[dateItem[9]][0][17][3::])
-            #print('this',myInvoiceObj[dateItem[9]][0][17])
 
             # support
-            myfirstVar = myInvoiceObj[dateItem[9]][0][17][3::]
-            myfirstVar += dateItem[17][3::]
-            #myfirstVar += dateItem[17][3::]
-            #print(myfirstVar)
-            #myStringFirstVar = str(myfirstVar)
-            #print(myStringFirstVar)
+            myfirstVar = float(myInvoiceObj[dateItem[9]][0][17][3::])
+            myfirstVar += float(dateItem[17][3::])
             myInvoiceObj[dateItem[9]][0][17] = 'GB£{}'.format(myfirstVar) 
-            #print(myInvoiceObj)
 
-            # # fuel
-            # mySecondVar = float(myInvoiceObj[dateItem[9]][0][28][3::])
-            # mySecondVar += float(dateItem[28][3::])
-            # myStringSecondVar = str(mySecondVar)
-            # myInvoiceObj[dateItem[9]][0][28] = 'GB£{}'.format(myStringSecondVar) 
-            # #print(myInvoiceObj)
-
-            # # vans
-            # myThirdVar = float(myInvoiceObj[dateItem[9]][0][29][3::])
-            # myThirdVar += float(dateItem[29][3::])
-            # myStringThirdVar = str(myThirdVar)
-            # myInvoiceObj[dateItem[9]][0][29] = 'GB£{}'.format(myStringThirdVar) 
-
-            # # deductions
-            # myFourthVar = float(myInvoiceObj[dateItem[9]][0][30][3::])
-            # myFourthVar += float(dateItem[30][3::])
-            # myStringFourthVar = str(myFourthVar)
-            # myInvoiceObj[dateItem[9]][0][30] = 'GB£{}'.format(myStringFourthVar) 
         else:
-            myInvoiceObj[dateItem[9]] = [dateItem]
-
-    # for key in myInvoiceObj:
-    #     print('item is: ', myInvoiceObj[key])            
-
-    #print(myInvoiceObj)         
+            myInvoiceObj[dateItem[9]] = [dateItem]  
 
     myFinalObject = {
         # 'drivers': myDriverArray,

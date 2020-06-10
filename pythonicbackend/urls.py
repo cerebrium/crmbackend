@@ -11,6 +11,8 @@ router.register(r'images', views.ImagesViewSet)
 router.register(r'vehicles', views.VehiclesViewSet)
 router.register(r'vehicledamages', views.VehicleDamagesViewSet)
 router.register(r'invoices', views.InvoicesViewSet)
+router.register(r'support', views.SupportViewSet)
+router.register(r'deductions', views.DeductionViewSet)
 
 
 # Setup automatic URL routing

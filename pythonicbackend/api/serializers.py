@@ -122,46 +122,26 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'parcel',
             'parcelNotDelivered',
             'TORH'
-            # 'LateWavePayment',
-            # 'LVP',
-            # 'CRT',
-            # 'RL',
-            # 'FDDS',
-            # 'PHR',
-            # 'CALL',
-            # 'POD',
-            # 'CONS',
-            # 'DPMO',
-            # 'fuel',
-            'support',
-            # 'vans',
-            'deductions'
         ]
-
-
 
 class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DeductionType
         fields = [  
-            'driver_id',
-            'deduction',
-            'hiVis',
-            'keyChain',
-            'fuelCard',
-            'otherDeduction'
+            'deduction_id',
+            'date_id',
+            'name',
+            'amount'
         ]
 
-class SupprtTypeSerializer(serializers.HyperlinkedModelSerializer):
+class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SupportType
         fields = [  
-            'driver_id',
-            'lateWavePayment',
-            'additionalSupport',
-            'seasonalIncentive',
-            'dpmoIncentive',
-            'otherSupport'
+            'support_id',
+            'date_id',
+            'name',
+            'amount'
         ]
 
  

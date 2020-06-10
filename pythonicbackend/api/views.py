@@ -1,9 +1,9 @@
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages, SupportType, DeductionType
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer
+from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer, SupportTypeSerializer, DeductionTypeSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice
 from .test_data import importData
 import csv,io 
@@ -34,7 +34,6 @@ class InvoicesViewSet(viewsets.ModelViewSet):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
         
-
 class ImagesViewSet(viewsets.ModelViewSet):
     # Authentication
     #permission_classes = (IsAuthenticated,)
@@ -82,9 +81,11 @@ class DataViewSet(APIView):
         schedule = ScheduledDate.objects.all().order_by('driver_id')
         images = Images.objects.all().order_by('driver_id')
         vehicles = Vehicles.objects.all().order_by('driver_id')
+        deductions = DeductionType.objects.all()
+        support = SupportType.objects.all()
 
         content = {
-            'data': returnOrderdData(drivers, schedule, images, vehicles)
+            'data': returnOrderdData(drivers, schedule, images, vehicles, deductions, support)
         }
         return Response(content)
 
@@ -100,12 +101,13 @@ class InvoiceViewSet(APIView):
         drivers = Driver.objects.all().order_by('driver_id')
         schedule = ScheduledDate.objects.all().order_by('driver_id')
         vehicles = Vehicles.objects.all().order_by('driver_id')
+        deductions = DeductionType.objects.all()
+        support = SupportType.objects.all()
 
         content = {
-            'data': invoice(drivers, schedule, vehicles)
+            'data': invoice(drivers, schedule, vehicles, deductions, support)
         }
         return Response(content)
-
 
 class StatisticsViewSet(APIView):
     #permission_classes = (IsAuthenticated,)
@@ -138,3 +140,16 @@ class MapViewSet(APIView):
 
         return Response(content)
 
+class SupportViewSet(viewsets.ModelViewSet):
+    # Authentication
+    #permission_classes = (IsAuthenticated,)
+
+    queryset = SupportType.objects.all()
+    serializer_class = SupportTypeSerializer
+
+class DeductionViewSet(viewsets.ModelViewSet):
+    # Authentication
+    #permission_classes = (IsAuthenticated,)
+
+    queryset = DeductionType.objects.all()
+    serializer_class = DeductionTypeSerializer

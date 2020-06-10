@@ -184,44 +184,29 @@ class ScheduledDate(models.Model):
 
     #the following fields are Extra's report fields 
     TORH = models.TimeField("TORH", null = True)
-    # LateWavePayment = models.IntegerField("LWP", default=0, null = True)
-    # LVP = models.IntegerField("LVP", default=0,  null = True)
-    # CRT = models.IntegerField("CRT", default=0, null = True)
-    # RL = models.IntegerField("RL", default=0, null = True)
-    # FDDS = models.FloatField("FDDS", default=0, null = True)
-    # PHR = models.FloatField("PHR", default=0, null = True)
-    # CALL = models.FloatField("CALL", default=0, null = True)
-    # POD = models.FloatField("POD", default=0, null = True)
-    # CONS = models.FloatField("FDDS", default=0, null = True)
-    # DPMO = models.FloatField("DPMO", default=0, null = True)
 
     #the following fields are money DEDUCTION fields 
-    #fuel = MoneyField("FUEL", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    support = MoneyField("SUPPORT", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    #vans = MoneyField("VANS", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    deductions = MoneyField("Deductions", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     objects = ScheduledDatesManager()
 
     def __str__(self):
-        return self.name
-    
+        return self.date
 
 class DeductionType(models.Model):
-    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
-
-    deduction = MoneyField("Deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    hiVis = MoneyField("HiVis", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    keyChain = MoneyField("Key Chain", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    fuelCard = MoneyField("Feul Card Charge", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    otherDeduction = MoneyField("Other deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+    deduction_id = models.AutoField(primary_key=True, unique=True)
+    date_id = models.ForeignKey(ScheduledDate, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length = 100)
+    amount = MoneyField("Deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
    
-class SupportType(models.Model):
-    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
-    lateWavePayment = MoneyField("Late Wave Payment", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    additionalSupport= MoneyField("Additional Support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    seasonalIncentive = MoneyField("Seasonal Incentive", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    dpmoIncentive= MoneyField("DPMO Incentive", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
-    otherSupport = MoneyField("Other support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+class SupportType(models.Model):
+    support_id = models.AutoField(primary_key=True, unique=True)
+    date_id = models.ForeignKey(ScheduledDate, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length = 100)
+    amount = MoneyField("Support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
+
+    def __str__(self):
+        return self.name
 
  
