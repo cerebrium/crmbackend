@@ -149,8 +149,6 @@ def statistics(datesList):
 
 
 def returnOrderdData(driversList, datesList, imagesList, vehicles):
-    ############## this function just copies everything and puts it into one array that can be returned...  ###########
-    print(__package__)
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
