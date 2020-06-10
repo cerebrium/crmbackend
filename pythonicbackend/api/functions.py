@@ -50,7 +50,7 @@ def statistics(datesList):
         myTransientObjectDates['fuel'] = str(ele.fuel)
         myTransientObjectDates['support'] = str(ele.support)
         myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
+        myTransientObjectDates['deductions'] = str(ele.deductions) # here
         myTransientObjectDates['training'] = ele.CRT + ele.RL # and here
 
         myDatesArray.append(myTransientObjectDates)
@@ -223,20 +223,20 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles):
         myTransientObjectDates['parcel'] = ele.parcel
         myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
         myTransientObjectDates['TORH'] = ele.TORH
-        myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
-        myTransientObjectDates['LVP'] = ele.LVP
-        myTransientObjectDates['CRT'] = ele.CRT
-        myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['FDDS'] = ele.FDDS
-        myTransientObjectDates['PHR'] = ele.PHR
-        myTransientObjectDates['CALL'] = ele.CALL
-        myTransientObjectDates['POD'] = ele.POD
-        myTransientObjectDates['CONS'] = ele.CONS
-        myTransientObjectDates['DPMO'] = ele.DPMO
+        # myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
+        # myTransientObjectDates['LVP'] = ele.LVP
+        # myTransientObjectDates['CRT'] = ele.CRT
+        # myTransientObjectDates['RL'] = ele.RL
+        # myTransientObjectDates['FDDS'] = ele.FDDS
+        # myTransientObjectDates['PHR'] = ele.PHR
+        # myTransientObjectDates['CALL'] = ele.CALL
+        # myTransientObjectDates['POD'] = ele.POD
+        # myTransientObjectDates['CONS'] = ele.CONS
+        # myTransientObjectDates['DPMO'] = ele.DPMO
         myTransientObjectDates['support'] = str(ele.support)
-        myTransientObjectDates['fuel'] = str(ele.fuel)
-        myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
+        # myTransientObjectDates['fuel'] = str(ele.fuel)
+        # myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['deductions'] = str(ele.deductions) # here
     
         myDatesArray.append(myTransientObjectDates)
 
@@ -373,20 +373,20 @@ def invoice(driversList, datesList, vehiclesList):
         myTransientObjectDates['parcel'] = ele.parcel
         myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
         myTransientObjectDates['TORH'] = ele.TORH
-        myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
-        myTransientObjectDates['LVP'] = ele.LVP
-        myTransientObjectDates['CRT'] = ele.CRT
-        myTransientObjectDates['RL'] = ele.RL
-        myTransientObjectDates['FDDS'] = ele.FDDS
-        myTransientObjectDates['PHR'] = ele.PHR
-        myTransientObjectDates['CALL'] = ele.CALL
-        myTransientObjectDates['POD'] = ele.POD
-        myTransientObjectDates['CONS'] = ele.CONS
-        myTransientObjectDates['DPMO'] = ele.DPMO
+        # myTransientObjectDates['LateWavePayment'] = ele.LateWavePayment
+        # myTransientObjectDates['LVP'] = ele.LVP
+        # myTransientObjectDates['CRT'] = ele.CRT
+        # myTransientObjectDates['RL'] = ele.RL
+        # myTransientObjectDates['FDDS'] = ele.FDDS
+        # myTransientObjectDates['PHR'] = ele.PHR
+        # myTransientObjectDates['CALL'] = ele.CALL
+        # myTransientObjectDates['POD'] = ele.POD
+        # myTransientObjectDates['CONS'] = ele.CONS
+        # myTransientObjectDates['DPMO'] = ele.DPMO
         myTransientObjectDates['support'] = str(ele.support)
-        myTransientObjectDates['fuel'] = str(ele.fuel)
-        myTransientObjectDates['vans'] = str(ele.vans)
-        myTransientObjectDates['deductions'] = str(ele.fuel + ele.support + ele.vans) # here
+        # myTransientObjectDates['fuel'] = str(ele.fuel)
+        # myTransientObjectDates['vans'] = str(ele.vans)
+        myTransientObjectDates['deductions'] = str(ele.deductions) # here
     
         myDatesArray.append(myTransientObjectDates)
 
@@ -485,10 +485,10 @@ def invoice(driversList, datesList, vehiclesList):
             except ValueError:
                 isValidDate = False
             if isValidDate:
-                if weekBeforeSunday < datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
                     myWeekArray.append(date)
             else:
-                if weekBeforeSunday < datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
                     myWeekArray.append(date)
 
 
@@ -509,42 +509,51 @@ def invoice(driversList, datesList, vehiclesList):
         allDatesArray.append(localArray)
         localArray = [] 
 
-    # print(allDatesArray)    
+
+    #print(allDatesArray)    
 
 # leaving out summing the time for a little while get the rest working then will do that one.... turns out that part is hard
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:
+            
+            #print(myInvoiceObj[dateItem[9]][0][17][3::])
+            #print('this',myInvoiceObj[dateItem[9]][0][17])
+
             # support
-            myfirstVar = float(myInvoiceObj[dateItem[9]][0][27][3::])
-            myfirstVar += float(dateItem[27][3::])
-            myStringFirstVar = str(myfirstVar)
-            myInvoiceObj[dateItem[9]][0][27] = 'GB£{}'.format(myStringFirstVar) 
+            myfirstVar = myInvoiceObj[dateItem[9]][0][17][3::]
+            myfirstVar += dateItem[17][3::]
+            #myfirstVar += dateItem[17][3::]
+            #print(myfirstVar)
+            #myStringFirstVar = str(myfirstVar)
+            #print(myStringFirstVar)
+            myInvoiceObj[dateItem[9]][0][17] = 'GB£{}'.format(myfirstVar) 
+            #print(myInvoiceObj)
 
-            # fuel
-            mySecondVar = float(myInvoiceObj[dateItem[9]][0][28][3::])
-            mySecondVar += float(dateItem[28][3::])
-            myStringSecondVar = str(mySecondVar)
-            myInvoiceObj[dateItem[9]][0][28] = 'GB£{}'.format(myStringSecondVar) 
+            # # fuel
+            # mySecondVar = float(myInvoiceObj[dateItem[9]][0][28][3::])
+            # mySecondVar += float(dateItem[28][3::])
+            # myStringSecondVar = str(mySecondVar)
+            # myInvoiceObj[dateItem[9]][0][28] = 'GB£{}'.format(myStringSecondVar) 
+            # #print(myInvoiceObj)
 
-            # vans
-            myThirdVar = float(myInvoiceObj[dateItem[9]][0][29][3::])
-            myThirdVar += float(dateItem[29][3::])
-            myStringThirdVar = str(myThirdVar)
-            myInvoiceObj[dateItem[9]][0][29] = 'GB£{}'.format(myStringThirdVar) 
+            # # vans
+            # myThirdVar = float(myInvoiceObj[dateItem[9]][0][29][3::])
+            # myThirdVar += float(dateItem[29][3::])
+            # myStringThirdVar = str(myThirdVar)
+            # myInvoiceObj[dateItem[9]][0][29] = 'GB£{}'.format(myStringThirdVar) 
 
-            # deductions
-            myFourthVar = float(myInvoiceObj[dateItem[9]][0][30][3::])
-            myFourthVar += float(dateItem[30][3::])
-            myStringFourthVar = str(myFourthVar)
-            myInvoiceObj[dateItem[9]][0][30] = 'GB£{}'.format(myStringFourthVar) 
+            # # deductions
+            # myFourthVar = float(myInvoiceObj[dateItem[9]][0][30][3::])
+            # myFourthVar += float(dateItem[30][3::])
+            # myStringFourthVar = str(myFourthVar)
+            # myInvoiceObj[dateItem[9]][0][30] = 'GB£{}'.format(myStringFourthVar) 
         else:
             myInvoiceObj[dateItem[9]] = [dateItem]
 
     # for key in myInvoiceObj:
     #     print('item is: ', myInvoiceObj[key])            
-    # for element in df:
-    #     print(df[element])     
-    # print(myInvoiceObj) 
+
+    #print(myInvoiceObj)         
 
     myFinalObject = {
         # 'drivers': myDriverArray,

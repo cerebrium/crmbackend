@@ -1,4 +1,4 @@
-from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages
+from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages, DeductionType, SupportType 
 from rest_framework import serializers
 
 
@@ -121,23 +121,47 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'finish_mileage',
             'parcel',
             'parcelNotDelivered',
-            'TORH',
-            'LateWavePayment',
-            'LVP',
-            'CRT',
-            'RL',
-            'FDDS',
-            'PHR',
-            'CALL',
-            'POD',
-            'CONS',
-            'DPMO',
-            'fuel',
+            'TORH'
+            # 'LateWavePayment',
+            # 'LVP',
+            # 'CRT',
+            # 'RL',
+            # 'FDDS',
+            # 'PHR',
+            # 'CALL',
+            # 'POD',
+            # 'CONS',
+            # 'DPMO',
+            # 'fuel',
             'support',
-            'vans',
+            # 'vans',
             'deductions'
         ]
 
 
 
+class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = DeductionType
+        fields = [  
+            'driver_id',
+            'deduction',
+            'hiVis',
+            'keyChain',
+            'fuelCard',
+            'otherDeduction'
+        ]
 
+class SupprtTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SupportType
+        fields = [  
+            'driver_id',
+            'lateWavePayment',
+            'additionalSupport',
+            'seasonalIncentive',
+            'dpmoIncentive',
+            'otherSupport'
+        ]
+
+ 
