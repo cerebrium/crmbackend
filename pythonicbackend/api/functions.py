@@ -217,7 +217,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         imagesArray = []
         for imgObject in myImagesArray:
             if imgObject['vehicle_id'] == ele.registration:
-                print(imgObject)
                 imagesArray.append(imgObject)
 
         myTransientVehicle['imgArray'] = imagesArray  
@@ -250,15 +249,15 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         supportList = []
 
         for element in myDeductionArray: 
-            if element['date_id'] == ele.date:
+            if element['date_id'] == str(ele.date_id):
                 myDeductionSum += float(element['amount'][3::])
                 deductionList.append(element)
-
+                
         myTransientObjectDates['deductionSum'] = 'GB£{}'.format(myDeductionSum) 
         myTransientObjectDates['deductionList'] = deductionList 
 
         for element in mySupportArray: 
-            if element['date_id'] == ele.date:
+            if element['date_id'] == str(ele.date_id):
                 mySupportSum += float(element['amount'][3::])
                 supportList.append(element)
 
@@ -266,8 +265,8 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
 
         myTransientObjectDates['supportSum'] ='GB£{}'.format(mySupportSum) 
         myTransientObjectDates['supportList'] = supportList 
-        myTransientObjectDates['total'] = total
 
+        myTransientObjectDates['total'] = total
 
         myDatesArray.append(myTransientObjectDates)
 

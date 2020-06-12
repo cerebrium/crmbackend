@@ -164,7 +164,11 @@ class ScheduledDate(models.Model):
 
 
     # all fields needed for the daily feeling sheet report 
-    date_id = models.AutoField(primary_key=True, unique=True)
+    date_id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+        )
     name = models.CharField(max_length = 50, null = True)
     inOff = models.IntegerField("IN", default=1, editable=True, null = True)
     route = models.CharField("Route", max_length = 30, default = "0", null = True)
@@ -189,7 +193,7 @@ class ScheduledDate(models.Model):
     objects = ScheduledDatesManager()
 
     def __str__(self):
-        return self.date
+        return str(self.date_id)
 
 class DeductionType(models.Model):
     deduction_id = models.AutoField(primary_key=True, unique=True)
