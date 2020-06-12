@@ -342,7 +342,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         'dates': myDatesArray,
         'images': myImagesArray,
         'vehicles': myVehiclesArray,
-        'urls': urlArray
     }   
     
 
@@ -544,25 +543,25 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         for date in ele["datesArray"]:
             isValidDate = 0
             
-            try:
-                datetime.datetime.strptime(date['date'], '%a %d %B %Y').date()
-            except ValueError:
-                isValidDate = 1
+            # try:
+            #     datetime.datetime.strptime(date['date'], '%a %d %B %Y').date()
+            # except ValueError:
+            #     isValidDate = 1
 
             try:
                 datetime.datetime.strptime(date['date'], '%Y-%m-%d').date()
             except ValueError:
                 isValidDate = 2
 
-            if isValidDate == 1:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)  
+            # if isValidDate == 1:
+            #     if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
+            #         myWeekArray.append(date)  
+
+            # if isValidDate == 0:
+            #     if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+            #         myWeekArray.append(date)
 
             if isValidDate == 0:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)
-
-            if isValidDate == 2:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d').date() < mostRecentSunday:
                     myWeekArray.append(date)       
 
@@ -586,24 +585,64 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 # instead of looping through each item in allDatesArray... loop through each deduction in dateItem in allDatesArray.... these are all the deductions. take them and seperate them into the correct place and then return them as values
 
 # loop through all the dates and find per driver how many of each route type there are
+
+# make an object which has keys as names of route types, an dvalues as amount the driver makes per route
+    myObj = {
+        'Full Standard Van Route': 121.8,
+        'Full Large Van Route': 141.8,
+        'Transportation Route': 100,
+        'MFN Route': 70,
+        'Missort Route': 121.8,
+        'Classroom Training': 75,
+        'Ride Along': 75,
+        'Sweeper': 121.8
+
+    }
+
+    for item, index in enumerate(allDatesArray[0]):
+        print(item, ': ', index)
+
+
+    
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:
+         #   print(myInvoiceObj[dateItem[9]]['route'])
 
-            # support
-            myfirstVar = float(myInvoiceObj[dateItem[9]][0][17][3::])
-            myfirstVar += float(dateItem[17][3::])
-            myInvoiceObj[dateItem[9]][0][17] = 'GB£{}'.format(myfirstVar) 
+            # sums the routes
+            myInvoiceObj[dateItem[9]]['route'] = myInvoiceObj[dateItem[9]]['route'] + float([myObj[dateItem[3]]][0])
 
+            # sums the routes
+            myInvoiceObj[dateItem[9]]['parcels'] = myInvoiceObj[dateItem[9]]['parcels'] + float(dateItem[14])
+
+            # sums the routes
+            myInvoiceObj[dateItem[9]]['mileage'] = myInvoiceObj[dateItem[9]]['mileage'] + float(dateItem[10])*0.17
+
+            # sums the deduction
+            myMoneyObj = float(myInvoiceObj[dateItem[9]]['deduction'][3::]) + float(dateItem[17][3::])
+            myInvoiceObj[dateItem[9]]['deduction'] = 'GB£{}'.format(myMoneyObj) 
+
+            # sums the support
+            mySupportObj = float(myInvoiceObj[dateItem[9]]['support'][3::]) + float(dateItem[19][3::])
+            myInvoiceObj[dateItem[9]]['support'] = 'GB£{}'.format(mySupportObj) 
+
+            
         else:
-            myInvoiceObj[dateItem[9]] = [dateItem]  
+            myInvoiceObj[dateItem[9]] = {
+                    'route': myObj[dateItem[3]], 
+                    'parcels': dateItem[14],
+                    'mileage': (dateItem[10]*0.17),
+                    'deduction': dateItem[17],
+                    'support': dateItem[19] 
+                }
+
+
+           
+
 
     myFinalObject = {
-        # 'drivers': myDriverArray,
-        # 'dates': myDatesArray,
-        # 'vehicles': myVehiclesArray,
         'myOneWeekArray': myInvoiceObj,
-        # 'numberOfRoutesPerDriver': myCountObject
     }   
+
     
 
     return myFinalObject          
