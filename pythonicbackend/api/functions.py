@@ -516,7 +516,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
-        print(myTransientObjectDriver)
         myDriverArray.append(myTransientObjectDriver)   
 
 
@@ -529,8 +528,9 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
     fourWeeksBeforeSunday = 0
     dateWeekDay+=1
     if currentDate.weekday() > 0:
-        if currentDate.weekday() == 6:
-            print(currentDate)    
+        if currentDate.weekday() == 6:  
+            mostRecentSunday = currentDate 
+            weekBeforeSunday = currentDate - datetime.timedelta(days=7)
         else:
             mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
             weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
@@ -552,7 +552,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
                 isValidDate = 1
 
             if isValidDate == 0:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y') < mostRecentSunday:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
                     myWeekArray.append(date)
 
             if isValidDate == 1:
@@ -590,7 +590,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         'Classroom Training': 75,
         'Ride Along': 75,
         'Sweeper': 121.8
-
     }
     
     for dateItem in allDatesArray:
