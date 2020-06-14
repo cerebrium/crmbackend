@@ -556,9 +556,9 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
             #     if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
             #         myWeekArray.append(date)  
 
-            # if isValidDate == 0:
-            #     if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-            #         myWeekArray.append(date)
+            if isValidDate == 0:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                    myWeekArray.append(date)
 
             if isValidDate == 1:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d').date() < mostRecentSunday:
