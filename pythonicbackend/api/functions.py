@@ -347,7 +347,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
     return myFinalObject
 
 def invoice(driversList, datesList, vehiclesList, deductions, support):
-    print('wtf')
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
@@ -457,7 +456,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     ## recreate the driver dataset
     for ele in driversList:
-        print(ele)
         myTransientObjectDriver = {}
         datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
@@ -604,6 +602,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
             myInvoiceObj[dateItem[9]]['parcels'] = myInvoiceObj[dateItem[9]]['parcels'] + float(dateItem[14])
 
             # sums the routes
+            print(float(dateItem[10])*0.17)
             myInvoiceObj[dateItem[9]]['mileage'] = myInvoiceObj[dateItem[9]]['mileage'] + float(dateItem[10])*0.17
 
             # sums the deduction
@@ -616,10 +615,11 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
             
         else:
+            print(dateItem[12])
             myInvoiceObj[dateItem[9]] = {
                     'route': myObj[dateItem[3]],
                     'parcels': dateItem[14],
-                    'mileage': (dateItem[10]*0.17),
+                    'mileage': (dateItem[12]*0.17),
                     'deduction': dateItem[17],
                     'support': dateItem[19] 
                 }
