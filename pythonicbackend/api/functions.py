@@ -548,7 +548,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
             #     isValidDate = 1
 
             try:
-                datetime.datetime.strptime(date['date'], '%a %d %B %Y').date()
+                datetime.datetime.strptime(date['date'], '%a %b %d %Y').date()
             except ValueError:
                 isValidDate = 1
 
