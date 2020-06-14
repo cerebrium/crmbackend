@@ -630,6 +630,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     myFinalObject = {
         'myOneWeekArray': myInvoiceObj,
+        'datesList': myWeekArray
     }   
 
     
