@@ -542,24 +542,18 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     # # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
     myWeekArray = []
-    print(myDriverArray)
     for ele in myDriverArray:
-        print(ele)
         for date in ele["datesArray"]:
-            print('hello')
             isValidDate = 0
 
-            # try:
-            #     datetime.datetime.strptime(date['date'], '%a %b %d %Y').date()
-            #     print(datetime.datetime.strptime(date['date'], '%a %b %d %Y').date())
-            # except ValueError:
-            #     isValidDate = 1
+            try:
+                datetime.datetime.strptime(date['date'], '%a %b %d %Y').date()
+            except ValueError:
+                isValidDate = 1
 
-            # if isValidDate == 0:
-            print(weekBeforeSunday, datetime.datetime.strptime(date['date'], '%a %b %d %Y').date(), mostRecentSunday)
-            if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-                print('found date')
-                myWeekArray.append(date)
+            if isValidDate == 0:
+                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                    myWeekArray.append(date)
 
             if isValidDate == 1:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d').date() < mostRecentSunday:
