@@ -347,6 +347,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
     return myFinalObject
 
 def invoice(driversList, datesList, vehiclesList, deductions, support):
+    print('wtf')
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
@@ -428,15 +429,15 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         supportList = []
 
         for element in myDeductionArray: 
-            if element['date_id'] == ele.date:
+            if element['date_id'] == str(ele.date_id):
                 myDeductionSum += float(element['amount'][3::])
                 deductionList.append(element)
-
+                
         myTransientObjectDates['deductionSum'] = 'GB£{}'.format(myDeductionSum) 
         myTransientObjectDates['deductionList'] = deductionList 
 
         for element in mySupportArray: 
-            if element['date_id'] == ele.date:
+            if element['date_id'] == str(ele.date_id):
                 mySupportSum += float(element['amount'][3::])
                 supportList.append(element)
 
@@ -444,6 +445,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
         myTransientObjectDates['supportSum'] ='GB£{}'.format(mySupportSum) 
         myTransientObjectDates['supportList'] = supportList 
+
         myTransientObjectDates['total'] = total
 
 
@@ -455,6 +457,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     ## recreate the driver dataset
     for ele in driversList:
+        print(ele)
         myTransientObjectDriver = {}
         datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
@@ -513,6 +516,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
+        print(myTransientObjectDriver)
         myDriverArray.append(myTransientObjectDriver)   
 
 
@@ -538,27 +542,24 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     # # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
     myWeekArray = []
+    print(myDriverArray)
     for ele in myDriverArray:
+        print(ele)
         for date in ele["datesArray"]:
+            print('hello')
             isValidDate = 0
-            
+
             # try:
-            #     datetime.datetime.strptime(date['date'], '%a %d %B %Y').date()
+            #     datetime.datetime.strptime(date['date'], '%a %b %d %Y').date()
+            #     print(datetime.datetime.strptime(date['date'], '%a %b %d %Y').date())
             # except ValueError:
             #     isValidDate = 1
 
-            try:
-                datetime.datetime.strptime(date['date'], '%a %b %d %Y').date()
-            except ValueError:
-                isValidDate = 1
-
-            # if isValidDate == 1:
-            #     if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %d %B %Y').date() < mostRecentSunday:
-            #         myWeekArray.append(date)  
-
-            if isValidDate == 0:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)
+            # if isValidDate == 0:
+            print(weekBeforeSunday, datetime.datetime.strptime(date['date'], '%a %b %d %Y').date(), mostRecentSunday)
+            if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                print('found date')
+                myWeekArray.append(date)
 
             if isValidDate == 1:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d').date() < mostRecentSunday:
@@ -597,11 +598,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         'Sweeper': 121.8
 
     }
-
-    for item, index in enumerate(allDatesArray[0]):
-        print(item, ': ', index)
-
-
     
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:

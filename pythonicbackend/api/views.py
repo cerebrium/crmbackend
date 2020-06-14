@@ -90,17 +90,13 @@ class DataViewSet(APIView):
         return Response(content)
 
 class InvoiceViewSet(APIView):
-    # Authentication
-    permission_classes = (IsAuthenticated,)
-   
-
-    # function for all data
+        # function for all data
     def get(self, request):
-        ## defining overall data objects
-        invoices = Invoice.objects.all().order_by('driver_id')
-        drivers = Driver.objects.all().order_by('driver_id')
-        schedule = ScheduledDate.objects.all().order_by('driver_id')
-        vehicles = Vehicles.objects.all().order_by('driver_id')
+        # defining overall data objects
+        invoices = Invoice.objects.all()
+        drivers = Driver.objects.all()
+        schedule = ScheduledDate.objects.all()
+        vehicles = Vehicles.objects.all()
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
 
