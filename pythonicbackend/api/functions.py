@@ -582,6 +582,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
 # make an object which has keys as names of route types, an dvalues as amount the driver makes per route
     myObj = {
+        '0': 0.0,
         'Full Standard Van Route': 121.8,
         'Full Large Van Route': 141.8,
         'Transportation Route': 100,
@@ -616,7 +617,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
             
         else:
             myInvoiceObj[dateItem[9]] = {
-                    'route': myObj[dateItem[3]], 
+                    'route': myObj[dateItem[3]],
                     'parcels': dateItem[14],
                     'mileage': (dateItem[10]*0.17),
                     'deduction': dateItem[17],
