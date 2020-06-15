@@ -615,11 +615,10 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
             
         else:
-            print(dateItem[12])
             myInvoiceObj[dateItem[9]] = {
                     'route': myObj[dateItem[3]],
                     'parcels': dateItem[14],
-                    'mileage': (dateItem[12]*0.17),
+                    'mileage': dateItem[12]*0.17,
                     'deduction': dateItem[17],
                     'support': dateItem[19] 
                 }
