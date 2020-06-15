@@ -199,6 +199,7 @@ class DeductionType(models.Model):
     deduction_id = models.AutoField(primary_key=True, unique=True)
     date_id = models.ForeignKey(ScheduledDate, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length = 100)
+    comment = models.CharField(max_length = 500)
     amount = MoneyField("Deduction", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
    
     def __str__(self):
@@ -208,6 +209,7 @@ class SupportType(models.Model):
     support_id = models.AutoField(primary_key=True, unique=True)
     date_id = models.ForeignKey(ScheduledDate, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length = 100)
+    comment = models.CharField(max_length = 500)
     amount = MoneyField("Support", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
     def __str__(self):

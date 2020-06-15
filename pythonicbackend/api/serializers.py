@@ -131,7 +131,8 @@ class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):
             'deduction_id',
             'date_id',
             'name',
-            'amount'
+            'amount',
+            'comment'
         ]
 
 class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -141,7 +142,8 @@ class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
             'support_id',
             'date_id',
             'name',
-            'amount'
+            'amount',
+            'comment'
         ]
 
  
