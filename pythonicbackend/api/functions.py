@@ -534,6 +534,9 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
             weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
             twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
             fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)
+    else:
+        mostRecentSunday = currentDate 
+        weekBeforeSunday = currentDate - datetime.timedelta(days=7)     
         
     # # create array to go onto the driver that will contain all the drivers dates
     payrollArray = []
@@ -551,12 +554,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
             if isValidDate == 0:
                 if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)
-
-            if isValidDate == 1:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%Y-%m-%d') < mostRecentSunday:
-                    myWeekArray.append(date)       
-
+                    myWeekArray.append(date)      
 
         ##################################   FINAL INVOICE CREATION SECTION ############################################################################                    
     df = pd.DataFrame(myWeekArray)     # this is a dataframe with all the dates in the week we want      
@@ -572,13 +570,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         allDatesArray.append(localArray)
         localArray = [] 
 
-# leaving out summing the time for a little while get the rest working then will do that one.... turns out that part is hard
-
-# instead of looping through each item in allDatesArray... loop through each deduction in dateItem in allDatesArray.... these are all the deductions. take them and seperate them into the correct place and then return them as values
-
-# loop through all the dates and find per driver how many of each route type there are
-
-# make an object which has keys as names of route types, an dvalues as amount the driver makes per route
     myObj = {
         '0': 0.0,
         'Full Standard Van Route': 121.8,
@@ -623,169 +614,9 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
                     'support': dateItem[19] 
                 }
 
-
-           
-
-
     myFinalObject = {
         'myOneWeekArray': myInvoiceObj,
         'datesList': myWeekArray
     }   
 
-    
-
     return myFinalObject          
-
-
-#Own vans
-
-        # for row in df.itertuples(index=True, name='Pandas'):
-        #     invoiceObject = {}
-        #     if getattr(row, "name") == getattr(row, "name"):
-        #         if weekBeforeSunday < (datetime.datetime.strptime(getattr(row, "date"), '%a %d %d %Y')).date() < mostRecentSunday:
-        #             if len(myOneWeekArray) > 0:
-        #                 for element in myOneWeekArray[0]:
-        #                     if element == 'LVP':
-        #                         myOneWeekArray[0][element] = myOneWeekArray[0][element] + getattr(row, "LVP")
-        #                     if element == 'LWP':
-        #                         myOneWeekArray[0][element] = myOneWeekArray[0][element] + getattr(row, "LWP")
-        #                     if element == 'CRT':
-        #                         myOneWeekArray[0][element] = myOneWeekArray[0][element] + getattr(row, "CRT")
-        #                             #print(myOneWeekArray[0][element])
-        #         else:
-        #             invoiceObject['name'] = getattr(row, "name")
-        #             invoiceObject['mileage'] = getattr(row, "mileage")
-        #             invoiceObject['route'] = getattr(row, "route")
-        #             invoiceObject['support'] = getattr(row, "support")
-        #             invoiceObject['deductions'] = getattr(row, "deductions")
-        #             invoiceObject['fuel'] = getattr(row, "fuel")
-                    
-
-
-        #             myOneWeekArray.append(invoiceObject)   
-
-
-        # datesObjectArray = []
-        # for dateObject in myDatesArray:
-        #     if dateObject['driver_id'] == ele.name:
-        #         datesObjectArray.append(dateObject)
-
-
-        # for dateObject in myDatesArray:
-        #     if dateObject['driver_id'] == ele.name:
-        #         payrollArray.append(dateObject['date'])
-        #         myTransientObjectDriver['datesList'] = payrollArray 
-        # myTransientObjectDriver['payroll'] = datesObjectArray    
-        # myDriverArray.append(myTransientObjectDriver)
-        #print('This is myDriverArray:', myDriverArray)
-        
-        #fields we will need for invoice calulations
-        # invoiceArray['day'] = (datetime.datetime.strptime(str(dateObject['date']), '%Y-%m-%d %H:%M:%S.%f')).weekday()
-
-        # for dateObject in myDatesArray:
-        #     if dateObject['driver_id'] == ele.name:
-        #         invoiceObject = {}
-        #         if dateObject['date']:
-
-        #             # there are two string lengths for the dates the logic is different so this checks if the right string is found
-        #             if len(dateObject['date']) > 11:
-        #                 if weekBeforeSunday < (datetime.datetime.strptime(str(dateObject['date']), '%a %d %B %Y')).date() < mostRecentSunday:
-        #                     if len(myOneWeekArray) > 0:
-        #                         for element in myOneWeekArray[0]:
-        #                             # loop that sums all of the scheduled dates that aren't the first one
-        #                             if element == 'LVP':
-        #                                 myOneWeekArray[0][element] = myOneWeekArray[0][element] + dateObject['LVP']
-        #                             if element == 'LWP':
-        #                                 myOneWeekArray[0][element] = myOneWeekArray[0][element] + dateObject['LWP']
-        #                             if element == 'Support':
-        #                                 myValue= float(myOneWeekArray[0][element][3::]) + float(dateObject['support'][3::])
-        #                                 myOneWeekArray[0][element] = "GB%f" % myValue
-
-        #                     else:    
-        #                         # creation of the zero index of the myTwoWeeksArray.... also going to be the final invoice 
-        #                         invoiceObject['Route type'] = dateObject['route']
-        #                         invoiceObject['LWP'] = dateObject['LWP']
-        #                         invoiceObject['LVP'] = dateObject['LVP']
-        #                         invoiceObject['Support'] = dateObject['support']
-        #                         invoiceObject['Deductions'] = dateObject['deductions']
-        #                         invoiceObject['Fuel'] = dateObject['fuel']
-        #                         myOneWeekArray.append(invoiceObject)
-
-
-            #print(myOneWeekArray)    
-            # tempVar = defaultdict(list)
-            # payCheck = defaultdict(list)
-            # tempRoute = defaultdict(list)
-                
-
-            # # for i in myOneWeekArray[0]:
-            #     if d['name'] == d['name']:
-                    
-
-
-            #         payCheck['name'].append(d['mileage'])
-            #         mileage = [{'name': k, 'mileage': v, 'count': sum(v)} for k, v in payCheck.items()] 
-
-                
-
-
-            #here we will get the total routes
-            # for d in myOneWeekArray:
-            #     tempRoute['name'].append(d['route'])
-            #     routes = [{'name': k, 'route': v, 'count': len(v)} for k, v in tempRoute.items()] 
-
-
-            #     # routes = [{'name': k, 'route': v, 'count': len(v)} for k, v in tempRoute.items()] 
-            # totalRoutes = sum(item['count'] for item in routes)
-        
-            
-        
-            #sort the routes
-    #         for d in myOneWeekArray:
-    #             print(d['name'])
-    #             if d['name'] == d['name']:
-    #                 if d['route'] == 'BULK':
-    #                     tempVar[d['name']].append(d['route'])
-    #                 elif d['route'] == 'Transportation':
-    #                     tempVar[d['name']].append(d['route'])
-    #                 elif d['route'] == 'MFN':
-    #                     tempVar[d['name']].append(d['route'])
-    #                 else:
-    #                     tempVar[d['name']].append(d['route'])
-    # print
-
-
-                #tempRoute[d['name']].append(d['route'])
-                # for h in myOneWeekArray:
-                #     myTempArray = []
-                #     myTempArray.append([h['support']].append(h['support']))
-                # tempRoute[d['name']].append(myTempArray)
-                #print(d['route'])
-                    # for item in d['route']:
-                    #     if item == 'MFN':
-                            
-                        
-                    #         #myMFN.append(item)
-                    #         tempVar[d['name']].append(item)
-                    #     elif item == 'BULK':
-                    #         #myMFN.append(item)
-                    #         tempVar[d['name']].append(item)  
-                    #     elif item == 'Classroom Training':
-                    #     #print(item)
-                    #         tempVar[d['name']].append(item)
-                    #     elif item == 'Ride Along':
-                    #     #print(item)
-                    #         tempVar[d['name']].append(item)
-                    #     else:
-                    #         tempVar[d['name']].append(item)    
- 
-    
-    # print('my tempVar', tempVar)
-
-
-
-
-
-
-
-
