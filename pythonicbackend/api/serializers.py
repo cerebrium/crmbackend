@@ -1,4 +1,4 @@
-from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages, DeductionType, SupportType 
+from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages, DeductionType, SupportType, VehicleScheduledDate 
 from rest_framework import serializers
 
 
@@ -52,7 +52,6 @@ class VehiclesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Vehicles
         fields = [
-            'driver_id',
             'vehicle_id',
             'registration',
             'make',
@@ -146,4 +145,12 @@ class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
             'comment'
         ]
 
- 
+class VehicleScheduledDateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = VehicleScheduledDate
+        fields = [  
+            'vehicleDate_id',
+            'vehicle_id',
+            'driver_id',
+            'date'
+        ]

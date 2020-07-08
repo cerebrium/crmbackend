@@ -85,7 +85,6 @@ class Invoice(models.Model):
         return self.name
 
 class Vehicles(models.Model):
-    driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
     vehicle_id = models.AutoField(primary_key=True)
     registration = models.CharField(max_length=20, null=True)
     make = models.CharField(max_length=30, null=True)
@@ -156,7 +155,6 @@ class ScheduledDatesManager(models.Manager):
 
         return date
   
-
 class ScheduledDate(models.Model):
     # have to add this
     objects = ScheduledDatesManager()
@@ -194,6 +192,16 @@ class ScheduledDate(models.Model):
 
     def __str__(self):
         return str(self.date_id)
+
+class VehicleScheduledDate(models.Model):
+    vehicleDate_id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    vehicle_id = models.ForeignKey(Vehicles, null=True, on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(Driver, null=True, on_delete=models.CASCADE)
+    date = models.CharField(max_length = 50, null = True, default = datetime.date.today())
 
 class DeductionType(models.Model):
     deduction_id = models.AutoField(primary_key=True, unique=True)

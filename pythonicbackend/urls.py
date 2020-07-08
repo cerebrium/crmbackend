@@ -12,6 +12,7 @@ router.register(r'vehicles', views.VehiclesViewSet)
 router.register(r'vehicledamages', views.VehicleDamagesViewSet)
 router.register(r'support', views.SupportViewSet)
 router.register(r'deductions', views.DeductionViewSet)
+router.register(r'vanDates', views.VehicleScheduledDateViewSet)
 
 
 # Setup automatic URL routing
@@ -22,5 +23,6 @@ urlpatterns = [
     path('invoices/', views.InvoiceViewSet.as_view(), name='invoices'),
     path('data/', views.DataViewSet.as_view(), name='data'),
     path('statistics/', views.StatisticsViewSet.as_view(), name='stats'),
-    path('csv/', views.MapViewSet.as_view(), name='csv')
+    path('csv/', views.MapViewSet.as_view(), name='csv'),
+    path('vandata/', views.VehicleMapViewSet.as_view(), name='vehicles data')
 ]

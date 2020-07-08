@@ -200,7 +200,6 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
 
     for ele in vehicles:
         myTransientVehicle = {}
-        myTransientVehicle['driver_id'] = str(ele.driver_id)
         myTransientVehicle['vehicle_id'] = ele.vehicle_id
         myTransientVehicle['registration'] = ele.registration
         myTransientVehicle['make'] = ele.make
@@ -325,13 +324,13 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
 
         myTransientObjectDriver['imgArray'] = imagesArray  
 
-        # vehicles version
-        vehiclesArray = []
-        for vehicleObject in myVehiclesArray:
-            if vehicleObject['driver_id'] == ele.name:
-                vehiclesArray.append(vehicleObject)
+        # # vehicles version
+        # vehiclesArray = []
+        # for vehicleObject in myVehiclesArray:
+        #     if vehicleObject['driver_id'] == ele.name:
+        #         vehiclesArray.append(vehicleObject)
 
-        myTransientObjectDriver['vehicleArray'] = vehiclesArray  
+        # myTransientObjectDriver['vehicleArray'] = vehiclesArray  
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
@@ -343,6 +342,78 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         'vehicles': myVehiclesArray,
     }   
     
+
+    return myFinalObject
+
+def returnVanOrderedData(vanList, scheduledDatesVan, imagesList):
+    myVehiclesArray = []
+    myImagesArray = []
+    myVanDateArray = []
+
+    for ele in imagesList:
+        myTransientImage = {}
+        myTransientImage['driver_id'] = str(ele.driver_id)
+        myTransientImage['vehicle_id'] = str(ele.vehicle_id)
+        myTransientImage['image_id'] = ele.image_id
+        myTransientImage['name'] = ele.name
+        myTransientImage['countryOfIssue'] = ele.countryOfIssue
+        myTransientImage['expiryDate'] = ele.expiryDate
+        myTransientImage['dueDate'] = ele.dueDate
+        myTransientImage['datePassed'] = ele.datePassed
+        myTransientImage['photo'] = ele.photo
+        myTransientImage['managerApprovedName'] = ele.managerApprovedName
+        myTransientImage['managerApprovedDate'] = ele.managerApprovedDate
+        myTransientImage['imagesLink'] = ele.imagesLink
+        myTransientImage['verified'] = ele.verified
+        myTransientImage['driverSigned'] = ele.driverSigned
+        myTransientImage['points'] = ele.points
+        myTransientImage['nextDVLAScreenshot'] = ele.nextDVLAScreenshot
+        
+        myImagesArray.append(myTransientImage)
+
+    for ele in scheduledDatesVan:
+        myTransientVehicleDate = {}
+        myTransientVehicleDate['vehicleDate_id'] = str(ele.vehicleDate_id)
+        myTransientVehicleDate['vehicle_id'] = str(ele.vehicle_id)
+        myTransientVehicleDate['driver_id'] = str(ele.driver_id)
+        myTransientVehicleDate['date'] = ele.date
+
+        myVanDateArray.append(myTransientVehicleDate)
+
+    for ele in vanList:
+        myTransientVehicle = {}
+        myTransientVehicle['vehicle_id'] = ele.vehicle_id
+        myTransientVehicle['registration'] = ele.registration
+        myTransientVehicle['make'] = ele.make
+        myTransientVehicle['model'] = ele.model
+        myTransientVehicle['year'] = ele.year
+        myTransientVehicle['companyOwned'] = ele.companyOwned
+        myTransientVehicle['vtype'] = ele.vtype
+        myTransientVehicle['quotePrice'] = str(ele.quotePrice)
+        myTransientVehicle['invoice'] = str(ele.invoice)
+
+
+        # images version
+        imagesArray = []
+        for imgObject in myImagesArray:
+            if imgObject['vehicle_id'] == ele.registration:
+                imagesArray.append(imgObject)
+
+        myTransientVehicle['imgArray'] = imagesArray  
+
+        # dates version
+        datesArray = []
+        for dateObject in myVanDateArray:
+            if dateObject['vehicle_id'] == ele.vehicle_id:
+                datesArray.append(dateObject) 
+
+        myTransientVehicle['datesArray'] = datesArray
+
+        myVehiclesArray.append(myTransientVehicle)
+
+        myFinalObject = {
+            'vehicles': myVehiclesArray,
+        }   
 
     return myFinalObject
 
