@@ -14,7 +14,6 @@ router.register(r'support', views.SupportViewSet)
 router.register(r'deductions', views.DeductionViewSet)
 router.register(r'vanDates', views.VehicleScheduledDateViewSet)
 
-
 # Setup automatic URL routing
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
@@ -24,5 +23,6 @@ urlpatterns = [
     path('data/', views.DataViewSet.as_view(), name='data'),
     path('statistics/', views.StatisticsViewSet.as_view(), name='stats'),
     path('csv/', views.MapViewSet.as_view(), name='csv'),
-    path('vandata/', views.VehicleMapViewSet.as_view(), name='vehicles data')
+    path('vandata/', views.VehicleMapViewSet.as_view(), name='vehicles data'),
+    path('security/', views.securityViewSet.as_view(), name='data_encrypted')
 ]

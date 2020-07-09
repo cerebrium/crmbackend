@@ -1,7 +1,14 @@
 from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages, SupportType, DeductionType, VehicleScheduledDate
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.views import APIView, View
 from rest_framework import viewsets
+from Crypto.Cipher import AES
+import json
+import base64
+import Crypto
+from Crypto.Cipher import AES
+from Crypto.Hash import HMAC, SHA256
+from Crypto.Util.Padding import unpad
 from rest_framework.permissions import IsAuthenticated
 from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer, SupportTypeSerializer, DeductionTypeSerializer, VehicleScheduledDateSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice, returnVanOrderedData
@@ -158,6 +165,7 @@ class VehicleScheduledDateViewSet(viewsets.ModelViewSet):
     serializer_class = VehicleScheduledDateSerializer
 
 class VehicleMapViewSet(APIView):
+
     # Authentication
     # permission_classes = (IsAuthenticated,)
 
@@ -172,3 +180,52 @@ class VehicleMapViewSet(APIView):
         }
 
         return Response(content)
+
+class securityViewSet(APIView):
+    def get(self, request):
+        message = '0bc13d5abbb956ab5ca8a63fd8406d02ec8845b42bd5731a00224f04aeabcac9'
+        key = 'askjbiocsdjhb238467sdkjfvasdfqwe' # TODO change to something with more entropy
+
+
+
+        # AES
+        BLOCK_SIZE = 16
+        IV = message[:BLOCK_SIZE]
+
+        try:
+            b64 = json.loads(message)
+            print(b64)
+            iv = b64decode(b64[IV])
+            ct = b64decode(b64[message])
+            cipher = AES.new(key, AES.MODE_CBC, iv)
+            pt = unpad(cipher.decrypt(ct), AES.block_size)
+            print("The message was: ", pt)
+        except ValueError:
+            print("Incorrect decryption")
+
+        # def pad(data):
+        #     length = BLOCK_SIZE - (len(data) % BLOCK_SIZE)
+        #     return data + chr(length)*length
+
+        # def unpad(data):
+        #     return data[:data[-1]]
+
+        # def encrypt(message, key):
+        #     IV = Crypto.Random.new().read(BLOCK_SIZE)
+        #     aes = AES.new(key, AES.MODE_CBC, IV)
+        #     return base64.b64encode(IV + aes.encrypt(pad(message)))
+
+        # def decrypt(encrypted, key):
+        #     encrypted = base64.b64decode(encrypted)
+        #     IV = encrypted[:BLOCK_SIZE]
+        #     aes = AES.new(key, AES.MODE_CBC, IV)
+        #     print(unpad(aes.decrypt(encrypted[BLOCK_SIZE:])))
+        #     return unpad(aes.decrypt(encrypted[BLOCK_SIZE:]))
+
+        # decrypt(message.encode("utf8"), key.encode("utf8"))
+
+        return Response('get')
+
+    def post(self, request): 
+        print(request.body)
+        return Response(request.body)
