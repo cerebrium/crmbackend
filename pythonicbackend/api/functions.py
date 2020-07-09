@@ -411,9 +411,9 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList):
 
         myVehiclesArray.append(myTransientVehicle)
 
-        myFinalObject = {
-            'vehicles': myVehiclesArray,
-        }   
+    myFinalObject = {
+        'vehicles': myVehiclesArray,
+    }   
 
     return myFinalObject
 
