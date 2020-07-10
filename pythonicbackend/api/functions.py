@@ -415,7 +415,6 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
        ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
-        datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
         myTransientObjectDriver['vehicle_name'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
@@ -436,9 +435,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
             if dateObject['driver_id'] == ele.name:
                 datesArray.append(dateObject) 
 
-        myTransientVehicle['vanDatesArray'] = datesArray
-
-        myVehiclesArray.append(myTransientVehicle)
+        myTransientObjectDriver['vanDatesArray'] = datesArray
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
