@@ -445,6 +445,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
 
     myFinalObject = {
         'vehicles': myVehiclesArray,
+        'drivers' : myDriverArray
     }   
 
     return myFinalObject
