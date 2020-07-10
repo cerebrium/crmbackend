@@ -416,7 +416,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
     for ele in driversList:
         myTransientObjectDriver = {}
         myTransientObjectDriver['driver_id'] = ele.driver_id
-        myTransientObjectDriver['vehicle_name'] = ele.driver_id
+        myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
         myTransientObjectDriver['email'] = ele.email
