@@ -433,7 +433,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
          # dates version
         datesArray = []
         for dateObject in myVanDateArray:
-            if dateObject['driver_id'] == str(ele.driver_id):
+            if dateObject['driver_id'] == ele.name:
                 datesArray.append(dateObject) 
 
         myTransientVehicle['vanDatesArray'] = datesArray
