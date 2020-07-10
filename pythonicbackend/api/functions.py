@@ -345,10 +345,11 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
 
     return myFinalObject
 
-def returnVanOrderedData(vanList, scheduledDatesVan, imagesList):
+def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
     myVehiclesArray = []
     myImagesArray = []
     myVanDateArray = []
+    myDriverArray = []
 
     for ele in imagesList:
         myTransientImage = {}
@@ -410,6 +411,37 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList):
         myTransientVehicle['datesArray'] = datesArray
 
         myVehiclesArray.append(myTransientVehicle)
+
+       ## recreate the driver dataset
+    for ele in driversList:
+        myTransientObjectDriver = {}
+        datesArray = []
+        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['vehicle_name'] = ele.driver_id
+        myTransientObjectDriver['name'] = ele.name
+        myTransientObjectDriver['location'] = ele.location
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['address'] = ele.address
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
+        myTransientObjectDriver['Signed'] = ele.Signed
+        myTransientObjectDriver['approvedBy'] = ele.approvedBy
+        myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime 
+
+         # dates version
+        datesArray = []
+        for dateObject in myVanDateArray:
+            if dateObject['driver_id'] == str(ele.driver_id):
+                datesArray.append(dateObject) 
+
+        myTransientVehicle['vanDatesArray'] = datesArray
+
+        myVehiclesArray.append(myTransientVehicle)
+
+        ## append object to array
+        myDriverArray.append(myTransientObjectDriver)   
 
     myFinalObject = {
         'vehicles': myVehiclesArray,

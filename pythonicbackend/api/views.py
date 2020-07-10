@@ -171,11 +171,12 @@ class VehicleMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
+        drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
         images = Images.objects.all()
         content = {
-            'data': returnVanOrderedData(vehicles, vehiclesDates, images) # the function is actually called in this file... so it has this files scope.... why we put things in 
+            'data': returnVanOrderedData(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
         }
 
