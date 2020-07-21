@@ -18,6 +18,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         model = Driver
         fields =[
             'driver_id',
+            'deleteButton',
             'name',
             'location',
             'email',
