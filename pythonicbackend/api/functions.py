@@ -481,7 +481,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
     for ele in vehiclesList:
         myTransientVehicle = {}
-        myTransientVehicle['driver_id'] = str(ele.driver_id)
         myTransientVehicle['vehicle_id'] = ele.vehicle_id
         myTransientVehicle['registration'] = ele.registration
         myTransientVehicle['make'] = ele.make
