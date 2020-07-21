@@ -621,25 +621,21 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
 
     # find out today
-    currentDate = datetime.date.today()
+    currentDate = datetime.date.today() + datetime.timedelta(days=5)
     dateWeekDay = currentDate.weekday()
     mostRecentSunday = 0
     weekBeforeSunday = 0
     twoWeeksBeforeSunday = 0
     fourWeeksBeforeSunday = 0
     dateWeekDay+=1
-    if currentDate.weekday() > 0:
-        if currentDate.weekday() == 6:  
-            mostRecentSunday = currentDate 
-            weekBeforeSunday = currentDate - datetime.timedelta(days=7)
-        else:
-            mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
-            weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
-            twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
-            fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)
-    else:
+    if currentDate.weekday() == 6:
         mostRecentSunday = currentDate 
-        weekBeforeSunday = currentDate - datetime.timedelta(days=7)     
+        weekBeforeSunday = currentDate - datetime.timedelta(days=7) 
+    else:
+        mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
+        weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
+        twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
+        fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)  
         
     # # create array to go onto the driver that will contain all the drivers dates
     payrollArray = []
