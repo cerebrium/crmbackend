@@ -620,7 +620,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
 
     # find out today
-    currentDate = datetime.date.today() + datetime.timedelta(days=5)
+    currentDate = datetime.date.today()
     dateWeekDay = currentDate.weekday()
     mostRecentSunday = 0
     weekBeforeSunday = 0

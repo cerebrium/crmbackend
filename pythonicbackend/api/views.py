@@ -97,7 +97,8 @@ class DataViewSet(APIView):
         return Response(content)
 
 class InvoiceViewSet(APIView):
-        # function for all data
+    # function for all data
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         # defining overall data objects
         invoices = Invoice.objects.all()
@@ -183,6 +184,7 @@ class VehicleMapViewSet(APIView):
         return Response(content)
 
 class securityViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         message = '0bc13d5abbb956ab5ca8a63fd8406d02ec8845b42bd5731a00224f04aeabcac9'
         key = 'askjbiocsdjhb238467sdkjfvasdfqwe' # TODO change to something with more entropy
