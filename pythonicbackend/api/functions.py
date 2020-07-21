@@ -279,6 +279,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         datesArray = []
         myTransientObjectDriver['driver_id'] = ele.driver_id
         myTransientObjectDriver['deleteButton'] = ele.deleteButton
+        myTransientObjectDriver['vanOwner'] = ele.vanOwner
         myTransientObjectDriver['vehicle_name'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
