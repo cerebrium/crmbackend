@@ -642,17 +642,18 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
     # # inside of the driver array loop write some logic that links each date to the driver and push the date into the driver date array
     myWeekArray = []
     for ele in myDriverArray:
-        for date in ele["datesArray"]:
-            isValidDate = 0
+        if ele['status'] != 'OffboardedForever':
+            for date in ele["datesArray"]:
+                isValidDate = 0
 
-            try:
-                datetime.datetime.strptime(date['date'], '%a %b %d %Y')
-            except ValueError:
-                isValidDate = 1
+                try:
+                    datetime.datetime.strptime(date['date'], '%a %b %d %Y')
+                except ValueError:
+                    isValidDate = 1
 
-            if isValidDate == 0:
-                if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
-                    myWeekArray.append(date)      
+                if isValidDate == 0:
+                    if weekBeforeSunday <= datetime.datetime.strptime(date['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                        myWeekArray.append(date)      
 
         ##################################   FINAL INVOICE CREATION SECTION ############################################################################                    
     df = pd.DataFrame(myWeekArray)     # this is a dataframe with all the dates in the week we want      
