@@ -102,11 +102,12 @@ class Vehicles(models.Model):
 
 class VehicleDamages(models.Model):
     VehicleDamages_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 100, null = True)
     driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
     vehicle_id = models.ForeignKey(Vehicles, on_delete=models.CASCADE)
-    statmentOfDamage = models.CharField(max_length = 500)
+    statmentOfDamage = models.CharField(max_length = 2000)
     dateOfIncident = models.CharField(max_length = 100)
-    picturesOfIncident = ArrayField(models.CharField(max_length=100), default=list, blank=True)
+    picturesOfIncident = models.CharField(max_length = 200)
     quotePrice = MoneyField("INCIDENT QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     invoice = MoneyField("INCIDENT INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
