@@ -76,7 +76,8 @@ class VehicleDamagesSerializer(serializers.HyperlinkedModelSerializer):
             'dateOfIncident',
             'picturesOfIncident',
             'quotePrice',
-            'invoice'
+            'invoice',
+            'name'
         ]
 
 class ImagesSerializer(serializers.HyperlinkedModelSerializer):
