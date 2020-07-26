@@ -96,23 +96,6 @@ class DataViewSet(APIView):
         }
         return Response(content)
 
-class InvoiceViewSet(APIView):
-    # function for all data
-    permission_classes = (IsAuthenticated,)
-    def get(self, request):
-        # defining overall data objects
-        invoices = Invoice.objects.all()
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
-        vehicles = Vehicles.objects.all()
-        deductions = DeductionType.objects.all()
-        support = SupportType.objects.all()
-
-        content = {
-            'data': invoice(drivers, schedule, vehicles, deductions, support)
-        }
-        return Response(content)
-
 class StatisticsViewSet(APIView):
     permission_classes = (IsAuthenticated,)
    
@@ -181,6 +164,38 @@ class VehicleMapViewSet(APIView):
             # functions... makes them modular and then we can control their scope 
         }
 
+        return Response(content)
+
+class InvoiceViewSet(APIView):
+    # function for all data
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request): 
+        invoices = Invoice.objects.all()
+        drivers = Driver.objects.all()
+        schedule = ScheduledDate.objects.all()
+        vehicles = Vehicles.objects.all()
+        deductions = DeductionType.objects.all()
+        support = SupportType.objects.all()
+        theDate = request.body
+
+        content = {
+            'data': invoice(drivers, schedule, vehicles, deductions, support, theDate)
+        }
+        return Response(content)   
+
+    def get(self, request):
+        # defining overall data objects
+        invoices = Invoice.objects.all()
+        drivers = Driver.objects.all()
+        schedule = ScheduledDate.objects.all()
+        vehicles = Vehicles.objects.all()
+        deductions = DeductionType.objects.all()
+        support = SupportType.objects.all()
+
+        content = {
+            'data': invoice(drivers, schedule, vehicles, deductions, support)
+        }
         return Response(content)
 
 class securityViewSet(APIView):

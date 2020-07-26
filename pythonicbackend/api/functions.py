@@ -10,6 +10,7 @@ from collections import Counter
 import math
 import csv
 import collections, functools, operator
+import re
 
 ## declare a function - this one is going to return an array containing the difference between log in and log out times
 def timeDifference(logIn, logOut):
@@ -449,7 +450,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
 
     return myFinalObject
 
-def invoice(driversList, datesList, vehiclesList, deductions, support):
+def invoice(driversList, datesList, vehiclesList, deductions, support, selectedDate=None):
 
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
@@ -620,21 +621,28 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
 
 
     # find out today
-    currentDate = datetime.date.today()
-    dateWeekDay = currentDate.weekday()
-    mostRecentSunday = 0
-    weekBeforeSunday = 0
-    twoWeeksBeforeSunday = 0
-    fourWeeksBeforeSunday = 0
-    dateWeekDay+=1
-    if currentDate.weekday() == 6:
-        mostRecentSunday = currentDate 
-        weekBeforeSunday = currentDate - datetime.timedelta(days=7) 
+    if selectedDate == None:
+        currentDate = datetime.date.today()
+        dateWeekDay = currentDate.weekday()
+        mostRecentSunday = 0
+        weekBeforeSunday = 0
+        twoWeeksBeforeSunday = 0
+        fourWeeksBeforeSunday = 0
+        dateWeekDay+=1
+        if currentDate.weekday() == 6:
+            mostRecentSunday = currentDate 
+            weekBeforeSunday = currentDate - datetime.timedelta(days=7) 
+        else:
+            mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
+            weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
+            twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
+            fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)  
     else:
-        mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
-        weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
-        twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
-        fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)  
+        myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
+        mostRecentSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
+        weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)   
+
+    print(weekBeforeSunday, mostRecentSunday)    
         
     # # create array to go onto the driver that will contain all the drivers dates
     payrollArray = []
