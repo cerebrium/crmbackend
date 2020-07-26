@@ -678,7 +678,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support):
         'Missort Route': 121.8,
         'Classroom Training': 75,
         'Ride Along': 75,
-        'Sweeper': 121.8
+        'Sweeper': 121.8,
+        'None': 0.0
     }
     
     for dateItem in allDatesArray:
