@@ -638,7 +638,11 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
             twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
             fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28)  
     else:
-        myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
+        # from the postman requests
+        # myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
+
+        # from the backend
+        myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
         mostRecentSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
         weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)   
 
@@ -691,6 +695,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
     }
     
     for dateItem in allDatesArray:
+        print(dateItem[9])
         if dateItem[9] in myInvoiceObj:
          #   print(myInvoiceObj[dateItem[9]]['route'])
 
