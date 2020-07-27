@@ -643,8 +643,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
 
         # from the backend
         myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
-        mostRecentSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
-        weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)   
+        weekBeforeSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
+        mostRecentSunday = weekBeforeSunday + datetime.timedelta(days=7)   
 
     print(weekBeforeSunday, mostRecentSunday)    
         
