@@ -348,11 +348,12 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
 
     return myFinalObject
 
-def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
+def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, selectedDate=None):
     myVehiclesArray = []
     myImagesArray = []
     myVanDateArray = []
-    myDriverArray = []
+    myDriverArray = []     
+    myWeekArray = []
 
     for ele in imagesList:
         myTransientImage = {}
@@ -443,9 +444,29 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList):
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
 
+
+        # find out today
+    
+    if selectedDate == None:
+        print('hurray')
+    else:
+        # from the postman requests
+        # myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
+
+        # from the backend
+        myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
+        weekBeforeSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
+        mostRecentSunday = weekBeforeSunday + datetime.timedelta(days=7)   
+
+        for ele in myVanDateArray:
+            if weekBeforeSunday <= datetime.datetime.strptime(ele['date'], '%a %b %d %Y').date() < mostRecentSunday:
+                myWeekArray.append(ele)  
+
+
     myFinalObject = {
         'vehicles': myVehiclesArray,
-        'drivers' : myDriverArray
+        'drivers' : myDriverArray,
+        'modifiedvehicles' : myWeekArray
     }   
 
     return myFinalObject

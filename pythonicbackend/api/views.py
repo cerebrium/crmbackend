@@ -153,6 +153,18 @@ class VehicleMapViewSet(APIView):
     # Authentication
     permission_classes = (IsAuthenticated,)
 
+    def post(self, request): 
+        drivers = Driver.objects.all()
+        vehicles = Vehicles.objects.all()
+        vehiclesDates = VehicleScheduledDate.objects.all()
+        images = Images.objects.all()
+        theDate = request.body
+
+        content = {
+            'data': returnVanOrderedData(vehicles, vehiclesDates, images, drivers, theDate)
+        }
+        return Response(content)   
+
         # function for all data
     def get(self, request):
         drivers = Driver.objects.all()
