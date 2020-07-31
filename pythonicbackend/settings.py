@@ -14,6 +14,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
+    'crmbackend-env.eba-89azwc6y.eu-west-2.elasticbeanstalk.com',
     'localhost',
     '127.0.0.1'
 ]
