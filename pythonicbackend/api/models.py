@@ -20,14 +20,12 @@ class managers(models.Model):
     station = models.CharField(max_length = 20, null = True)
     creationDate = models.CharField(max_length = 50, default = datetime.date.today())
 
-# Create your models here.
 class DriverManager(models.Manager):
     def create_driver(self, name):
         driver = self.create(name=name)
 
         return driver
         
-#----rename it to Driver(models.model)
 class Driver(models.Model):
     driver_id = models.AutoField(primary_key=True, unique=True) #need to connect to DA Compliance Check
     vehicle_name = models.CharField(max_length=50, null = True)
@@ -54,7 +52,6 @@ class Driver(models.Model):
     def __str__(self):
         return self.name 
 
-# Create your models here.
 class InvoiceManager(models.Manager):
     def create_Invoice(self, driver_id, day, routeType, LWP, LVP, SUP, deductions, fuel):
         invoice = self.create(
@@ -111,7 +108,6 @@ class VehicleDamages(models.Model):
     quotePrice = MoneyField("INCIDENT QUOTE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
     invoice = MoneyField("INCIDENT INVOICE", default=0, max_digits=19, decimal_places=2, default_currency='GBP', null = True)
 
-# DA compliance check
 class Images(models.Model):
     driver_id = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
     vehicle_id = models.ForeignKey(Vehicles, blank=True, null=True, on_delete=models.CASCADE)
