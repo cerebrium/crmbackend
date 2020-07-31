@@ -54,6 +54,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://master.d2i61z5fsjun86.amplifyapp.com",
     "http://localhose:8000",
     "https://crmsignitures.netlify.app",
     "https://crmfrontend.netlify.app",
@@ -91,7 +92,17 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
 # Ginishka local database Configuration
 # DATABASES = {
 #     'default': {
