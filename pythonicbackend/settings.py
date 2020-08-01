@@ -54,6 +54,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://master.d2i61z5fsjun86.amplifyapp.com/",
     "https://master.d2i61z5fsjun86.amplifyapp.com",
     "http://localhose:8000",
     "https://crmsignitures.netlify.app",
@@ -109,7 +110,7 @@ if 'RDS_HOSTNAME' in os.environ:
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'test0',
 #         'USER': 'ginovevailieva',
-#         'PASSWORD': 'Ginishka95',
+#         'PASSWORD': 'Ginishka95',                                              
 #         'HOST': 'localhost',
 #         'PORT': '5432'
 #     }
