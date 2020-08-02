@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'pythonicbackend.herokuapp.com',
@@ -55,9 +55,6 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://master.d2i61z5fsjun86.amplifyapp.com",
-    "http://localhose:8000",
-    "https://crmsignitures.netlify.app",
-    "https://crmfrontend.netlify.app",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -116,16 +113,16 @@ if 'RDS_HOSTNAME' in os.environ:
 # }
 
 # Nikitch Local Database Configuration
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crmbackend',
-        'USER': 'postgres',
-        'PASSWORD': 'Ginishka04121995',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'crmbackend',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
 # Deployment Database Configuration
 # DATABASES = {
