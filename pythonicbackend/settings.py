@@ -101,15 +101,15 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #     }
 # else:    
     # Nikitch Local Database Configuration
-if 'RDS_HOSTNAME' in os.environ:
+if 'aaevc7a63kvgun.cvvej0n8dtzc.eu-west-2.rds.amazonaws.com' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+            'NAME': os.environ['ebdb'],
+            'USER': os.environ['BentleyTinta'],
+            'PASSWORD': os.environ['N0501199339911050mSBentleyLopeandTintamyTinta'],
+            'HOST': os.environ['aaevc7a63kvgun.cvvej0n8dtzc.eu-west-2.rds.amazonaws.com'],
+            'PORT': os.environ['5432'],
         }
     }
 else:
