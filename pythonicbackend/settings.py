@@ -13,7 +13,6 @@ SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'pythonicbackend.herokuapp.com',
     'crmbackend-env.eba-89azwc6y.eu-west-2.elasticbeanstalk.com',
     'localhost',
     '127.0.0.1'
@@ -105,7 +104,7 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 if 'aaevc7a63kvgun.cvvej0n8dtzc.eu-west-2.rds.amazonaws.com' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ['ebdb'],
             'USER': os.environ['BentleyTinta'],
             'PASSWORD': os.environ['N0501199339911050mSBentleyLopeandTintamyTinta'],
