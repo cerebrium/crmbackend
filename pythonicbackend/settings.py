@@ -101,15 +101,15 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 #     }
 # else:    
     # Nikitch Local Database Configuration
-if 'RDS_DB_NAME' in os.environ:
+if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2-binary',
-        'NAME': os.environ['RDS_DB_NAME'],
-        'USER': os.environ['RDS_USERNAME'],
-        'PASSWORD': os.environ['RDS_PASSWORD'],
-        'HOST': os.environ['RDS_HOSTNAME'],
-        'PORT': os.environ['RDS_PORT'],
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
 else:
@@ -123,6 +123,7 @@ else:
             'PORT': '5432'
         }
     }
+
 # Ginishka local database Configuration
 # DATABASES = {
 #     'default': {
