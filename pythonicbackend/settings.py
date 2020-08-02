@@ -99,6 +99,18 @@ if 'RDS_HOSTNAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
+else:    
+    # Nikitch Local Database Configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'crmbackend',
+            'USER': 'postgres',
+            'PASSWORD': 'Ginishka04121995',
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
+    }
 # Ginishka local database Configuration
 # DATABASES = {
 #     'default': {
@@ -111,17 +123,6 @@ if 'RDS_HOSTNAME' in os.environ:
 #     }
 # }
 
-# Nikitch Local Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'crmbackend',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ginishka04121995',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
 
 # Deployment Database Configuration
 # DATABASES = {
