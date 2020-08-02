@@ -54,7 +54,6 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "https://master.d2i61z5fsjun86.amplifyapp.com/",
     "https://master.d2i61z5fsjun86.amplifyapp.com",
     "http://localhose:8000",
     "https://crmsignitures.netlify.app",
