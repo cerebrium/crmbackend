@@ -13,7 +13,7 @@ SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'crmbackend-env.eba-89azwc6y.eu-west-2.elasticbeanstalk.com',
+    'https://pythonicbackend.herokuapp.com',
     'localhost',
     '127.0.0.1'
 ]
@@ -86,43 +86,18 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-
-# if 'RDS_HOSTNAME' in os.environ:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.environ['RDS_DB_NAME'],
-#             'USER': os.environ['RDS_USERNAME'],
-#             'PASSWORD': os.environ['RDS_PASSWORD'],
-#             'HOST': os.environ['RDS_HOSTNAME'],
-#             'PORT': os.environ['RDS_PORT'],
-#         }
-#     }
-# else:    
+  
     # Nikitch Local Database Configuration
-if 'aaevc7a63kvgun.cvvej0n8dtzc.eu-west-2.rds.amazonaws.com' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['ebdb'],
-            'USER': os.environ['BentleyTinta'],
-            'PASSWORD': os.environ['N0501199339911050mSBentleyLopeandTintamyTinta'],
-            'HOST': os.environ['aaevc7a63kvgun.cvvej0n8dtzc.eu-west-2.rds.amazonaws.com'],
-            'PORT': os.environ['5432'],
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'crmbackend',
-            'USER': 'postgres',
-            'PASSWORD': 'Ginishka04121995',
-            'HOST': 'localhost',
-            'PORT': '5432'
-        }
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'crmbackend',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ginishka04121995',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
 # Ginishka local database Configuration
 # DATABASES = {
@@ -138,12 +113,12 @@ else:
 
 
 # Deployment Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
