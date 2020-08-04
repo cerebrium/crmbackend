@@ -7,10 +7,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'asdnn7234njsf1!@#bsdkjhb1!@#$basdjbp123$ZNSdf10384bf'
+SECRET_KEY = 'asdkmfalskdmflaksdqwqmwe123mdklsm534kmwmpweom'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok! <--
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://pythonicbackend.herokuapp.com',
@@ -51,12 +51,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
+    # "http://localhost:3000",
     "https://master.d2i61z5fsjun86.amplifyapp.com",
 ]
 
 CORS_ALLOW_METHODS = [
-    'DELETE',
     'GET',
     'POST',
     'PUT',
