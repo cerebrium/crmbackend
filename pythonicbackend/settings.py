@@ -10,9 +10,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdkmfalskdmflaksdqwqmwe123mdklsm534kmwmpweom'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok! <--
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
+    'http://127.0.0.1',
     'https://pythonicbackend.herokuapp.com',
     'pythonicbackend.herokuapp.com'
 ]
@@ -51,7 +53,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    # "http://localhost:3000",
     "https://master.d2i61z5fsjun86.amplifyapp.com",
 ]
 
@@ -85,17 +86,17 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
   
-    # Nikitch Local Database Configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'crmbackend',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ginishka04121995',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
+# Nikitch Local Database Configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crmbackend',
+        'USER': 'postgres',
+        'PASSWORD': 'Ginishka04121995',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 # Ginishka local database Configuration
 # DATABASES = {
@@ -111,12 +112,12 @@ WSGI_APPLICATION = 'pythonicbackend.wsgi.application'
 
 
 # Deployment Database Configuration
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [

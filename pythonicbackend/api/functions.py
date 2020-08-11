@@ -473,6 +473,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, se
 
 def invoice(driversList, datesList, vehiclesList, deductions, support, selectedDate=None):
 
+
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
 
@@ -754,3 +755,15 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
     }   
 
     return myFinalObject          
+
+
+def tokenizer(managerList, requestBody):
+    isAuthenticated = False
+    print(requestBody)
+    submittedemail = ''
+    myString = str(requestBody).replace("b'", "").replace("'", "")
+
+    # from the backend
+    # myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
+
+    return isAuthenticated

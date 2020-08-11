@@ -17,7 +17,10 @@ class managers(models.Model):
         )
     email = models.CharField(max_length = 100, unique=True)
     name = models.CharField(max_length = 100, null = True)
-    station = models.CharField(max_length = 20, null = True)
+    DBS2 = models.BooleanField(default=False)
+    DSN1 = models.BooleanField(default=False)
+    DEX2 = models.BooleanField(default=False)
+    DXP1 = models.BooleanField(default=False)
     creationDate = models.CharField(max_length = 50, default = datetime.date.today())
 
 class DriverManager(models.Manager):

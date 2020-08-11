@@ -9,7 +9,10 @@ class managersSerializer(serializers.HyperlinkedModelSerializer):
             'user_id',
             'email',
             'name',
-            'station',
+            'DBS2',
+            'DEX2',
+            'DXP1',
+            'DSN1',
             'creationDate'
         ]        
   
