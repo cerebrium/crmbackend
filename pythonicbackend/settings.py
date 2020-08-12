@@ -60,6 +60,7 @@ CORS_ALLOW_METHODS = [
     'GET',
     'POST',
     'PUT',
+    'DELETE'
 ]
 
 ROOT_URLCONF = 'pythonicbackend.urls'
