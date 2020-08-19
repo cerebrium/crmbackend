@@ -10,11 +10,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'asdkmfalskdmflaksdqwqmwe123mdklsm534kmwmpweom'
 
 # SECURITY WARNING: don't run with debug turned on in production! ok! <--
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'localhost',
-    'http://127.0.0.1',
     'https://pythonicbackend.herokuapp.com',
     'pythonicbackend.herokuapp.com'
 ]

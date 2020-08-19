@@ -6,7 +6,7 @@ import json
 import base64
 from rest_framework.permissions import IsAuthenticated
 from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer, SupportTypeSerializer, DeductionTypeSerializer, VehicleScheduledDateSerializer
-from .functions import timeDifference, returnOrderdData, statistics, invoice, returnVanOrderedData, tokenizer
+from .functions import timeDifference, returnOrderdData, statistics, invoice, returnVanOrderedData, tokenizer, complianceCheck
 from .test_data import importData
 import csv, io 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -215,3 +215,33 @@ class securityViewSet(ObtainAuthToken):
         return Response({
             'token': tokenizer(managerList, request.body)
         })
+
+class ComplianceMapViewSet(APIView):
+    
+    # Authentication
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request): 
+        drivers = Driver.objects.all()
+        vehicles = Vehicles.objects.all()
+        vehiclesDates = VehicleScheduledDate.objects.all()
+        images = Images.objects.all()
+        theDate = request.body
+
+        content = {
+            'data': complianceCheck(vehicles, vehiclesDates, images, drivers, theDate)
+        }
+        return Response(content)   
+
+        # function for all data
+    def get(self, request):
+        drivers = Driver.objects.all()
+        vehicles = Vehicles.objects.all()
+        vehiclesDates = VehicleScheduledDate.objects.all()
+        images = Images.objects.all()
+        content = {
+            'data': complianceCheck(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
+            # functions... makes them modular and then we can control their scope 
+        }
+
+        return Response(content)
