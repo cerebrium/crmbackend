@@ -293,6 +293,9 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         myTransientObjectDriver['Signed'] = ele.Signed
         myTransientObjectDriver['approvedBy'] = ele.approvedBy
         myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime
+        myTransientObjectDriver['registration'] = ele.registration
+        myTransientObjectDriver['vtype'] = ele.vtype
+        myTransientObjectDriver['complianceCheck'] = ele.complianceCheck
             
         ## iterate through numbers
         if ele.SigningUrlNumber:
@@ -796,15 +799,6 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
         
         myImagesArray.append(myTransientImage)
 
-    for ele in scheduledDatesVan:
-        myTransientVehicleDate = {}
-        myTransientVehicleDate['vehicleDate_id'] = str(ele.vehicleDate_id)
-        myTransientVehicleDate['vehicle_id'] = str(ele.vehicle_id)
-        myTransientVehicleDate['driver_id'] = str(ele.driver_id)
-        myTransientVehicleDate['date'] = ele.date
-
-        myVanDateArray.append(myTransientVehicleDate)
-
     for ele in vanList:
         myTransientVehicle = {}
         myTransientVehicle['vehicle_id'] = ele.vehicle_id
@@ -826,14 +820,6 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
 
         myTransientVehicle['imgArray'] = imagesArray  
 
-        # dates version
-        datesArray = []
-        for dateObject in myVanDateArray:
-            if dateObject['vehicle_id'] == ele.registration:
-                datesArray.append(dateObject) 
-
-        myTransientVehicle['datesArray'] = datesArray
-
         myVehiclesArray.append(myTransientVehicle)
 
        ## recreate the driver dataset
@@ -852,6 +838,10 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
         myTransientObjectDriver['Signed'] = ele.Signed
         myTransientObjectDriver['approvedBy'] = ele.approvedBy
         myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime 
+        myTransientObjectDriver['vanOwner'] = ele.vanOwner
+        myTransientObjectDriver['registration'] = ele.registration
+        myTransientObjectDriver['vtype'] = ele.vtype
+        myTransientObjectDriver['complianceCheck'] = ele.complianceCheck
 
                 # images version
         print('hello')
@@ -861,14 +851,6 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
                 imagesArray.append(imgObject)
 
         myTransientObjectDriver['imgArray'] = imagesArray  
-
-         # dates version
-        datesArray = []
-        for dateObject in myVanDateArray:
-            if dateObject['driver_id'] == ele.name:
-                datesArray.append(dateObject) 
-
-        myTransientObjectDriver['vanDatesArray'] = datesArray
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
