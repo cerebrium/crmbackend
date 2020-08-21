@@ -889,3 +889,119 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
     }   
 
     return myFinalObject
+
+def addDatedDriver(driversList, datesList, selectedDate=None):
+    myDriverArray = []
+    myDatesArray = []
+
+    if selectedDate == None:
+        currentDate = datetime.date.today()
+        dateWeekDay = currentDate.weekday()
+        mostRecentSunday = 0
+        weekBeforeSunday = 0
+        twoWeeksBeforeSunday = 0
+        fourWeeksBeforeSunday = 0
+        dateWeekDay+=1
+        if currentDate.weekday() == 6:
+            mostRecentSunday = currentDate 
+            weekBeforeSunday = currentDate - datetime.timedelta(days=7) 
+        else:
+            mostRecentSunday = currentDate - datetime.timedelta(days=dateWeekDay)
+            weekBeforeSunday = mostRecentSunday - datetime.timedelta(days=7)
+            twoWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=14)
+            fourWeeksBeforeSunday = mostRecentSunday - datetime.timedelta(days=28) 
+            nextSunday = mostRecentSunday + datetime.timedelta(days=7) 
+        
+        for ele in datesList:
+            print(mostRecentSunday, nextSunday, datetime.datetime.strptime(ele.date, '%a %b %d %Y').date())
+            if mostRecentSunday <= datetime.datetime.strptime(ele.date, '%a %b %d %Y').date() < nextSunday:
+                myTransientObjectDates = {}
+
+                myTransientObjectDates['date_id'] = ele.date_id
+                myTransientObjectDates['name'] = ele.name
+                myTransientObjectDates['inOff'] = ele.inOff
+                myTransientObjectDates['route'] = ele.route
+                myTransientObjectDates['routeNumber'] = ele.routeNumber
+                myTransientObjectDates['logOut_time'] = ele.logOut_time
+                myTransientObjectDates['logIn_time'] = ele.logIn_time
+                myTransientObjectDates['location'] = ele.location
+                myTransientObjectDates['date'] = ele.date
+                myTransientObjectDates['driver_id'] = str(ele.driver_id)
+                myTransientObjectDates['mileage'] = ele.mileage
+                myTransientObjectDates['start_mileage'] = ele.start_mileage
+                myTransientObjectDates['finish_mileage'] = ele.finish_mileage
+                myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+                myTransientObjectDates['parcel'] = ele.parcel
+                myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
+                myTransientObjectDates['TORH'] = ele.TORH
+
+                myDatesArray.append(myTransientObjectDates)
+    else:
+        # from the postman requests
+        # myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
+
+        # from the backend
+        myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
+        weekBeforeSunday = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
+        mostRecentSunday = weekBeforeSunday + datetime.timedelta(days=7)   
+
+        for ele in datesList:
+            if weekBeforeSunday <= datetime.datetime.strptime(ele.date, '%a %b %d %Y').date() < mostRecentSunday:
+                myTransientObjectDates = {}
+
+                myTransientObjectDates['date_id'] = ele.date_id
+                myTransientObjectDates['name'] = ele.name
+                myTransientObjectDates['inOff'] = ele.inOff
+                myTransientObjectDates['route'] = ele.route
+                myTransientObjectDates['routeNumber'] = ele.routeNumber
+                myTransientObjectDates['logOut_time'] = ele.logOut_time
+                myTransientObjectDates['logIn_time'] = ele.logIn_time
+                myTransientObjectDates['location'] = ele.location
+                myTransientObjectDates['date'] = ele.date
+                myTransientObjectDates['driver_id'] = str(ele.driver_id)
+                myTransientObjectDates['mileage'] = ele.mileage
+                myTransientObjectDates['start_mileage'] = ele.start_mileage
+                myTransientObjectDates['finish_mileage'] = ele.finish_mileage
+                myTransientObjectDates['timeDifference'] = timeDifference(ele.logIn_time, ele.logOut_time)
+                myTransientObjectDates['parcel'] = ele.parcel
+                myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
+                myTransientObjectDates['TORH'] = ele.TORH
+
+                myDatesArray.append(myTransientObjectDates)
+
+
+
+    for ele in driversList:
+        myTransientObjectDriver = {}
+        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
+        myTransientObjectDriver['name'] = ele.name
+        myTransientObjectDriver['location'] = ele.location
+        myTransientObjectDriver['email'] = ele.email
+        myTransientObjectDriver['phone'] = ele.phone
+        myTransientObjectDriver['address'] = ele.address
+        myTransientObjectDriver['status'] = ele.status
+        myTransientObjectDriver['DriverUniqueId'] = ele.DriverUniqueId
+        myTransientObjectDriver['SigningUrlNumber'] = ele.SigningUrlNumber
+        myTransientObjectDriver['Signed'] = ele.Signed
+        myTransientObjectDriver['approvedBy'] = ele.approvedBy
+        myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime 
+        myTransientObjectDriver['vanOwner'] = ele.vanOwner
+        myTransientObjectDriver['registration'] = ele.registration
+        myTransientObjectDriver['vtype'] = ele.vtype
+        myTransientObjectDriver['complianceCheck'] = ele.complianceCheck
+
+        ## iterate through each date in datesList
+        datesArray = []
+        for item in myDatesArray:
+            if item['driver_id'] == ele.name:
+                datesArray.append(item)
+        myTransientObjectDriver['datesList'] = datesArray
+
+        myDriverArray.append(myTransientObjectDriver) 
+
+    myFinalObject = {
+        'drivers': myDriverArray,
+    } 
+
+    return myFinalObject
