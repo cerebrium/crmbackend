@@ -749,7 +749,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
                     'parcels': dateItem[14],
                     'mileage': dateItem[12]*0.17,
                     'deduction': dateItem[17],
-                    'support': dateItem[19] 
+                    'support': dateItem[19] ,
+                    'location': dateItem[7]
                 }
 
     myFinalObject = {
