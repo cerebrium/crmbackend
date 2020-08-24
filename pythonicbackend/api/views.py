@@ -247,7 +247,7 @@ class ComplianceMapViewSet(APIView):
         return Response(content)
 
 class AutoSchedulingMapViewSet(APIView):
-        
+    
     # Authentication
     permission_classes = (IsAuthenticated,)
 
