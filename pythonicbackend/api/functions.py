@@ -938,6 +938,7 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
                         myTransientObjectDates['parcel'] = ele.parcel
                         myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
                         myTransientObjectDates['TORH'] = ele.TORH
+                        myTransientObjectDates['totalRouteForDay'] = ele.totalRouteForDay
 
                         myDatesArray.append(myTransientObjectDates)
                 except:
@@ -972,6 +973,7 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
                 myTransientObjectDates['parcel'] = ele.parcel
                 myTransientObjectDates['parcelNotDelivered'] = ele.parcelNotDelivered
                 myTransientObjectDates['TORH'] = ele.TORH
+                myTransientObjectDates['totalRouteForDay'] = ele.totalRouteForDay
 
                 myDatesArray.append(myTransientObjectDates)
 
@@ -1006,8 +1008,14 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
 
         myDriverArray.append(myTransientObjectDriver) 
 
+    dateArrayLocal = []
+    for item in myDatesArray:
+        if item['name'] == 'bottomRoutes':
+            dateArrayLocal.append(item)
+
     myFinalObject = {
         'drivers': myDriverArray,
+        'bottomArray': dateArrayLocal
     } 
 
     return myFinalObject

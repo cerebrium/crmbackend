@@ -38,7 +38,8 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'approvedDateAndTime',
             'registration',
             'vtype',
-            'complianceCheck'
+            'complianceCheck',
+            'totalRouteForDay'
         ]
         
 class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
@@ -129,7 +130,8 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'finish_mileage',
             'parcel',
             'parcelNotDelivered',
-            'TORH'
+            'TORH',
+            'totalRouteForDay'
         ]
 
 class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):
