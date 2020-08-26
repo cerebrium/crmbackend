@@ -38,8 +38,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
             'approvedDateAndTime',
             'registration',
             'vtype',
-            'complianceCheck',
-            'totalRouteForDay'
+            'complianceCheck'
         ]
         
 class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
