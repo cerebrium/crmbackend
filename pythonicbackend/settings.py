@@ -15,6 +15,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'https://pythonicbackend.herokuapp.com',
     'pythonicbackend.herokuapp.com',
+    'localhost',
+    '127.0.0.1'
 ]
 # Application definition
 

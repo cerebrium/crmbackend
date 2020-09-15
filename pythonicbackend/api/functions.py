@@ -708,8 +708,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
 
     myObj = {
         '0': 0.0,
-        'Full Standard Van Route': 121.8,
-        'Full Large Van Route': 141.8,
+        'Full Standard Van Route': 126.8,
+        'Full Large Van Route': 146.8,
         'Transportation Route': 100,
         'MFN Route': 70,
         'Missort Route': 121.8,
