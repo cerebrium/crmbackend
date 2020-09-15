@@ -34,7 +34,7 @@ class Driver(models.Model):
     vehicle_name = models.CharField(max_length=50, null = True)
     deleteButton = models.CharField(max_length = 100, null=True)
 
-    #the following fields will be displayed when a manager clicks on "Add Driver"
+    #the following fields will be displayed when a manager clicks on "Add Driver" idk
     name = models.CharField(max_length = 100, null = True)
     location = models.CharField(max_length = 15, default = 'DBS2', null = True) #want to change to depot
     email = models.CharField(max_length = 50, null=True)
