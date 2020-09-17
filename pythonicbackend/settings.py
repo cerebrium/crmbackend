@@ -15,6 +15,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'https://pythonicbackend.herokuapp.com',
     'pythonicbackend.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
 ]
 # Application definition
 
@@ -52,6 +54,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "https://master.d2i61z5fsjun86.amplifyapp.com",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_METHODS = [
