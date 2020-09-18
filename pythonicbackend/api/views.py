@@ -28,7 +28,7 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 
     # drivers
-    queryset = Driver.objects.all()
+    queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
 
 class InvoicesViewSet(viewsets.ModelViewSet):
@@ -82,7 +82,7 @@ class DataViewSet(APIView):
     # function for all data
     def get(self, request):
         ## defining overall data objects
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         schedule = ScheduledDate.objects.all()
         images = Images.objects.all()
         vehicles = Vehicles.objects.all()
@@ -100,7 +100,7 @@ class StatisticsViewSet(APIView):
 
     def get(self, request):
         ## defining overall data objects
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         schedule = ScheduledDate.objects.all()
         images = Images.objects.all()
 
@@ -152,10 +152,10 @@ class VehicleMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all()
+        images = Images.objects.all().order_by('driver_id')
         theDate = request.body
 
         content = {
@@ -165,10 +165,10 @@ class VehicleMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all()
+        images = Images.objects.all().order_by('driver_id')
         content = {
             'data': returnVanOrderedData(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
@@ -182,8 +182,8 @@ class InvoiceViewSet(APIView):
 
     def post(self, request): 
         invoices = Invoice.objects.all()
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        schedule = ScheduledDate.objects.all().order_by('date')
         vehicles = Vehicles.objects.all()
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
@@ -197,7 +197,7 @@ class InvoiceViewSet(APIView):
     def get(self, request):
         # defining overall data objects
         invoices = Invoice.objects.all()
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         schedule = ScheduledDate.objects.all()
         vehicles = Vehicles.objects.all()
         deductions = DeductionType.objects.all()
@@ -213,8 +213,8 @@ class DailyServiceViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        schedule = ScheduledDate.objects.all().order_by('date')
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
         theDate = request.body
@@ -226,8 +226,8 @@ class DailyServiceViewSet(APIView):
 
     def get(self, request):
         # defining overall data objects
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        schedule = ScheduledDate.objects.all().order_by('date')
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
 
@@ -250,10 +250,10 @@ class ComplianceMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         vehicles = Vehicles.objects.all()
-        vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all()
+        vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
+        images = Images.objects.all().order_by('driver_id')
         theDate = request.body
 
         content = {
@@ -263,10 +263,10 @@ class ComplianceMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all()
+        drivers = Driver.objects.all().order_by('name')
         vehicles = Vehicles.objects.all()
-        vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all()
+        vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
+        images = Images.objects.all().order_by('driver_id')
         content = {
             'data': complianceCheck(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
@@ -280,8 +280,8 @@ class AutoSchedulingMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        schedule = ScheduledDate.objects.all().order_by('date')
         theDate = request.body
 
         content = {
@@ -291,8 +291,8 @@ class AutoSchedulingMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        schedule = ScheduledDate.objects.all().order_by('date')
         content = {
             'data': addDatedDriver(drivers, schedule) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
@@ -307,8 +307,8 @@ class docDrivers(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all()
-        images = Images.objects.all()
+        drivers = Driver.objects.all().order_by('name')
+        images = Images.objects.all().order_by('driver_id')
         content = {
             'data': documentsDriversOnly(drivers, images) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
