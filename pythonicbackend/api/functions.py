@@ -278,7 +278,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
     for ele in driversList:
         myTransientObjectDriver = {}
         datesArray = []
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['deleteButton'] = ele.deleteButton
         myTransientObjectDriver['vanOwner'] = ele.vanOwner
         myTransientObjectDriver['vehicle_name'] = ele.driver_id
@@ -317,7 +317,7 @@ def returnOrderdData(driversList, datesList, imagesList, vehicles, deductions, s
         # # if it can be avoided.
         datesObjectArray = []
         for dateObject in myDatesArray:
-            if dateObject['driver_id'] == ele.name:
+            if dateObject['driver_id'] == str(ele.driver_id):
                 datesObjectArray.append(dateObject)
 
         myTransientObjectDriver['datesArray'] = datesObjectArray    
@@ -422,7 +422,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, se
        ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
@@ -439,7 +439,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, se
          # dates version
         datesArray = []
         for dateObject in myVanDateArray:
-            if dateObject['driver_id'] == ele.name:
+            if dateObject['driver_id'] == str(ele.driver_id):
                 datesArray.append(dateObject) 
 
         myTransientObjectDriver['vanDatesArray'] = datesArray
@@ -586,7 +586,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
     for ele in driversList:
         myTransientObjectDriver = {}
         datesArray = []
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
@@ -620,7 +620,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
         # # if it can be avoided.
         datesObjectArray = []
         for dateObject in myDatesArray:
-            if dateObject['driver_id'] == ele.name:
+            if dateObject['driver_id'] == str(ele.driver_id):
                 datesObjectArray.append(dateObject)
 
         myTransientObjectDriver['datesArray'] = datesObjectArray    
@@ -628,7 +628,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
         # images version
         imagesArray = []
         for imgObject in myImagesArray:
-            if imgObject['driver_id'] == ele.name:
+            if imgObject['driver_id'] == str(ele.driver_id):
                 imagesArray.append(imgObject)
 
         myTransientObjectDriver['imgArray'] = imagesArray  
@@ -708,8 +708,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
 
     myObj = {
         '0': 0.0,
-        'Full Standard Van Route': 126.8,
-        'Full Large Van Route': 146.8,
+        'Full Standard Van Route': 121.8,
+        'Full Large Van Route': 141.8,
         'Transportation Route': 100,
         'MFN Route': 70,
         'Missort Route': 121.8,
@@ -720,7 +720,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
     }
     
     for dateItem in allDatesArray:
-        print(dateItem[9])
+        print(dateItem[7])
         if dateItem[9] in myInvoiceObj:
          #   print(myInvoiceObj[dateItem[9]]['route'])
 
@@ -749,8 +749,8 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
                     'parcels': dateItem[14],
                     'mileage': dateItem[12]*0.17,
                     'deduction': dateItem[17],
-                    'support': dateItem[19] ,
-                    'location': dateItem[7]
+                    'support': dateItem[19],
+                    'location': dateItem[7] 
                 }
 
     myFinalObject = {
@@ -771,6 +771,7 @@ def tokenizer(managerList, requestBody):
     # myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '')
 
     return isAuthenticated
+
 
 def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selectedDate=None):
     myVehiclesArray = []
@@ -826,7 +827,7 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
        ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
@@ -848,7 +849,7 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
         print('hello')
         imagesArray = []
         for imgObject in myImagesArray:
-            if imgObject['driver_id'] == ele.name:
+            if imgObject['driver_id'] == str(ele.driver_id):
                 imagesArray.append(imgObject)
 
         myTransientObjectDriver['imgArray'] = imagesArray  
@@ -877,7 +878,7 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
 
         imagesArray = []
         for imgObject in myImagesArray:
-            if imgObject['driver_id'] == ele.name:
+            if imgObject['driver_id'] == str(ele.driver_id):
                 imagesArray.append(imgObject)
 
         myTransientObjectDriver['imgArray'] = imagesArray  
@@ -974,7 +975,7 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
 
     for ele in driversList:
         myTransientObjectDriver = {}
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
@@ -992,10 +993,10 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
         myTransientObjectDriver['vtype'] = ele.vtype
         myTransientObjectDriver['complianceCheck'] = ele.complianceCheck
 
-        ## iterate through each date in datesList
+        ## iterate through each date in datesList fuck me
         datesArray = []
         for item in myDatesArray:
-            if item['driver_id'] == ele.name:
+            if item['driver_id'] == str(ele.driver_id):
                 datesArray.append(item)
         myTransientObjectDriver['datesList'] = datesArray
 
@@ -1014,8 +1015,49 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
     return myFinalObject
 
 def documentsDriversOnly(driversList, imagesList): 
-    myImagesArray = []
-    myDriverArray = []     
+    myDriverArray = []  
+    imageObj = {}   
+
+    for item in imagesList:
+        if str(item.driver_id) in imageObj:
+            myTransientImage = {}
+            myTransientImage['driver_id'] = str(item.driver_id)
+            myTransientImage['vehicle_id'] = str(item.vehicle_id)
+            myTransientImage['image_id'] = item.image_id
+            myTransientImage['name'] = item.name
+            myTransientImage['countryOfIssue'] = item.countryOfIssue
+            myTransientImage['expiryDate'] = item.expiryDate
+            myTransientImage['dueDate'] = item.dueDate
+            myTransientImage['datePassed'] = item.datePassed
+            myTransientImage['photo'] = item.photo
+            myTransientImage['managerApprovedName'] = item.managerApprovedName
+            myTransientImage['managerApprovedDate'] = item.managerApprovedDate
+            myTransientImage['imagesLink'] = item.imagesLink
+            myTransientImage['verified'] = item.verified
+            myTransientImage['driverSigned'] = item.driverSigned
+            myTransientImage['points'] = item.points
+            myTransientImage['nextDVLAScreenshot'] = item.nextDVLAScreenshot
+            imageObj[str(item.driver_id)].append(myTransientImage)
+        else:
+            imageObj[str(item.driver_id)] = []
+            myTransientImage = {}
+            myTransientImage['driver_id'] = str(item.driver_id)
+            myTransientImage['vehicle_id'] = str(item.vehicle_id)
+            myTransientImage['image_id'] = item.image_id
+            myTransientImage['name'] = item.name
+            myTransientImage['countryOfIssue'] = item.countryOfIssue
+            myTransientImage['expiryDate'] = item.expiryDate
+            myTransientImage['dueDate'] = item.dueDate
+            myTransientImage['datePassed'] = item.datePassed
+            myTransientImage['photo'] = item.photo
+            myTransientImage['managerApprovedName'] = item.managerApprovedName
+            myTransientImage['managerApprovedDate'] = item.managerApprovedDate
+            myTransientImage['imagesLink'] = item.imagesLink
+            myTransientImage['verified'] = item.verified
+            myTransientImage['driverSigned'] = item.driverSigned
+            myTransientImage['points'] = item.points
+            myTransientImage['nextDVLAScreenshot'] = item.nextDVLAScreenshot
+            imageObj[str(item.driver_id)].append(myTransientImage)
 
        ## recreate the driver dataset
     for ele in driversList:
@@ -1039,30 +1081,9 @@ def documentsDriversOnly(driversList, imagesList):
         myTransientObjectDriver['vtype'] = ele.vtype 
         myTransientObjectDriver['complianceCheck'] = ele.complianceCheck 
 
-        imgArray = []
-        for item in imagesList:
-            if str(item.driver_id) == ele.name:
-                myTransientImage = {}
-                myTransientImage['driver_id'] = str(item.driver_id)
-                myTransientImage['vehicle_id'] = str(item.vehicle_id)
-                myTransientImage['image_id'] = item.image_id
-                myTransientImage['name'] = item.name
-                myTransientImage['countryOfIssue'] = item.countryOfIssue
-                myTransientImage['expiryDate'] = item.expiryDate
-                myTransientImage['dueDate'] = item.dueDate
-                myTransientImage['datePassed'] = item.datePassed
-                myTransientImage['photo'] = item.photo
-                myTransientImage['managerApprovedName'] = item.managerApprovedName
-                myTransientImage['managerApprovedDate'] = item.managerApprovedDate
-                myTransientImage['imagesLink'] = item.imagesLink
-                myTransientImage['verified'] = item.verified
-                myTransientImage['driverSigned'] = item.driverSigned
-                myTransientImage['points'] = item.points
-                myTransientImage['nextDVLAScreenshot'] = item.nextDVLAScreenshot
-        
-                imgArray.append(myTransientImage)
-                
-        myTransientObjectDriver['imgArray'] = imgArray
+        for item in imageObj:
+            if item == str(ele.driver_id):
+                myTransientObjectDriver['imgArray'] = imageObj[item]
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
@@ -1253,7 +1274,7 @@ def dailyService(driversList, datesList, deductions, support, selectedDate=None)
 
     for ele in driversList:
         myTransientObjectDriver = {}
-        myTransientObjectDriver['driver_id'] = ele.driver_id
+        myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.vehicle_name
         myTransientObjectDriver['name'] = ele.name
         myTransientObjectDriver['location'] = ele.location
@@ -1274,7 +1295,7 @@ def dailyService(driversList, datesList, deductions, support, selectedDate=None)
         ## iterate through each date in datesList fuck me
         datesArray = []
         for item in myDatesArray:
-            if item['driver_id'] == ele.name:
+            if item['driver_id'] == str(ele.driver_id):
                 datesArray.append(item)
         myTransientObjectDriver['datesList'] = datesArray
 
@@ -1284,4 +1305,4 @@ def dailyService(driversList, datesList, deductions, support, selectedDate=None)
         'drivers': myDriverArray,
     } 
 
-    return myFinalObject    
+    return myFinalObject
