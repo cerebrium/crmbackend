@@ -28,7 +28,7 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 
     # drivers
-    queryset = Driver.objects.all().order_by('driver_id')
+    queryset = Driver.objects.all()
     serializer_class = DriverSerializer
 
 class InvoicesViewSet(viewsets.ModelViewSet):
@@ -71,7 +71,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     # schedule
-    queryset = ScheduledDate.objects.all().order_by('driver_id')
+    queryset = ScheduledDate.objects.all()
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
@@ -82,7 +82,7 @@ class DataViewSet(APIView):
     # function for all data
     def get(self, request):
         ## defining overall data objects
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all()
         images = Images.objects.all()
         vehicles = Vehicles.objects.all()
@@ -100,7 +100,7 @@ class StatisticsViewSet(APIView):
 
     def get(self, request):
         ## defining overall data objects
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all()
         images = Images.objects.all()
 
@@ -152,7 +152,7 @@ class VehicleMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
         images = Images.objects.all().order_by('driver_id')
@@ -165,7 +165,7 @@ class VehicleMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
         images = Images.objects.all().order_by('driver_id')
@@ -182,7 +182,7 @@ class InvoiceViewSet(APIView):
 
     def post(self, request): 
         invoices = Invoice.objects.all()
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
         vehicles = Vehicles.objects.all()
         deductions = DeductionType.objects.all()
@@ -197,7 +197,7 @@ class InvoiceViewSet(APIView):
     def get(self, request):
         # defining overall data objects
         invoices = Invoice.objects.all()
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all()
         vehicles = Vehicles.objects.all()
         deductions = DeductionType.objects.all()
@@ -213,7 +213,7 @@ class DailyServiceViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
@@ -226,7 +226,7 @@ class DailyServiceViewSet(APIView):
 
     def get(self, request):
         # defining overall data objects
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
@@ -250,7 +250,7 @@ class ComplianceMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
         images = Images.objects.all().order_by('driver_id')
@@ -263,7 +263,7 @@ class ComplianceMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
         images = Images.objects.all().order_by('driver_id')
@@ -280,7 +280,7 @@ class AutoSchedulingMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
         theDate = request.body
 
@@ -291,7 +291,7 @@ class AutoSchedulingMapViewSet(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
         content = {
             'data': addDatedDriver(drivers, schedule) # the function is actually called in this file... so it has this files scope.... why we put things in 
@@ -307,7 +307,7 @@ class docDrivers(APIView):
 
         # function for all data
     def get(self, request):
-        drivers = Driver.objects.all().order_by('driver_id')
+        drivers = Driver.objects.all()
         images = Images.objects.all().order_by('driver_id')
         content = {
             'data': documentsDriversOnly(drivers, images) # the function is actually called in this file... so it has this files scope.... why we put things in 
