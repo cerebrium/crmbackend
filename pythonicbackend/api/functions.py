@@ -1084,6 +1084,8 @@ def documentsDriversOnly(driversList, imagesList):
         for item in imageObj:
             if item == str(ele.driver_id):
                 myTransientObjectDriver['imgArray'] = imageObj[item]
+            else:
+                myTransientObjectDriver['imgArray'] = []
 
         ## append object to array
         myDriverArray.append(myTransientObjectDriver)   
