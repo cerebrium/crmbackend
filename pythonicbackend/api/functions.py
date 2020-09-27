@@ -904,8 +904,6 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
         # myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
 
         # from the backend
-        weekBeforeSunday
-        mostRecentSunday
         try:
             weekBeforeSunday = datetime.datetime.strptime(selectedDate, '%a %b %d %Y').date()
             mostRecentSunday = weekBeforeSunday + datetime.timedelta(days=14)   
