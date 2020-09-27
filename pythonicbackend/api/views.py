@@ -282,7 +282,10 @@ class AutoSchedulingMapViewSet(APIView):
     def post(self, request): 
         drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all().order_by('date')
-        theDate = request.body
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        theDate = body['date']
+
 
         content = {
             'data': addDatedDriver(drivers, schedule, theDate)
