@@ -679,9 +679,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
     for dateItem in allDatesArray:
         if dateItem[9] in myInvoiceObj:
          #   print(myInvoiceObj[dateItem[9]]['route'])
-            # add the name
-            myInvoiceObj[dateItem[9]]['name'] = driverObj[dateItem[9]]
-
             # sums the routes
             myInvoiceObj[dateItem[9]]['route'] = myInvoiceObj[dateItem[9]]['route'] + float([myObj[dateItem[3]]][0])
 
@@ -702,6 +699,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
             
         else:
             myInvoiceObj[dateItem[9]] = {
+                    'name': driverObj[dateItem[9]],
                     'route': myObj[dateItem[3]],
                     'parcels': dateItem[14],
                     'mileage': dateItem[12]*0.17,
@@ -1154,10 +1152,6 @@ def dailyService(driversList, datesList, deductions, support, selectedDate=None)
 
                 myDatesArray.append(myTransientObjectDates)
     else:
-        # from the postman requests
-        # myString = str(selectedDate).replace('%20', ' ').replace('date=', '').replace("b'", "").replace("'", "")
-        # print('*********************** my string: ', myString)
-
         # from the backend
         myString = str(selectedDate).replace("'b'", '').replace('{"date":"', '').replace('"', '').replace("b'", '').replace("}'", '') 
         selectedDate = datetime.datetime.strptime(myString, '%a %b %d %Y').date()
