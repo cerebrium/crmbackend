@@ -1273,3 +1273,28 @@ def dailyService(driversList, datesList, deductions, support, selectedDate=None)
     } 
 
     return myFinalObject
+
+def vanWeeklyDates(vanDatesList, selectedDate):
+    finalArray = []
+    # from the backend
+    try:
+        weekBeforeSunday = datetime.datetime.strptime(selectedDate, '%a %b %d %Y').date()
+        mostRecentSunday = weekBeforeSunday + datetime.timedelta(days=14)   
+    except:
+        print('no date')    
+
+    if weekBeforeSunday:
+        for ele in vanDatesList:
+            if weekBeforeSunday <= datetime.datetime.strptime(ele.date, '%a %b %d %Y').date() < mostRecentSunday:
+                myTransientVehicleDate = {}
+                myTransientVehicleDate['vehicleDate_id'] = str(ele.vehicleDate_id)
+                myTransientVehicleDate['vehicle_id'] = str(ele.vehicle_id)
+                myTransientVehicleDate['driver_id'] = str(ele.driver_id)
+                myTransientVehicleDate['date'] = ele.date
+                finalArray.append(myTransientVehicleDate)
+
+    myFinalObject = {
+        'dates': finalArray
+    } 
+
+    return myFinalObject
