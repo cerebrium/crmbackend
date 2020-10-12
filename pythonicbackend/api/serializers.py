@@ -131,7 +131,8 @@ class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):
             'parcel',
             'parcelNotDelivered',
             'TORH',
-            'totalRouteForDay'
+            'totalRouteForDay',
+            'week_number'
         ]
 
 class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):

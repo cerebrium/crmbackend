@@ -180,6 +180,9 @@ class ScheduledDate(models.Model):
     logOut_time = models.TimeField("LOG OUT", null = True)
     logIn_time = models.TimeField("LOG IN", null = True)
 
+    # sorting field
+    week_number = models.IntegerField("WEEKNUMBER", default=1, editable=True, null = True)
+
      #here we don't need the manager to enter the station every time, but if he choose a driver from anotehr station
      # the location should be either auto filled, or manually
     location = models.CharField(max_length = 15, default='DBS2', null=True)

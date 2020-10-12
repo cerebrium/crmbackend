@@ -280,17 +280,17 @@ class AutoSchedulingMapViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all().order_by('date')
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         theDate = body['date']
-
+        theWeek = body['week']
+        drivers = Driver.objects.all()
+        schedule = ScheduledDate.objects.filter(week_number = theWeek | theWeek+1)
 
         content = {
             'data': addDatedDriver(drivers, schedule, theDate)
         }
-        return Response(content)   
+        return Response(content) 
 
         # function for all data
     def get(self, request):
