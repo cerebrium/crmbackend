@@ -144,7 +144,8 @@ class DeductionTypeSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'amount',
             'comment',
-            'date'
+            'date',
+            'week_number'
         ]
 
 class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -156,7 +157,8 @@ class SupportTypeSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'amount',
             'comment',
-            'date'
+            'date',
+            'week_number'
         ]
 
 class VehicleScheduledDateSerializer(serializers.HyperlinkedModelSerializer):
@@ -166,5 +168,6 @@ class VehicleScheduledDateSerializer(serializers.HyperlinkedModelSerializer):
             'vehicleDate_id',
             'vehicle_id',
             'driver_id',
-            'date'
+            'date',
+            'week_number'
         ]

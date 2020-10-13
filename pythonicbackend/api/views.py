@@ -18,7 +18,7 @@ from django.db.models import Q
 class managersViewSet(viewsets.ModelViewSet):
     # Authentication
     permission_classes = (IsAuthenticated,)
-
+    
     # Users
     queryset = managers.objects.all()
     serializer_class = managersSerializer
@@ -29,17 +29,9 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 
     # drivers
-    queryset = Driver.objects.all()
+    queryset = Driver.objects.all().order_by('name')
     serializer_class = DriverSerializer
-
-class InvoicesViewSet(viewsets.ModelViewSet):
-    # Authentication
-    permission_classes = (IsAuthenticated,)
-
-
-    queryset = Invoice.objects.all()
-    serializer_class = InvoiceSerializer
-        
+    
 class ImagesViewSet(viewsets.ModelViewSet):
     # Authentication
     permission_classes = (IsAuthenticated,)
@@ -72,7 +64,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     # schedule
-    queryset = ScheduledDate.objects.all()
+    queryset = ScheduledDate.objects.all().order_by('driver_id')
     serializer_class = ScheduledDatesSerializer
 
 class DataViewSet(APIView):
@@ -156,7 +148,7 @@ class VehicleMapViewSet(APIView):
         drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all().order_by('driver_id')
+        images = Images.objects.all()
         theDate = request.body
 
         content = {
@@ -169,7 +161,7 @@ class VehicleMapViewSet(APIView):
         drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
         vehiclesDates = VehicleScheduledDate.objects.all()
-        images = Images.objects.all().order_by('driver_id')
+        images = Images.objects.all()
         content = {
             'data': returnVanOrderedData(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
@@ -182,13 +174,20 @@ class InvoiceViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
-        invoices = Invoice.objects.all()
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        theDate = body['date']
+        theWeek = body['week']
         drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all().order_by('date')
+        
+        # filtered queries
+        schedule = ScheduledDate.objects.filter(Q(week_number = theWeek))
+        deductions = DeductionType.objects.filter(Q(week_number = theWeek))
+        support = SupportType.objects.filter(Q(week_number = theWeek))
+
+        drivers = Driver.objects.all().order_by('name')
+
         vehicles = Vehicles.objects.all()
-        deductions = DeductionType.objects.all()
-        support = SupportType.objects.all()
-        theDate = request.body
 
         content = {
             'data': invoice(drivers, schedule, vehicles, deductions, support, theDate)
@@ -197,7 +196,6 @@ class InvoiceViewSet(APIView):
 
     def get(self, request):
         # defining overall data objects
-        invoices = Invoice.objects.all()
         drivers = Driver.objects.all()
         schedule = ScheduledDate.objects.all()
         vehicles = Vehicles.objects.all()
@@ -215,7 +213,7 @@ class DailyServiceViewSet(APIView):
 
     def post(self, request): 
         drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all().order_by('date')
+        schedule = ScheduledDate.objects.all()
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
         theDate = request.body
@@ -228,14 +226,14 @@ class DailyServiceViewSet(APIView):
     def get(self, request):
         # defining overall data objects
         drivers = Driver.objects.all()
-        schedule = ScheduledDate.objects.all().order_by('date')
+        schedule = ScheduledDate.objects.all()
         deductions = DeductionType.objects.all()
         support = SupportType.objects.all()
 
         content = {
             'data': dailyService(drivers, schedule, deductions, support)
         }
-        return Response(content)        
+        return Response(content)
 
 class securityViewSet(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -253,8 +251,8 @@ class ComplianceMapViewSet(APIView):
     def post(self, request): 
         drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
-        vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
-        images = Images.objects.all().order_by('driver_id')
+        vehiclesDates = VehicleScheduledDate.objects.all()
+        images = Images.objects.all()
         theDate = request.body
 
         content = {
@@ -266,8 +264,8 @@ class ComplianceMapViewSet(APIView):
     def get(self, request):
         drivers = Driver.objects.all()
         vehicles = Vehicles.objects.all()
-        vehiclesDates = VehicleScheduledDate.objects.all().order_by('date')
-        images = Images.objects.all().order_by('driver_id')
+        vehiclesDates = VehicleScheduledDate.objects.all()
+        images = Images.objects.all()
         content = {
             'data': complianceCheck(vehicles, vehiclesDates, images, drivers) # the function is actually called in this file... so it has this files scope.... why we put things in 
             # functions... makes them modular and then we can control their scope 
@@ -287,12 +285,14 @@ class AutoSchedulingMapViewSet(APIView):
         theWeek = body['week']
         theNextWeek = theWeek+1
         drivers = Driver.objects.all()
+        
+        # schedule = ScheduledDate.objects.all()
         schedule = ScheduledDate.objects.filter(Q(week_number = theWeek) | Q(week_number = theNextWeek))
 
         content = {
             'data': addDatedDriver(drivers, schedule, theDate)
         }
-        return Response(content) 
+        return Response(content)   
 
         # function for all data
     def get(self, request):
@@ -335,16 +335,18 @@ class docDrivers(APIView):
         }
 
         return Response(content)
+
 class VanWeeklyDatesView(APIView):
         # Authentication
     permission_classes = (IsAuthenticated,)
 
     serializer_class = VehicleScheduledDateSerializer
     def post(self, request):
-        vehicleDates = VehicleScheduledDate.objects.all()
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         date = body['date']
+        theWeek = body['week']
+        vehicleDates = VehicleScheduledDate.objects.filter(Q(week_number = theWeek))
 
         content = {
             'data': vanWeeklyDates(vehicleDates, date)
