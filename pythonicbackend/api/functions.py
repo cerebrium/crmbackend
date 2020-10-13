@@ -670,6 +670,7 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
         'Full Large Van Route': 141.8,
         'Transportation Route': 100,
         'MFN Route': 70,
+        'Manager': 0,
         'Missort Route': 121.8,
         'Classroom Training': 75,
         'Ride Along': 75,
@@ -700,14 +701,14 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
             
         else:
             myInvoiceObj[dateItem[9]] = {
-                    'name': driverObj[dateItem[9]],
-                    'route': myObj[dateItem[3]],
-                    'parcels': dateItem[14],
-                    'mileage': dateItem[12]*0.17,
-                    'deduction': dateItem[17],
-                    'support': dateItem[19],
-                    'location': dateItem[7] 
-                }
+                'name': driverObj[dateItem[9]],
+                'route': myObj[dateItem[3]],
+                'parcels': dateItem[14],
+                'mileage': dateItem[12]*0.17,
+                'deduction': dateItem[17],
+                'support': dateItem[19],
+                'location': dateItem[7] 
+            }
 
     myFinalObject = {
         'myOneWeekArray': myInvoiceObj,
