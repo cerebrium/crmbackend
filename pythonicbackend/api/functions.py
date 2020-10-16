@@ -607,8 +607,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
 
         driverObj[ele.location].append(myTransientObjectDriver)
 
-    print(myDriverArray)    
-
 
     # # # find out today
     # # if selectedDate == None:
@@ -744,7 +742,6 @@ def tokenizer(managerList, requestBody):
 
     return isAuthenticated
 
-
 def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selectedDate=None):
     myVehiclesArray = []
     myImagesArray = []
@@ -867,6 +864,13 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
 def addDatedDriver(driversList, datesList, selectedDate=None):
     myDriverArray = []
     myDatesArray = []
+    driverObj = {
+        'DBS2': [],
+        'DRR1': [],
+        'DEX2': [],
+        'DXP1': [],
+        'DSN1': []
+    }
 
     if selectedDate == None:
         currentDate = datetime.date.today()
@@ -982,7 +986,7 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
                 datesArray.append(item)
         myTransientObjectDriver['datesList'] = datesArray
 
-        myDriverArray.append(myTransientObjectDriver) 
+        driverObj[ele.location].append(myTransientObjectDriver) 
 
     dateArrayLocal = []
     for item in myDatesArray:
@@ -990,7 +994,7 @@ def addDatedDriver(driversList, datesList, selectedDate=None):
             dateArrayLocal.append(item)
 
     myFinalObject = {
-        'drivers': myDriverArray,
+        'drivers': driverObj,
         'bottomArray': dateArrayLocal
     } 
 
