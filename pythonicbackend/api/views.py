@@ -187,10 +187,10 @@ class InvoiceViewSet(APIView):
 
         drivers = Driver.objects.all().order_by('name')
 
-        vehicles = Vehicles.objects.all()
+        # vehicles = Vehicles.objects.all()
 
         content = {
-            'data': invoice(drivers, schedule, vehicles, deductions, support, theDate)
+            'data': invoice(drivers, schedule, deductions, support, theDate)
         }
         return Response(content)   
 
