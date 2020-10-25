@@ -475,7 +475,7 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, se
 
     return myFinalObject
 
-def invoice(driversList, datesList, vehiclesList, deductions, support, selectedDate=None):
+def invoice(driversList, datesList, deductions, support, selectedDate=None):
  
 
     #### add an array of registrations for the vehicles that are owned by the company
@@ -492,14 +492,6 @@ def invoice(driversList, datesList, vehiclesList, deductions, support, selectedD
         'DXP1': [],
         'Other': []
         }
-    # dateObj = {
-    #     'DBS2': [],
-    #     'DSN1': [],
-    #     'DEX2': [],
-    #     'DRR1': [],
-    #     'DXP1': [],
-    #     'Other': []
-    # }
 
     ## array for checking urls
     urlArray = []
