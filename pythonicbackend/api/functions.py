@@ -477,7 +477,6 @@ def returnVanOrderedData(vanList, scheduledDatesVan, imagesList, driversList, se
 
 def invoice(driversList, datesList, deductions, support, selectedDate=None):
  
-
     #### add an array of registrations for the vehicles that are owned by the company
     #### add array containing the status of the drivers
     myDriverArray = []
@@ -499,7 +498,6 @@ def invoice(driversList, datesList, deductions, support, selectedDate=None):
     ## recreate the driver dataset
     for ele in driversList:
         myTransientObjectDriver = {}
-        datesArray = []
         myTransientObjectDriver['driver_id'] = str(ele.driver_id)
         myTransientObjectDriver['vehicle_name'] = ele.driver_id
         myTransientObjectDriver['name'] = ele.name
@@ -586,17 +584,29 @@ def invoice(driversList, datesList, deductions, support, selectedDate=None):
 
         station = 'Other'
 
+        localGate = False
+
         for element in myDriverArray:
-            if str(ele.driver_id) == str(element['driver_id']):
-                localGate = False
-                for driverElement in driverMapObj[str(element['location'])]:
-                    if driverElement['name'] == element['name']:
+            localElement = dict(element)
+            localElement['datesList'] = []
+            # assign location
+            location = ''
+            if str(ele.location) == 'CT' or str(ele.location) == 'RT' or str(ele.location) == 'Holiday':
+                location = element['location']
+            else:
+                location = str(ele.location)
+
+            # handle this bullshit  
+            if str(localElement['driver_id']) == str(ele.driver_id):
+                for driverElement in driverMapObj[location]:
+                    if driverElement['name'] == localElement['name']:
+                        localElement['datesList'] = driverElement['datesList']
+                        localElement['datesList'].append(myTransientObjectDates)
                         localGate = True
-                        element['datesList'].append(myTransientObjectDates)
                 if localGate == False:
-                    localElement = element
                     localElement['datesList'].append(myTransientObjectDates)
-                    driverMapObj[str(element['location'])].append(localElement)        
+                    driverMapObj[location].append(localElement)
+                
 
                 # driverMapObj
 
@@ -604,7 +614,8 @@ def invoice(driversList, datesList, deductions, support, selectedDate=None):
         'dates': driverMapObj,
     }   
 
-    return myFinalObject    
+    return myFinalObject          
+
 
 
 def tokenizer(managerList, requestBody):
