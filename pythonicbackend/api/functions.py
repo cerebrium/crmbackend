@@ -512,6 +512,7 @@ def invoice(driversList, datesList, deductions, support, selectedDate=None):
         myTransientObjectDriver['approvedBy'] = ele.approvedBy
         myTransientObjectDriver['approvedDateAndTime'] = ele.approvedDateAndTime
         myTransientObjectDriver['datesList'] = []
+        myTransientObjectDriver['vat'] = ele.vat
         
         myDriverArray.append(myTransientObjectDriver)
 
@@ -616,8 +617,6 @@ def invoice(driversList, datesList, deductions, support, selectedDate=None):
 
     return myFinalObject          
 
-
-
 def tokenizer(managerList, requestBody):
     isAuthenticated = False
     print(requestBody)
@@ -700,6 +699,7 @@ def complianceCheck(vanList, scheduledDatesVan, imagesList, driversList, selecte
         myTransientObjectDriver['registration'] = ele.registration
         myTransientObjectDriver['vtype'] = ele.vtype
         myTransientObjectDriver['complianceCheck'] = ele.complianceCheck
+        myTransientObjectDriver['vat'] = ele.vat
 
                 # images version
         print('hello')
