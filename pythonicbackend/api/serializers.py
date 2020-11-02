@@ -1,4 +1,4 @@
-from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages, DeductionType, SupportType, VehicleScheduledDate 
+from .models import Driver, ScheduledDate, Images, Vehicles, Invoice, managers, VehicleDamages, DeductionType, SupportType, VehicleScheduledDate, DailyMessage 
 from rest_framework import serializers
 
 
@@ -172,3 +172,13 @@ class VehicleScheduledDateSerializer(serializers.HyperlinkedModelSerializer):
             'date',
             'week_number'
         ]
+
+class DailyMessageSerializer(serializers.HyperlinkedModelSerializer):
+    class  Meta:
+        model = DailyMessage
+        fields = [
+            'message_id',
+            'date',
+            'message'
+        ]
+
