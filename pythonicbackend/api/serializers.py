@@ -170,7 +170,8 @@ class VehicleScheduledDateSerializer(serializers.HyperlinkedModelSerializer):
             'vehicle_id',
             'driver_id',
             'date',
-            'week_number'
+            'week_number',
+            'location'
         ]
 
 class DailyMessageSerializer(serializers.HyperlinkedModelSerializer):
