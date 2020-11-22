@@ -256,3 +256,10 @@ class DailyServiceLock(models.Model):
 
     def __str__(self):
         return self.message
+
+class RentalVanLock(models.Model):
+    rental_id = models.AutoField(primary_key=True, unique=True)
+    date = models.CharField(null=True, max_length = 30)
+
+    def __str__(self):
+        return self.rental_id
