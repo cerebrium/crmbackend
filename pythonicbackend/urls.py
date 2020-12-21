@@ -41,4 +41,5 @@ urlpatterns = [
     path('driverimages/', views.ReturnDriverImage.as_view(), name='Image with id'),
     path('weekschedule/', views.ReturnScheduledSortWeek.as_view(), name='week schedule data'),
     path('driverhistory/', views.DriverHistoryView.as_view(), name='drivers associated with van'),
+    path('singledriverdates/', views.ReturnScheduledSingleSorts.as_view(), name='drivers associated with van'),
 ]

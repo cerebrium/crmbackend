@@ -477,6 +477,21 @@ class DriverHistoryAddView(viewsets.ModelViewSet):
     queryset = DriverHistory.objects.all()
     serializer_class = DriverHistorySerializer
 
+class ReturnScheduledSingleSorts(APIView):
+        # Authentication
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request): 
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        theWeek = body['week']
+        theDate = body['date']
+        
+        dates = ScheduledDate.objects.filter(Q(week_number = theWeek), Q(date = theDate))
+        serializer = ScheduledDatesSerializer(dates, many=True, context={'request': request})
+
+        return Response({"data": serializer.data})
+
 class DriverHistoryView(APIView):
     
     # Authentication
