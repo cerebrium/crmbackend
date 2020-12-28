@@ -18,6 +18,8 @@ router.register(r'dailyservicelock', views.DailyServiceLockViewSet)
 router.register(r'dailyservicelocktwo', views.DailyServiceLockTwoViewSet)
 router.register(r'rentallock', views.RentalVanLock)
 router.register(r'driveraddhistory', views.DriverHistoryAddView)
+router.register(r'dailyserviceoverridetwo', views.DailyServiceOverrideTwoViewSet)
+router.register(r'validationsheet', views.ValidationSheetView)
 
 # Setup automatic URL routing
 # Additionally, we include login URLs for the browsable API.
@@ -42,4 +44,5 @@ urlpatterns = [
     path('weekschedule/', views.ReturnScheduledSortWeek.as_view(), name='week schedule data'),
     path('driverhistory/', views.DriverHistoryView.as_view(), name='drivers associated with van'),
     path('singledriverdates/', views.ReturnScheduledSingleSorts.as_view(), name='drivers associated with van'),
+    path('validationsort/', views.ValidationSheetSort.as_view(), name='drivers associated with van'),
 ]
