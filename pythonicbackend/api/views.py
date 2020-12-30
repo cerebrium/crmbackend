@@ -519,9 +519,9 @@ class ValidationSheetView(viewsets.ModelViewSet):
 
     queryset = ValidationSheet.objects.all()
     serializer_class = ValidationSheetSerializer    
-
+        
 class ValidationSheetSort(APIView):
-        # Authentication
+    # Authentication
     permission_classes = (IsAuthenticated,)
 
     def post(self, request): 
@@ -532,4 +532,4 @@ class ValidationSheetSort(APIView):
         dates = ValidationSheet.objects.filter(Q(week_number = theWeek))
         serializer = ValidationSheetSerializer(dates, many=True, context={'request': request})
 
-        return Response({"data": serializer.data})    
+        return Response({"data": serializer.data})
