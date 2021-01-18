@@ -45,5 +45,6 @@ urlpatterns = [
     path('driverhistory/', views.DriverHistoryView.as_view(), name='drivers associated with van'),
     path('singledriverdates/', views.ReturnScheduledSingleSorts.as_view(), name='drivers associated with van'),
     path('validationsort/', views.ValidationSheetSort.as_view(), name='drivers associated with van'),
+    path('validationsorttwo/', views.ReturnValidationInfo.as_view(), name='drivers associated with van'),
     path('tripledates/', views.ReturnScheduledSortsTriple.as_view(), name='triple week dates')
 ]
