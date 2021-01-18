@@ -44,6 +44,6 @@ urlpatterns = [
     path('weekschedule/', views.ReturnScheduledSortWeek.as_view(), name='week schedule data'),
     path('driverhistory/', views.DriverHistoryView.as_view(), name='drivers associated with van'),
     path('singledriverdates/', views.ReturnScheduledSingleSorts.as_view(), name='drivers associated with van'),
-    path('validationsort/', views.ValidationSheetSort.as_view(), name='drivers associated with van'),
+    path('validationsort/', views.ValidationSortRoute.as_view(), name='drivers associated with van'),
     path('tripledates/', views.ReturnScheduledSortsTriple.as_view(), name='triple week dates')
 ]

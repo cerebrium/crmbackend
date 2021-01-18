@@ -547,7 +547,7 @@ class ValidationSheetView(viewsets.ModelViewSet):
     queryset = ValidationSheet.objects.all()
     serializer_class = ValidationSheetSerializer    
         
-class ReturnScheduledSortWeek(APIView):
+class ValidationSortRoute(APIView):
         # Authentication
     permission_classes = (IsAuthenticated,)
 
