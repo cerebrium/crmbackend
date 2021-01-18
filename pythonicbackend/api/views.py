@@ -556,7 +556,7 @@ class ValidationSortRoute(APIView):
         body = json.loads(body_unicode)
         theWeek = body['week']
         
-        dates = ScheduledDate.objects.filter(Q(week_number = theWeek))
-        serializer = ScheduledDatesSerializer(dates, many=True, context={'request': request})
+        dates = ValidationSheet.objects.filter(Q(week_number = theWeek))
+        serializer = ValidationSheetSerializer(dates, many=True, context={'request': request})
 
         return Response({"data": serializer.data})
