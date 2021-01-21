@@ -249,7 +249,9 @@ class SupportType(models.Model):
 class DailyMessage(models.Model):
     message_id = models.AutoField(primary_key=True, unique=True)
     date = models.CharField(null=True, max_length = 30)
-    message = models.CharField(null=True, max_length = 300)
+    message = models.CharField(null=True, max_length = 900)
+    name = models.CharField(null=True, max_length = 300)
+    station = models.CharField(null=True, default='DBS2', max_length = 15)
 
     def __str__(self):
         return self.message
