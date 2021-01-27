@@ -111,6 +111,7 @@ class ImagesSerializer(serializers.HyperlinkedModelSerializer):
             'driverSigned',
             'points',
             'nextDVLAScreenshot',
+            'storageBool'
         ]
 
 class ScheduledDatesSerializer(serializers.HyperlinkedModelSerializer):  
