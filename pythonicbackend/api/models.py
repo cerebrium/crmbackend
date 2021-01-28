@@ -289,11 +289,11 @@ class DriverHistory(models.Model):
         editable=False
     )
     date = models.CharField(null=True, max_length = 30)
+    endDate = models.CharField(null=True, max_length = 30)
     week_number = models.IntegerField("WEEKNUMBER", default=1, editable=True, null = True)
     driver_id = models.CharField(null=True, max_length = 100)
     registration = models.CharField(null=True, max_length = 100)
     name = models.CharField(null=True, max_length = 30)
-    endDate = models.CharField(null=True, max_length = 30)
 
     def __str__(self):
         return self.DriverHistory_id
