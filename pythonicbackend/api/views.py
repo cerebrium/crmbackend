@@ -1,11 +1,11 @@
-from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages, SupportType, DeductionType, VehicleScheduledDate, DailyMessage, DailyServiceLock, RentalVanLock, DailyServiceLockTwo, DriverHistory, ValidationSheet, DailyServiceOverrideTwo, ValidationMessage
+from .models import Driver, ScheduledDate, DriverManager, ScheduledDatesManager, Images, Vehicles, Invoice, managers, VehicleDamages, SupportType, DeductionType, VehicleScheduledDate, DailyMessage, DailyServiceLock, RentalVanLock, DailyServiceLockTwo, DriverHistory, ValidationSheet, DailyServiceOverrideTwo, ValidationMessage, RentalVanOveride
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
 from rest_framework import viewsets
 import json
 import base64
 from rest_framework.permissions import IsAuthenticated
-from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer, SupportTypeSerializer, DeductionTypeSerializer, VehicleScheduledDateSerializer, DailyMessageSerializer, DailyServiceLockSerializer, RentalVanLockSerializer, DailyServiceLockTwoSerializer, DriverHistorySerializer, ValidationSheetSerializer, DailyServiceOverrideSerializerTwo, ValidationMessageSerializer
+from .serializers import managersSerializer, DriverSerializer, ScheduledDatesSerializer, ImagesSerializer, VehiclesSerializer, InvoiceSerializer, VehicleDamagesSerializer, SupportTypeSerializer, DeductionTypeSerializer, VehicleScheduledDateSerializer, DailyMessageSerializer, DailyServiceLockSerializer, RentalVanLockSerializer, DailyServiceLockTwoSerializer, DriverHistorySerializer, ValidationSheetSerializer, DailyServiceOverrideSerializerTwo, ValidationMessageSerializer, RentalVanOverideSerializer
 from .functions import timeDifference, returnOrderdData, statistics, invoice, returnVanOrderedData, tokenizer, complianceCheck, addDatedDriver, documentsDriversOnly, dailyService, vanWeeklyDates
 from .test_data import importData
 import csv, io 
@@ -116,6 +116,13 @@ class StatisticsViewSet(APIView):
         }
 
         return Response(content)
+
+class RentalVanOverideViewSet(viewsets.ModelViewSet):
+        # Authentication
+    permission_classes = (IsAuthenticated,)
+
+    queryset = RentalVanOveride.objects.all()
+    serializer_class = RentalVanOverideSerializer
 
 class MapViewSet(APIView):
     # Authentication
