@@ -54,7 +54,7 @@ class Driver(models.Model):
     complianceCheck = models.CharField(max_length = 30, null=True)
     vat = models.BooleanField(default=False)
     compliance_list = ArrayField(models.CharField(max_length=20), default=list, blank=True)
-    vehicle_list = ArrayField(models.CharField(max_length=20), default=list, blank=True)
+    vehicle_list = ArrayField(models.CharField(max_length=60), default=list, blank=True)
     rentalCheckList = ArrayField(models.CharField(max_length=25), default=list, blank=True)
 
     objects = DriverManager() # allows us to call method above
